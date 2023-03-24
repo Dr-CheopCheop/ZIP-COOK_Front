@@ -1,10 +1,11 @@
-import Header from "./components/UI/Header";
-import NewBoard from "./components/Board/NewBoard";
+import { GlobalStyle } from "./components/Styles/GlobalStyle";
+import Navbar from "./components/Navbar/Navbar";
+
 function App() {
   return (
     <>
-      <Header />
-      <NewBoard />
+      <GlobalStyle />
+      <Navbar />
     </>
   );
 }
