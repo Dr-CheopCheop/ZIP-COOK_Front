@@ -67,25 +67,24 @@ export const button = styled.button`
 export const Line = styled.hr`
   margin-top: 0;
   width: 100%;
+  height: 1px;
+  border: 0;
+  background: rgba(0, 0, 0, 0.3);
 `;
 
-export const Googlesign = styled.button`
-  display: center;
-  width: 40%;
-  border-radius: 10px;
-  background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+export const Googleb = styled.button`
+  border: none;
+  width: 35%;
   color: black;
   font-size: 1rem;
   cursor: pointer;
-  &:hover {
-    background-color: #f7c04a;
-  }
+  background-color: white;
+  margin: 0.5rem;
 `;
 
-export const Logo = styled.img`
-  float: left;
-  margin-top: 0.5rem;
-  width: 30px;
-  hight: 30px;
+export const img = styled.img`
+  width: 170px;
+  height: 15;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
 `;
