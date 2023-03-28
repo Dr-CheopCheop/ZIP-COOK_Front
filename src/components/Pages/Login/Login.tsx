@@ -1,11 +1,8 @@
 import React from "react";
+import Loginpage from "../../Login/Login";
 
 const Login = () => {
-  return (
-    <div>
-      <h1>로그인 페이지</h1>
-    </div>
-  );
+  return <Loginpage />;
 };
 
 export default Login;
