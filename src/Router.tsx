@@ -1,17 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import Navbar from "./components/Navbar/Navbar";
 // import Home from "./components/Pages/Home/Home";
-import Main from "./components/Pages/Main/Main";
-import Help from "./components/Pages/Help/Help";
-import Chatbot from "./components/Pages/Chatbot/Chatbot";
-import Community from "./components/Pages/Community/Community";
-import Recipe from "./components/Pages/Community/Recipe/Recipe";
-import Share from "./components/Pages/Community/Share/Share";
-import Discount from "./components/Pages/Discount/Discount";
-import Login from "./components/Pages/Login/Login";
-import Join from "./components/Pages/Join/Join";
-import MyPage from "./components/Pages/MyPage/MyPage";
-import NotFound from "./components/Pages/NotFound/NotFound";
+import Main from "./Pages/Main/Main";
+import Help from "./Pages/Help/Help";
+import Chatbot from "./Pages/Chatbot/Chatbot";
+import Community from "./Pages/Community/Community";
+import Recipe from "./Pages/Community/Recipe/Recipe";
+import Share from "./Pages/Community/Share/Share";
+import Discount from "./Pages/Discount/Discount";
+import Login from "./Pages/Login/Login";
+import Join from "./Pages/Join/Join";
+import MyPage from "./Pages/MyPage/MyPage";
+import NotFound from "./Pages/NotFound/NotFound";
 
 const Router = () => {
   return (
