@@ -1,6 +1,4 @@
-import React from "react";
 import * as S from "./ChatbotStyle";
-
 const Chatbot = () => {
   return (
     <div>
