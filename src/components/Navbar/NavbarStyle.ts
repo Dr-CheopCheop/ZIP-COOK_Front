@@ -1,28 +1,57 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const Nav = styled.nav`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 12px;
+export const Header = styled.header`
+  width: 100%;
 `;
 
+export const Nav = styled.nav`
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  &:visited {
+    color: black;
+  }
+  &:hover {
+    color: green;
+  }
+`;
+
+export const StyledImg = styled.img``;
+
 export const Ul = styled.ul`
-  width: 1000px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   list-style: none;
 `;
 
+export const Div = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
 export const Logo = styled.div`
-  font-size: 30px;
-  padding: 0 25px;
+  width: 160px;
+  height: 40px;
+  font-size: 35px;
+  padding: 0;
+  white-space: nowrap;
+  cursor: pointer;
 `;
 
 export const Li = styled.li`
   font-size: 20px;
   padding: 0 15px;
-  display: flex;
-  flex-direction: row;
   align-items: center;
+  white-space: nowrap;
+  &:hover {
+    font-size: 22px;
+  }
 `;

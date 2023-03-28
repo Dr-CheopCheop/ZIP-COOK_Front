@@ -1,11 +1,11 @@
 import { GlobalStyle } from "./components/Styles/GlobalStyle";
-import Navbar from "./components/Navbar/Navbar";
+import Router from "./Router";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Navbar />
+      <Router />
     </>
   );
 }
