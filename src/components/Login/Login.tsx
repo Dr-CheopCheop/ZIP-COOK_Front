@@ -1,10 +1,10 @@
 import * as L from "./LoginStyle";
-import icon from "../../img/google.png";
+import icon from "../../img/Gb.jpeg";
 
 const Loginpage = () => {
   return (
     <L.Container>
-      <h1>LOGO</h1>
+      <h1>LOGO 넣기</h1>
       <L.Sign>
         <L.Signinput type="text" placeholder="ID"/>
         <L.Signinput type="password" placeholder="PassWord"/>
@@ -15,9 +15,9 @@ const Loginpage = () => {
         <L.button>Sign UP</L.button>
         </div>
       <L.Line></L.Line>
-      <L.Googlesign type="button">
-          <L.Logo src={icon}/><p>Sign with Google</p>
-      </L.Googlesign>
+      <L.Googleb type="button">
+          <L.img src={icon}/>
+      </L.Googleb>
       </L.Sign>
     </L.Container>
   );
