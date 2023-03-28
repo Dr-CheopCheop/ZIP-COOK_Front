@@ -11,10 +11,10 @@ const Navbar = () => {
                 <S.StyledLink to="/help">HELP</S.StyledLink>
               </S.Li>
               <S.Li>
-                <S.StyledLink to="chatbot">Chatbot</S.StyledLink>
+                <S.StyledLink to="/chatbot">Chatbot</S.StyledLink>
               </S.Li>
               <S.Li>
-                <S.StyledLink to="community">COMMUNITY</S.StyledLink>
+                <S.StyledLink to="/community">COMMUNITY</S.StyledLink>
               </S.Li>
             </S.Div>
             <S.Div>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -8,6 +9,10 @@ export const Container = styled.div`
   transform: translate(-50%, -50%);
   /* 개체의 너비,높이에 대해 각각 -50% 만큼 이동함 */
   text-align: center;
+`;
+
+export const Test = styled(Link)`
+  text-decoration: none;
 `;
 
 export const Sign = styled.form`
