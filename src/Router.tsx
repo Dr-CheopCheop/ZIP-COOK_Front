@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
-import Home from "./components/Pages/Home/Home";
+// import Navbar from "./components/Navbar/Navbar";
+// import Home from "./components/Pages/Home/Home";
+import Main from "./components/Pages/Main/Main";
 import Help from "./components/Pages/Help/Help";
 import Chatbot from "./components/Pages/Chatbot/Chatbot";
 import Community from "./components/Pages/Community/Community";
@@ -15,23 +16,61 @@ import NotFound from "./components/Pages/NotFound/NotFound";
 const Router = () => {
   return (
     <BrowserRouter>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/help" element={<Help />} />
-        <Route path="/chatbot" element={<Chatbot />} />
-        <Route path="/community" element={<Community />} />
-        <Route path="/community/recipe" element={<Share />} />
-        <Route path="/community/share" element={<Recipe />} />
-        <Route path="/community/discount" element={<Discount />} />
+        {/* 추후에 / main대신 홈으로 바꿔줄 예정 */}
+        <Route path="/" element={<Main />}>
+          <Route path="main" element={<Main />} />
+          <Route path="help" element={<Help />} />
+          <Route path="chatbot" element={<Chatbot />} />
+          <Route path="community" element={<Community />} />
+          <Route path="community/recipe" element={<Share />} />
+          <Route path="community/share" element={<Recipe />} />
+          <Route path="community/discount" element={<Discount />} />
+          <Route path="/mypage" element={<MyPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
-        <Route path="/mypage" element={<MyPage />} />
-
-        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
 };
 
 export default Router;
+
+// return (
+//   <BrowserRouter>
+//     <Routes>
+//       <Route
+//         path="/"
+//         element={
+//           <>
+//             <Navbar />
+//             <Home />
+//           </>
+//         }
+//       />
+//       <Route path="/main" element={<Main />} />
+//       <Route path="/help" element={<Help />} />
+//       <Route
+//         path="/chatbot"
+//         element={
+//           <>
+//             <Navbar />
+//             <Chatbot />
+//           </>
+//         }
+//       />
+//       <Route path="/community" element={<Community />} />
+//       <Route path="/community/recipe" element={<Share />} />
+//       <Route path="/community/share" element={<Recipe />} />
+//       <Route path="/community/discount" element={<Discount />} />
+//       <Route path="/login" element={<Login />} />
+//       <Route path="/join" element={<Join />} />
+//       <Route path="/mypage" element={<MyPage />} />
+
+//       <Route path="*" element={<NotFound />} />
+//     </Routes>
+//   </BrowserRouter>
+// );
