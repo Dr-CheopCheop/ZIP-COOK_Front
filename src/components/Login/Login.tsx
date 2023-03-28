@@ -4,7 +4,7 @@ import icon from "../../img/Gb.jpeg";
 const Loginpage = () => {
   return (
     <L.Container>
-      <L.Test to={"/"}>
+      <L.Test to={"/main"}>
         <h1>LOGO 넣기</h1>
       </L.Test>
       <L.Sign>

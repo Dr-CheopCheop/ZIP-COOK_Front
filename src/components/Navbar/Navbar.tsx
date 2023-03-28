@@ -19,7 +19,7 @@ const Navbar = () => {
             </S.Div>
             <S.Div>
               <S.Logo>
-                <S.StyledLink to="/">ZIP COOK</S.StyledLink>
+                <S.StyledLink to="/main">ZIP COOK</S.StyledLink>
               </S.Logo>
             </S.Div>
             <S.Div>
