@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Colors from "../Styles/Colors";
 
 export const Container = styled.div`
   width: 100%;
@@ -39,7 +40,7 @@ export const Signinput = styled.input`
 
 export const Loginbutton = styled.button`
   width: 106%;
-  background-color: #94af9f;
+  background-color: ${Colors.loginButton}};
   border: none;
   border-radius: 10px;
   color: white;
@@ -48,7 +49,7 @@ export const Loginbutton = styled.button`
   padding: 1.5rem 2rem;
   font-size: 1.5rem;
   &:hover {
-    color: yellow;
+    color: ${Colors.loginButtonHover};
   }
 `;
 

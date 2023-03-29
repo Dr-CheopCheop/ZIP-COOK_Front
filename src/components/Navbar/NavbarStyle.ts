@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Colors from "../Styles/Colors";
+import Frames from "../Styles/Frames";
 
 export const Header = styled.header`
   width: 100%;
+  height: ${Frames.navbar_height};
 `;
 
 export const Nav = styled.nav`
@@ -18,7 +21,7 @@ export const StyledLink = styled(Link)`
     color: black;
   }
   &:hover {
-    color: green;
+    color: ${Colors.postBackground};
   }
 `;
 
