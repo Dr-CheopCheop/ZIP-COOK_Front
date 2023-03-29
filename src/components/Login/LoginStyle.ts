@@ -77,19 +77,22 @@ export const Line = styled.hr`
   background: rgba(0, 0, 0, 0.3);
 `;
 
+export const Div = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export const Googleb = styled.button`
   border: none;
-  width: 35%;
   color: black;
   font-size: 1rem;
   cursor: pointer;
   background-color: white;
-  margin: 0.5rem;
+  margin: 1rem;
 `;
 
 export const img = styled.img`
-  width: 170px;
-  height: 15;
+  width: 250px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
 `;

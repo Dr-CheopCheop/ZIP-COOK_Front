@@ -17,9 +17,11 @@ const Loginpage = () => {
           <L.button>Sign UP</L.button>
         </div>
         <L.Line></L.Line>
+        <L.Div>
         <L.Googleb type="button">
           <L.img src={icon} />
         </L.Googleb>
+        </L.Div>
       </L.Sign>
     </L.Container>
   );
