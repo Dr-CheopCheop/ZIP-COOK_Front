@@ -1,1 +1,1 @@
-# 가톨릭대학교 종합설계프로젝트 FRONT 페이지입니다.
+# ZIP-COOK FRONT

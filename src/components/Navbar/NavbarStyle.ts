@@ -4,11 +4,17 @@ import Colors from "../Styles/Colors";
 import Frames from "../Styles/Frames";
 
 export const Header = styled.header`
+  /* position: fixed;  메인화면 기획에따라 바꿀예정 */
+  position: relative;
   width: 100%;
   height: ${Frames.navbar_height};
+  align-items: center;
 `;
 
 export const Nav = styled.nav`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   width: 100%;
   align-items: center;
   text-align: center;
