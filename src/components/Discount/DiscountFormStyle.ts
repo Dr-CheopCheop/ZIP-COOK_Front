@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Colors from "../Styles/Colors";
-import Frames from "../Styles/Frames";
+import Colors from "../../Styles/Colors";
+import Frames from "../../Styles/Frames";
 
 export const Form = styled.form`
   border-top: 2px solid rgba(0, 0, 0, 0.5);
@@ -45,19 +45,16 @@ export const ImgView = styled.div`
   margin: 10px auto;
   color: rgba(0, 0, 0, 0.3);
   border: 3px solid ${Colors.postBackground};
+  font-size: 30px;
   cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
   &:hover {
     border: 3px solid ${Colors.postBackgroundBorder};
   }
-`;
-
-export const Button = styled.button`
-  display: block;
-  margin: 0 auto;
-  background-color: ${Colors.zipCookYellow};
-  border-radius: 10px;
-  border: none;
-  width: 100px;
-  height: 40px;
-  font-weight: 700;
 `;
