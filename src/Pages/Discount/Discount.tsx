@@ -1,11 +1,10 @@
 import Navbar from "../../components/Navbar/Navbar";
-import DiscountForm from "../../components/Discount/DiscountForm";
-
+import DiscountMain from "../../components/Discount/DiscountMain";
 const Discount = () => {
   return (
     <div>
       <Navbar />
-      <DiscountForm />
+      <DiscountMain />
     </div>
   );
 };
