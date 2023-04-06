@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Colors from "../Styles/Colors";
-import Frames from "../Styles/Frames";
+import Colors from "../../Styles/Colors";
+import Frames from "../../Styles/Frames";
 
 export const Header = styled.header`
   /* position: fixed;  메인화면 기획에따라 바꿀예정 */

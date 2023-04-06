@@ -7,6 +7,7 @@ import Community from "./Pages/Community/Community";
 import Recipe from "./Pages/Community/Recipe/Recipe";
 import Share from "./Pages/Community/Share/Share";
 import Discount from "./Pages/Discount/Discount";
+import DiscountForm from "./components/Discount/DiscountForm";
 import Login from "./Pages/Login/Login";
 import Join from "./Pages/Join/Join";
 import MyPage from "./Pages/MyPage/MyPage";
@@ -22,14 +23,15 @@ const Router = () => {
         <Route path="/help" element={<Help />} />
         <Route path="/chatbot" element={<Chatbot />} />
         <Route path="/community" element={<Community />} />
-        <Route path="/community/recipe" element={<Share />} />
-        <Route path="/community/share" element={<Recipe />} />
+        <Route path="/community/recipe" element={<Recipe />} />
+        <Route path="/community/share" element={<Share />} />
         <Route path="/community/discount" element={<Discount />} />
-        <Route path="/mypage" element={<MyPage />} />
-        <Route path="*" element={<NotFound />} />
 
+        <Route path="/community/discount/write" element={<DiscountForm />} />
+        <Route path="/mypage" element={<MyPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
