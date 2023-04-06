@@ -16,7 +16,7 @@ const useAxios = () => {
   const sendRequest = useCallback(
     async (
       requestConfig: requestConfigData,
-      applyData: (arg0: any) => void
+      applyData: (responseData: object) => void
     ) => {
       setIsLoading(true);
       setError(null);

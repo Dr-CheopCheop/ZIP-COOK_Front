@@ -4,12 +4,9 @@ export const GlobalStyle = createGlobalStyle`
 *{
   margin:0;
   padding:0;
-}
-body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
-  }
   
+  font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
+}
+
 `;

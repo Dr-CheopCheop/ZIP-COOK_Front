@@ -1,5 +1,5 @@
 import useAxios from "../../hooks/UseAxios";
-
+import url from "../../constants/path";
 //추후 함수명,더미데이터등 모든거 바꿔줘야함.
 //폼만들어서 분리 할것. 폼 prevent반드시!
 
@@ -17,13 +17,13 @@ const NewBoard = () => {
   const { isLoading, error, sendRequest: sendBoardRequest } = axiosData;
 
   const postBoardItem = async () => {
-    const abc = (responseData: any) => {
+    const abc = (responseData: object) => {
       console.log(responseData);
     };
 
     sendBoardRequest(
       {
-        url: "https://cuk-recipe-default-rtdb.firebaseio.com/boards.json",
+        url: `${url}`,
         method: "POST",
         headers: { "Content-Type": "application/json" },
         data: { data: dummy },
