@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Colors from "../Styles/Colors";
+import Colors from "../../Styles/Colors";
 
 export const Container = styled.div`
   width: 100%;
@@ -35,6 +35,7 @@ export const List = styled.ul`
   text-align: left;
   font-size: 15px;
   font-style: normal;
+  width: 400px;
 `;
 
 export const li_div = styled.div`
