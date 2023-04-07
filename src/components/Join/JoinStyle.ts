@@ -13,12 +13,18 @@ export const Container = styled.div`
 `;
 
 export const Top = styled.div`
-  font-style: normal;
   font-weight: 700;
-  font-size: 30px;
+  font-size: 40px;
   line-height: 40px;
   text-align: center;
   letter-spacing: 0.05em;
+`;
+
+export const ul_div = styled.div`
+  margin-top: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 38%;
 `;
 
 export const List = styled.ul`
@@ -29,4 +35,32 @@ export const List = styled.ul`
   text-align: left;
   font-size: 15px;
   font-style: normal;
+`;
+
+export const li_div = styled.div`
+  margin-top: -0.5rem;
+  width: 100%;
+`;
+
+export const Input = styled.input`
+  width: 200%;
+  height: 30px;
+  border-radius: 10px;
+`;
+
+export const Button = styled.button`
+width: 200px;
+height: 60px;
+text-align : center;
+margin-top : 1rem;
+background-color: ${Colors.loginButton}};
+border: none;
+border-radius: 10px;
+color: white;
+font-weight: bold;
+cursor: pointer;
+font-size: 1.5rem;
+&:hover {
+  color: ${Colors.loginButtonHover};
+}
 `;
