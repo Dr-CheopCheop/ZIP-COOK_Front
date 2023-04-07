@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-// import Colors from "../Styles/Colors";
+import Colors from "../../Styles/Colors";
 
 export const Container = styled.div`
   width: 100%;
@@ -60,7 +60,7 @@ export const ButtonWrap = styled.div`
 `
 
 export const RecipeButton = styled(Link)`
-  width: 30%;
+  /* width: 30%; */
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
@@ -76,7 +76,7 @@ export const RecipeButton = styled(Link)`
 `
 
 export const MainButton = styled(Link)`
-  width: 30%;
+  /* width: 40%; */
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
@@ -89,6 +89,7 @@ export const MainButton = styled(Link)`
   margin: 3%;
   padding: 4%;
   box-shadow: 3px 3px 5px gray;
+  white-space: nowrap;
 `
 
 export const SecondDiv = styled.div`
@@ -179,16 +180,14 @@ export const img1 = styled.img`
 
 export const img2 = styled.img`
   display: flex;
-  width: 10%;
-  width: 50px;
-  height: 50px;
+  width: 8%;
+  height: 8%;
   margin: 4%;
 `
 
 export const img3 = styled.img`
   display: flex;
-  width: 10%;
-  width: 50px;
-  height: 50px;
+  width: 8%;
+  height: 8%;
   margin: 4%;
 `
