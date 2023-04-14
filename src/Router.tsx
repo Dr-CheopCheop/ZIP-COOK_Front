@@ -18,6 +18,7 @@ import Join from "./Pages/Join/Join";
 import MyPage from "./Pages/MyPage/MyPage";
 import NotFound from "./Pages/NotFound/NotFound";
 import Home from "./Pages/Home/Home";
+import Forgot from "./Pages/Forgot/Forgot";
 
 const Router = () => {
   return (
@@ -43,6 +44,7 @@ const Router = () => {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
+        <Route path="/forgot" element={<Forgot />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
@@ -50,39 +52,3 @@ const Router = () => {
 };
 
 export default Router;
-
-// return (
-//   <BrowserRouter>
-//     <Routes>
-//       <Route
-//         path="/"
-//         element={
-//           <>
-//             <Navbar />
-//             <Home />
-//           </>
-//         }
-//       />
-//       <Route path="/main" element={<Main />} />
-//       <Route path="/help" element={<Help />} />
-//       <Route
-//         path="/chatbot"
-//         element={
-//           <>
-//             <Navbar />
-//             <Chatbot />
-//           </>
-//         }
-//       />
-//       <Route path="/community" element={<Community />} />
-//       <Route path="/community/recipe" element={<Share />} />
-//       <Route path="/community/share" element={<Recipe />} />
-//       <Route path="/community/discount" element={<Discount />} />
-//       <Route path="/login" element={<Login />} />
-//       <Route path="/join" element={<Join />} />
-//       <Route path="/mypage" element={<MyPage />} />
-
-//       <Route path="*" element={<NotFound />} />
-//     </Routes>
-//   </BrowserRouter>
-// );

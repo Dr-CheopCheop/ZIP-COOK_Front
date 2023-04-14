@@ -1,11 +1,12 @@
 import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
+import Mypage from "../../components/Mypage/Mypage";
 
 const MyPage = () => {
   return (
     <div>
       <Navbar />
-      <h1>내정보 페이지</h1>
+      <Mypage />
     </div>
   );
 };
