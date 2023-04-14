@@ -12,11 +12,13 @@ interface FormValue {
 
 const Loginpage = () => {
   const movepage = useNavigate();
+
   const [isLoding,setIsLoading] = useState(false);
   const[errorMessage, setErrorMessage] = useState("");
 
+
   function JoinPage() {
-    movepage('/join');
+    movepage("/join");
   }
 
   function ForgotPage() {
@@ -68,15 +70,16 @@ const Loginpage = () => {
         {isLoding ? "로딩중..." : "로그인"}
         </form>
         <div>
+       
           <L.button onClick={ForgotPage}>ID/PassWord Forgot</L.button>
           <L.P></L.P>
           <L.button onClick={JoinPage}>Sign UP</L.button>
         </div>
         <L.Line></L.Line>
         <L.Div>
-        <L.Googleb type="button">
-          <L.img src={icon} />
-        </L.Googleb>
+          <L.Googleb type="button">
+            <L.img src={icon} />
+          </L.Googleb>
         </L.Div>
       </L.Sign>
     </L.Container>

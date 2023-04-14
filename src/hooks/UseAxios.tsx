@@ -1,12 +1,6 @@
 import { useState, useCallback } from "react";
 import axios from "axios";
-
-interface requestConfigData {
-  url: string;
-  method: string;
-  headers: object;
-  data: object | null;
-}
+import type { requestConfigDataProps } from "../constants/interfaces";
 
 const useAxios = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -15,7 +9,7 @@ const useAxios = () => {
   //applyData 타입 지정해줘야함!
   const sendRequest = useCallback(
     async (
-      requestConfig: requestConfigData,
+      requestConfig: requestConfigDataProps,
       applyData: (responseData: object) => void
     ) => {
       setIsLoading(true);
@@ -24,7 +18,9 @@ const useAxios = () => {
         const response = await axios({
           url: requestConfig.url,
           method: requestConfig.method,
-          headers: requestConfig.headers ? requestConfig.headers : {},
+          headers: requestConfig.headers
+            ? requestConfig.headers
+            : { "Content-Type": "application/json" },
           data: requestConfig.data ? requestConfig.data : null,
         });
         const responseData = await response.data;

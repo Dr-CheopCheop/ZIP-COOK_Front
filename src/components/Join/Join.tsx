@@ -86,6 +86,7 @@ const SignupForm = () => {
     };
 
   return (
+
     <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
       <S.Test to={"/main"}><S.p>Join Us</S.p></S.Test>
       <div>
@@ -115,6 +116,7 @@ const SignupForm = () => {
           {isEmailSent ? (
             <div>이메일이 전송되었습니다. 인증코드를 확인해주세요.</div>
           ) : (<span></span>)}
+
           </div>
           <S.Div><label>Email Verification Number</label></S.Div>
           <div><S.Input {...register("code", {required: true})} placeholder="이메일 인증번호를 입력해주세요."
@@ -154,3 +156,4 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
+

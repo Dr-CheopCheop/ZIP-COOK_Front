@@ -1,4 +1,4 @@
-import useAxios from "../../hooks/UseAxios";
+import useAxios from "../../hooks/useAxios";
 import url from "../../constants/path";
 //추후 함수명,더미데이터등 모든거 바꿔줘야함.
 //폼만들어서 분리 할것. 폼 prevent반드시!

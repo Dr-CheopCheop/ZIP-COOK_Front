@@ -1,18 +1,12 @@
 import * as S from "./ButtonStyle";
-
-interface buttonProps {
-  children: React.ReactNode;
-  color?: string;
-  active?: boolean;
-}
+import Colors from "../Styles/Colors";
+import type { buttonProps } from "../constants/interfaces";
 
 const Button = (props: buttonProps) => {
-  const { children, color, active } = props;
+  const { children, active } = props;
   return (
-    <S.Button color={color} disabled={active}>
+    <S.Button color={`${Colors.zipCookYellow}`} disabled={active}>
       {children}
-      {color}
-      zz
     </S.Button>
   );
 };
