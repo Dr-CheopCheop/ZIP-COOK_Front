@@ -35,6 +35,7 @@ export const List = styled.ul`
   text-align: left;
   font-size: 15px;
   font-style: normal;
+  width: 400px;
 `;
 
 export const li_div = styled.div`
