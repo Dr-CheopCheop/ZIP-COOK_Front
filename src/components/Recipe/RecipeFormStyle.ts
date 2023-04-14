@@ -9,6 +9,10 @@ export const Form = styled.form`
   label {
     display: inline-block;
   }
+  svg {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 export const Container = styled.div`
@@ -77,4 +81,47 @@ export const Button = styled.button`
 
 export const Error = styled.p`
   color: ${Colors.postBackgroundBorder};
+  font-size: 14px;
+`;
+
+export const RadioContainer = styled.div`
+  ${Frames.FormBox};
+  display: flex;
+  justify-content: space-around;
+  font-size: 30px;
+  margin: 20px auto;
+  input {
+    display: none;
+  }
+  input:checked + label {
+    color: ${Colors.postBackgroundBorder};
+  }
+
+  label {
+    &:hover {
+      font-size: 35px;
+    }
+  }
+`;
+
+export const countContainer = styled.div`
+  display: flex;
+  position: relative;
+  button {
+    position: absolute;
+    top: 50%;
+    background-color: transparent;
+    transform: translateY(-50%);
+    font-size: 30px;
+    border: none;
+    &:hover {
+      font-size: 35px;
+    }
+  }
+  button:first-child {
+    left: 10%;
+  }
+  button:last-child {
+    right: 10%;
+  }
 `;

@@ -1,11 +1,11 @@
 import Loginpage from "../../components/Login/Login";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-  <div>
-    <Loginpage />
-  </div>
+    <div>
+      <Loginpage />
+    </div>
   );
 };
 

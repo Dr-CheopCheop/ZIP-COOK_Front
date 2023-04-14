@@ -1,44 +1,67 @@
 import Select from "react-select";
 import { map } from "../constants/map";
 import { useState } from "react";
+import type { addressProps } from "../constants/interfaces";
 
 const MapSelector = () => {
   const { sido, sigugun, dong } = map;
 
-  const [sidoValue, setSidoValue] = useState<string>("서울특별시");
-  const [sigugunValue, setSigugunValue] = useState<string>("종로구");
-  const [dongValue, setDongValue] = useState<string>("청운효자동");
-
-  const filterdSidoList = sigugun.filter((e) => e.link === sidoValue);
+  const [addressPieces, setAddressPieces] = useState<addressProps>({
+    sido: "",
+    sigugun: "",
+    dong: "",
+  });
+  const filterdSidoList = sigugun.filter((e) => e.link === addressPieces.sido);
   const filterdSidoSigugunList = dong.filter(
-    (e) => e.sido === sidoValue && e.sigugun === sigugunValue
+    (e) => e.sido === addressPieces.sido && e.sigugun === addressPieces.sigugun
   );
 
-  console.log(sidoValue, sigugunValue, dongValue);
+  const address = `${addressPieces.sido} ${addressPieces.sigugun} ${addressPieces.dong}`;
+  console.log(address);
+  const sidoHandler = (sido: string) => {
+    setAddressPieces({
+      sido: sido,
+      sigugun: "",
+      dong: "",
+    });
+  };
+  const sigugunHandler = (sigugun: string) => {
+    setAddressPieces({
+      ...addressPieces,
+      sigugun: sigugun,
+      dong: "",
+    });
+  };
+  const dongHandler = (dong: string) => {
+    setAddressPieces({
+      ...addressPieces,
+      dong: dong,
+    });
+  };
   return (
     <>
       <Select
-        onChange={(e: any) => setSidoValue(e.value)}
+        onChange={(e: any) => sidoHandler(e.value)}
         options={sido}
         placeholder="시/도 선택"
-        value={sido.filter((option) => option.value === sidoValue)}
+        value={sido.filter((option) => option.value === addressPieces.sido)}
       />
       <Select
-        onChange={(e: any) => setSigugunValue(e.value)}
+        onChange={(e: any) => sigugunHandler(e.value)}
         options={filterdSidoList}
-        placeholder="시/도 선택"
+        placeholder="시/군/구 선택"
         value={filterdSidoList.filter(
-          (option) => option.value === sigugunValue
+          (option) => option.value === addressPieces.sigugun
         )}
       />
       <Select
-        onChange={(e: any) => setDongValue(e.value)}
+        onChange={(e: any) => dongHandler(e.value)}
         options={filterdSidoSigugunList}
         placeholder="읍/면/동 선택"
         value={filterdSidoSigugunList.filter(
-          (option) => option.value === dongValue
+          (option) => option.value === addressPieces.dong
         )}
-      />
+      />{" "}
     </>
   );
 };

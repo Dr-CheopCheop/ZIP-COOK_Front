@@ -1,2 +1,2 @@
-const url = "https://cuk-recipe-default-rtdb.firebaseio.com/boards.json";
+const url = "https://cuk-recipe-default-rtdb.firebaseio.com";
 export default url;

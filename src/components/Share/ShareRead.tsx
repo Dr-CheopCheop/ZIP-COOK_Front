@@ -1,5 +1,6 @@
 import Navbar from "../Navbar/Navbar";
-const DiscountRead = () => {
+
+const ShareRead = () => {
   return (
     <>
       <Navbar />
@@ -7,4 +8,4 @@ const DiscountRead = () => {
   );
 };
 
-export default DiscountRead;
+export default ShareRead;

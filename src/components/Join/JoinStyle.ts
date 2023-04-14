@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Colors from "../Styles/Colors";
+// import Colors from "../../Styles/Colors";
 
 export const Container = styled.div`
   width: 100%;
