@@ -5,6 +5,7 @@ import React, { useRef } from 'react';
 import foodImg from '../../img/HomeImg1.png';
 import peopleIcon from '../../img/HomeImg2.png';
 import robotIcon from '../../img/HomeImg3.png';
+// import UseScrollSnap from '../../hooks/UseScrollSnap';
 
 const HomePage = () => {
     const scrollRef = useRef(null);
