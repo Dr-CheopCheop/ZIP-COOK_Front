@@ -39,7 +39,7 @@ export const Signinput = styled.input`
 `;
 
 export const Loginbutton = styled.button`
-  width: 106%;
+  width: 100%;
   background-color: ${Colors.loginButton}};
   border: none;
   border-radius: 10px;

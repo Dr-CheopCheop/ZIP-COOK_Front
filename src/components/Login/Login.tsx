@@ -1,9 +1,10 @@
+import React from 'react';
 import * as L from "./LoginStyle";
 import icon from "../../img/Gb.jpeg";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import {useEffect, useState} from 'react';
+import {useForm} from "react-hook-form";
+import {  useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 interface FormValue {
   ID: string;
@@ -12,10 +13,8 @@ interface FormValue {
 
 const Loginpage = () => {
   const movepage = useNavigate();
-  const [isLoding, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  console.log(errorMessage);
+  const [isLoding,setIsLoading] = useState(false);
+  const[errorMessage, setErrorMessage] = useState("");
 
   function JoinPage() {
     movepage("/join");
@@ -23,6 +22,10 @@ const Loginpage = () => {
 
   function ForgotPage() {
     movepage("/forgot");
+  }
+
+  function Googlepage() {
+    movepage("/googleLogin");
   }
 
   const {
@@ -46,6 +49,15 @@ const Loginpage = () => {
     }
   };
 
+  // const onSuccess = (res:any) => {
+  //   console.log("LOGIN SUCCESS", res);
+  //   movepage('/main');
+  // }
+
+  // const onFailure = (res:any) => {
+  //   console.log("LOGIN FAIL", res);
+  // }
+ 
   return (
     <L.Container>
       <L.Test to={"/main"}>
@@ -62,27 +74,15 @@ const Loginpage = () => {
           {errors.ID && errors.ID.type === "maxLength" && (
             <div>아이디는 8글자 이내로 작성해주세요.</div>
           )}
-          <L.Signinput
-            type="password"
-            placeholder="PassWord"
-            {...register("PW", {
-              required: true,
-              minLength: 8,
-              pattern:
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-            })}
-          />
-          {errors.PW && <span>비밀번호를 입력해주세요!</span>}
-          {errors.PW && errors.PW.type === "pattern" && (
-            <div>
-              비밀번호는 영문 대/소문자, 숫자, 특수문자를 포함해 8글자 이상
-              입력해주세요.
-            </div>
-          )}
-          <L.Loginbutton type="submit" disabled={isLoding}>
-            LOGIN
-          </L.Loginbutton>
-          {isLoding ? "로딩중..." : "로그인"}
+        <L.Signinput type="password" placeholder="PassWord" {...register("PW", {required:true,
+        minLength: 8,
+        pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+        })}/>
+        {errors.PW && <span>비밀번호를 입력해주세요!</span>}
+        {errors.PW && errors.PW.type === "pattern" && (
+              <div>비밀번호는 영문 대/소문자, 숫자, 특수문자를 포함해 8글자 이상 입력해주세요.</div>
+            )}
+        <L.Loginbutton type="submit" disabled={isLoding}>{isLoding ? "LOGING..." : "LOGIN"}</L.Loginbutton>
         </form>
         <div>
           <L.button onClick={ForgotPage}>ID/PassWord Forgot</L.button>
@@ -91,7 +91,7 @@ const Loginpage = () => {
         </div>
         <L.Line></L.Line>
         <L.Div>
-          <L.Googleb type="button">
+        <L.Googleb type="button" onClick={Googlepage} >
             <L.img src={icon} />
           </L.Googleb>
         </L.Div>
