@@ -5,21 +5,20 @@ import Help from "./Pages/Help/Help";
 import Chatbot from "./Pages/Chatbot/Chatbot";
 import Community from "./Pages/Community/Community";
 import Recipe from "./Pages/Community/Recipe/Recipe";
-import RecipeForm from "./components/Recipe/RecipeForm";
-import RecipeRead from "./components/Recipe/RecipeRead";
+import RecipeForm from "./components/Community/Recipe/RecipeForm";
+import RecipeRead from "./components/Community/Recipe/RecipeRead";
 import Share from "./Pages/Community/Share/Share";
-import ShareForm from "./components/Share/ShareForm";
-import ShareRead from "./components/Share/ShareRead";
+import ShareForm from "./components/Community/Share/ShareForm";
+import ShareRead from "./components/Community/Share/ShareRead";
 import Discount from "./Pages/Community/Discount/Discount";
-import DiscountForm from "./components/Discount/DiscountForm";
-import DiscountRead from "./components/Discount/DiscountRead";
+import DiscountForm from "./components/Community/Discount/DiscountForm";
+import DiscountRead from "./components/Community/Discount/DiscountRead";
 import Login from "./Pages/Login/Login";
 import Join from "./Pages/Join/Join";
 import MyPage from "./Pages/MyPage/MyPage";
 import NotFound from "./Pages/NotFound/NotFound";
 import Home from "./Pages/Home/Home";
 import Forgot from "./Pages/Forgot/Forgot";
-
 
 const Router = () => {
   return (
@@ -45,7 +44,7 @@ const Router = () => {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
-        <Route path="/forgot" element={<Forgot />}/>
+        <Route path="/forgot" element={<Forgot />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
@@ -53,39 +52,3 @@ const Router = () => {
 };
 
 export default Router;
-
-// return (
-//   <BrowserRouter>
-//     <Routes>
-//       <Route
-//         path="/"
-//         element={
-//           <>
-//             <Navbar />
-//             <Home />
-//           </>
-//         }
-//       />
-//       <Route path="/main" element={<Main />} />
-//       <Route path="/help" element={<Help />} />
-//       <Route
-//         path="/chatbot"
-//         element={
-//           <>
-//             <Navbar />
-//             <Chatbot />
-//           </>
-//         }
-//       />
-//       <Route path="/community" element={<Community />} />
-//       <Route path="/community/recipe" element={<Share />} />
-//       <Route path="/community/share" element={<Recipe />} />
-//       <Route path="/community/discount" element={<Discount />} />
-//       <Route path="/login" element={<Login />} />
-//       <Route path="/join" element={<Join />} />
-//       <Route path="/mypage" element={<MyPage />} />
-
-//       <Route path="*" element={<NotFound />} />
-//     </Routes>
-//   </BrowserRouter>
-// );

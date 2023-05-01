@@ -3,9 +3,10 @@ export interface FormProps {
   title: string;
   price: string;
   contents: string;
-  time: string;
-  servings: string;
-  radioOption: string;
+  cookTime: string;
+  quantity: string;
+  difficulty: string;
+  foods: string[];
 }
 
 export interface addressProps {
@@ -32,4 +33,10 @@ export interface requestConfigDataProps {
   method: string;
   headers: object;
   data: object | null;
+}
+export interface levelViewProps {
+  isView: boolean;
+}
+export interface PostListProps {
+  category: string;
 }

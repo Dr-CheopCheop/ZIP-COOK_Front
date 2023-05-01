@@ -1,11 +1,18 @@
 import styled from "styled-components";
-import Colors from "../../Styles/Colors";
-import Frames from "../../Styles/Frames";
+import Colors from "../../../Styles/Colors";
+import Frames from "../../../Styles/Frames";
+import TagsInput from "react-tagsinput";
+import type { levelViewProps } from "../../../constants/interfaces";
 
+export const LevelBar = styled.div`
+  width: 900px;
+  margin: 20px auto 10px;
+  text-align: right;
+`;
 export const Form = styled.form`
   border-top: 2px solid rgba(0, 0, 0, 0.5);
   width: 900px;
-  margin: 20px auto;
+  margin: 0px auto;
   label {
     display: inline-block;
   }
@@ -13,12 +20,16 @@ export const Form = styled.form`
     width: 30px;
     height: 30px;
   }
+
+  text-align: center;
 `;
 
 export const Container = styled.div`
-  margin: 0px auto;
   padding: 20px 0;
-  text-align: center;
+`;
+
+export const LevelByVIew = styled.div<levelViewProps>`
+  display: ${(props) => (props.isView ? "block" : "none")};
 `;
 
 export const Manual = styled.div`
@@ -123,5 +134,55 @@ export const countContainer = styled.div`
   }
   button:last-child {
     right: 10%;
+  }
+`;
+
+export const StyledTags = styled(TagsInput)`
+  width: 500px;
+  display: block;
+  margin: 0px auto;
+  overflow: hidden;
+
+  /* padding-left: 5px; */
+  padding-top: 5px;
+  .react-tagsinput-tag {
+    background-color: ${Colors.postBackground};
+    border-radius: 10px;
+    border: 2px solid ${Colors.postBackgroundBorder};
+    color: black;
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: 20px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+
+    /* margin: 5px; */
+    padding: 5px;
+  }
+
+  .react-tagsinput-remove {
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .react-tagsinput-tag a::before {
+    content: " ×";
+  }
+
+  .react-tagsinput-input {
+    display: block;
+    margin: 10px auto;
+    background-color: ${Colors.postBackground};
+    border-radius: 10px;
+    border: 2px solid ${Colors.postBackgroundBorder};
+    color: #777;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 6px;
+    margin-top: 1px;
+    outline: none;
+    padding: 5px;
+    width: 100px;
+    text-align: center;
   }
 `;

@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import Forgot from '../../components/Forgot/ForgotPage';
+import Forgot from "../../components/Forgot/ForgotPage";
 
 const ForgotPage = () => {
   return (
