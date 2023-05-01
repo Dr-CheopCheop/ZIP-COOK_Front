@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import {useNavigate} from "react-router-dom";
-import React, {useState, useRef} from 'react';
+import { useNavigate } from "react-router-dom";
+import React, { useState, useRef } from "react";
 import * as S from "./JoinStyle";
 import axios from 'axios';
 import MapSelector from "../../utils/MapSelector";
@@ -19,13 +19,19 @@ interface FormValue {
 const SignupForm = () => {
   const navigate = useNavigate();
 
-	const { 
-    register, 
-    handleSubmit, 
-    watch, 
-    formState: { errors }, 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
   } = useForm<FormValue>({
-    defaultValues: {name:"", ID:"", email:"", password:"", password_confirm:""},
+    defaultValues: {
+      name: "",
+      ID: "",
+      email: "",
+      password: "",
+      password_confirm: "",
+    },
   });
     console.log(watch());
     const [isEmailSent, setIsEmailSent] = useState(false);
@@ -50,27 +56,30 @@ const SignupForm = () => {
         console.log("이메일전송실패",data);
         console.log("이메일 전송에 실패했습니다.");
       }
-    };
+    } catch (error) {
+      console.log("이메일 전송에 실패했습니다.");
+    }
+  };
 
-    //이메일 전송번호 확인
-    const verifyEmailCode = async (data : FormValue) => {
-      try {
-        const {email, code} = data;
-        //이메일 코드 검증 api
-        const res = await axios.post("",{email,code});
-        if(res.data.verified){
-          setIsEmailSent(true);
-          alert("이메일 인증이 완료되었습니다.");
-        }else {
-          throw new Error("올바른 인증번호가 아닙니다.");
-        }
-      }catch (error) {
-        console.log(error);
-        alert("이메일 인증에 실패하였습니다. 다시 시도해주세요");
-        setEmailError(String(error));
-        setIsSubmitting(false);
+  //이메일 전송번호 확인
+  const verifyEmailCode = async (data: FormValue) => {
+    try {
+      const { email, code } = data;
+      //이메일 코드 검증 api
+      const res = await axios.post("", { email, code });
+      if (res.data.verified) {
+        setIsEmailSent(true);
+        alert("이메일 인증이 완료되었습니다.");
+      } else {
+        throw new Error("올바른 인증번호가 아닙니다.");
       }
-    };
+    } catch (error) {
+      console.log(error);
+      alert("이메일 인증에 실패하였습니다. 다시 시도해주세요");
+      setEmailError(String(error));
+      setIsSubmitting(false);
+    }
+  };
 
     const onSubmitHandler: SubmitHandler<FormValue> = async (data) => {
       try {
@@ -97,9 +106,10 @@ const SignupForm = () => {
     };
 
   return (
-
     <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
-      <S.Test to={"/main"}><S.p>Join Us</S.p></S.Test>
+      <S.Test to={"/main"}>
+        <S.p>Join Us</S.p>
+      </S.Test>
       <div>
 	        <S.Div><label>Name</label></S.Div>
         	<div><S.Input placeholder=" 이름을 입력해주세요." {...register("name", { required: true })} /></div>
@@ -124,7 +134,9 @@ const SignupForm = () => {
           {errors.email && errors.email.type === "pattern" && (
             <div>이메일 형식에 맞게 작성해주세요!</div>
           )}
-          {errors.email && errors.email.type === "required" && <div>이메일을 작성해주세요!</div>}
+          {errors.email && errors.email.type === "required" && (
+            <div>이메일을 작성해주세요!</div>
+          )}
           {isEmailSent ? (
             <div>이메일이 전송되었습니다. 인증코드를 확인해주세요.</div>
           ) : (<div>이메일 전송 실패</div>)}
@@ -171,4 +183,3 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
-

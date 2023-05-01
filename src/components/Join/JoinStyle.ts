@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import { Link } from "react-router-dom";
+>>>>>>> f7640fb402c31e1800daccbd65fa251f5eec6eb2
 import styled from "styled-components";
 import Colors from "../../Styles/Colors";
 import { Link } from "react-router-dom";
@@ -52,20 +56,20 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-width: 200px;
-height: 60px;
-text-align : center;
-margin-top : 1rem;
-background-color: ${Colors.loginButton}};
-border: none;
-border-radius: 10px;
-color: white;
-font-weight: bold;
-cursor: pointer;
-font-size: 1.5rem;
-&:hover {
-  color: ${Colors.loginButtonHover};
-}
+  width: 200px;
+  height: 60px;
+  text-align: center;
+  margin-top: 1rem;
+  background-color: ${Colors.loginButton};
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.5rem;
+  &:hover {
+    color: ${Colors.loginButtonHover};
+  }
 `;
 
 export const Div = styled.div`

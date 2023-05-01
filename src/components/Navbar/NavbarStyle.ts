@@ -4,21 +4,21 @@ import Colors from "../../Styles/Colors";
 import Frames from "../../Styles/Frames";
 
 export const Header = styled.header`
-  /* position: fixed;  메인화면 기획에따라 바꿀예정 */
-  position: relative;
   width: 100%;
   height: ${Frames.navbar_height};
   align-items: center;
+  margin: 0 auto;
 `;
 
 export const Nav = styled.nav`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
+  /* align-items: center; */
+  /* text-align: center; */
+`;
+export const Ul = styled.ul`
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  text-align: center;
-  margin: 0 auto;
+  list-style: none;
 `;
 
 export const StyledLink = styled(Link)`
@@ -33,13 +33,6 @@ export const StyledLink = styled(Link)`
 
 export const StyledImg = styled.img``;
 
-export const Ul = styled.ul`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  list-style: none;
-`;
-
 export const Div = styled.div`
   display: flex;
   justify-content: center;
@@ -48,9 +41,10 @@ export const Div = styled.div`
 
 export const Logo = styled.div`
   width: 160px;
-  height: 40px;
+  height: ${Frames.navbar_height};
   font-size: 35px;
   padding: 0;
+  line-height: 60px;
   white-space: nowrap;
   cursor: pointer;
 `;
@@ -63,4 +57,7 @@ export const Li = styled.li`
   &:hover {
     font-size: 22px;
   }
+  /* @media only screen and (max-width: 1080px) {
+    display: none;
+  } */
 `;

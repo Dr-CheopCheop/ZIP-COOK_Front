@@ -2,12 +2,12 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import useAxios from "../../hooks/useAxios";
-import Navbar from "../Navbar/Navbar";
+import useAxios from "../../../hooks/useAxios";
+import Navbar from "../../Navbar/Navbar";
 import * as S from "./ShareFormStyle";
-import Icons from "../../Styles/Icons";
-import url from "../../constants/path";
-import type { FormProps } from "../../constants/interfaces";
+import Icons from "../../../Styles/Icons";
+import url from "../../../constants/path";
+import type { FormProps } from "../../../constants/interfaces";
 
 const ShareForm = () => {
   const navigate = useNavigate();

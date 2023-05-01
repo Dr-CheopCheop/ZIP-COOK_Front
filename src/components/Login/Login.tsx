@@ -7,8 +7,8 @@ import {  useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 interface FormValue {
-  ID : string
-  PW : string
+  ID: string;
+  PW: string;
 }
 
 const Loginpage = () => {
@@ -21,7 +21,7 @@ const Loginpage = () => {
   }
 
   function ForgotPage() {
-    movepage('/forgot');
+    movepage("/forgot");
   }
 
   function Googlepage() {
@@ -31,23 +31,23 @@ const Loginpage = () => {
   const {
     register,
     handleSubmit,
-    formState: {errors},
+    formState: { errors },
   } = useForm<FormValue>();
 
   const onSubmit = async (data: FormValue) => {
     setIsLoading(true);
-    try{
-      const response = await axios.post('',data); //login api
+    try {
+      const response = await axios.post("", data); //login api
       console.log(response.data);
       setIsLoading(false);
-      alert("로그인 성공하셨습니다.")
-      movepage('/main');
-    } catch(error){
+      alert("로그인 성공하셨습니다.");
+      movepage("/main");
+    } catch (error) {
       console.log("로그인 실패하셨습니다.");
       setIsLoading(false);
       setErrorMessage("로그인 실패하셨습니다.");
     }
-  }
+  };
 
   // const onSuccess = (res:any) => {
   //   console.log("LOGIN SUCCESS", res);
@@ -65,9 +65,13 @@ const Loginpage = () => {
       </L.Test>
       <L.Sign>
         <form onSubmit={handleSubmit(onSubmit)}>
-        <L.Signinput type="text" placeholder="ID" {...register("ID", {required: true, minLength : 6, maxLength: 8})}/>
-        {errors.ID && <span>아이디를 입력해주세요!</span>}
-        {errors.ID && errors.ID.type === "maxLength" && (
+          <L.Signinput
+            type="text"
+            placeholder="ID"
+            {...register("ID", { required: true, minLength: 6, maxLength: 8 })}
+          />
+          {errors.ID && <span>아이디를 입력해주세요!</span>}
+          {errors.ID && errors.ID.type === "maxLength" && (
             <div>아이디는 8글자 이내로 작성해주세요.</div>
           )}
         <L.Signinput type="password" placeholder="PassWord" {...register("PW", {required:true,

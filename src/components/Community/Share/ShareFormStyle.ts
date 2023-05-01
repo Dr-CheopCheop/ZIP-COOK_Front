@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Colors from "../../Styles/Colors";
-import Frames from "../../Styles/Frames";
+import Colors from "../../../Styles/Colors";
+import Frames from "../../../Styles/Frames";
 
 export const Form = styled.form`
   border-top: 2px solid rgba(0, 0, 0, 0.5);
