@@ -1,5 +1,5 @@
 import Navbar from "../../../components/Navbar/Navbar";
-import DiscountMain from "../../../components/Discount/DiscountMain";
+import DiscountMain from "../../../components/Community/Discount/DiscountMain";
 const Discount = () => {
   return (
     <div>
