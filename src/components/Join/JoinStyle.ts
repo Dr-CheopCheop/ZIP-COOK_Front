@@ -1,7 +1,6 @@
-
 import styled from "styled-components";
-
 import Colors from "../../Styles/Colors";
+import { Link } from "react-router-dom";
 
 export const Form = styled.div`
   width: 100%;
@@ -82,6 +81,7 @@ export const E_button = styled.button`
   border-radius: 10px;
   margin-top: 10px;
   margin-left: 10px;
+  cursor: pointer;
 `;
 
 export const p = styled.p`
@@ -92,4 +92,11 @@ export const p = styled.p`
 
 export const Test = styled(Link)`
   text-decoration: none;
+`;
+
+export const map = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
 `;

@@ -3,16 +3,18 @@ import {useNavigate} from "react-router-dom";
 import React, {useState, useRef} from 'react';
 import * as S from "./JoinStyle";
 import axios from 'axios';
-import { spawn } from "child_process";
+import MapSelector from "../../utils/MapSelector";
+import useInput from "../../hooks/useInput";
 
 interface FormValue {
 	name: string
 	ID: string
-  email: string
+  email : string
   code: number
   password: string
   password_confirm: string
 }
+
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -25,11 +27,13 @@ const SignupForm = () => {
   } = useForm<FormValue>({
     defaultValues: {name:"", ID:"", email:"", password:"", password_confirm:""},
   });
+    console.log(watch());
     const [isEmailSent, setIsEmailSent] = useState(false);
     const [emailError, setEmailError] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const passwordRef = useRef<string | null>(null)
+    const passwordRef = useRef<string | null>(null);
     passwordRef.current = watch("password");
+    
 
     //이메일 전송
     const sendEmail = async (data: FormValue) => {
@@ -39,9 +43,11 @@ const SignupForm = () => {
         if(res.status === 200){
           setIsEmailSent(true);
         }else {
+          console.log("이메일전송실패",data);
           throw new Error("이메일 전송에 실패하였습니다.");
         }
       }catch (error){
+        console.log("이메일전송실패",data);
         console.log("이메일 전송에 실패했습니다.");
       }
     };
@@ -68,7 +74,7 @@ const SignupForm = () => {
 
     const onSubmitHandler: SubmitHandler<FormValue> = async (data) => {
       try {
-        const {ID} = data;
+        const {ID, name, email, password} = data;
         //아이디 중복 체크
         const idCheckRes = await axios.post('/api/checkId', {ID : ID}); //ID 중복 api 주소
         if(idCheckRes.data.exists){
@@ -76,13 +82,18 @@ const SignupForm = () => {
         }
         
         await sendEmail(data);
+        //회원가입 api
+        const signUpRes = await axios.post('/api/signup', { name, ID, email, password}); //회원가입 api
+        console.log(signUpRes);
       } catch(error){
         console.error(error);
+        console.log("이메일 전송실패");
         setEmailError("이메일 전송에 실패했습니다.");
       }finally{
         setIsSubmitting(false);
       }
       navigate('/login');
+
     };
 
   return (
@@ -97,7 +108,8 @@ const SignupForm = () => {
           )}
 	        <S.Div><label>ID</label></S.Div>
         	<div>
-          <S.Input placeholder=" 6~8글자 이내로 입력해주세요" {...register("ID", { required: true, minLength : 6, maxLength: 8 })} /></div>
+          <S.Input placeholder=" 6~8글자 이내로 입력해주세요" {...register("ID", { required: true, minLength : 6, maxLength: 8 })} />
+          </div>
           {errors.ID && errors.ID.type === "required" && (
             <div>아이디는 6~8글자 이내로 작성해주세요.</div>
           )}
@@ -105,18 +117,17 @@ const SignupForm = () => {
             <div>아이디는 8글자 이내로 작성해주세요.</div>
           )}
 	        <S.Div><label>Email</label></S.Div>
-        	<div><S.Input placeholder=" 이메일을 입력해주세요" {...register("email", { required: true, pattern: /^\S+@\S+$/i })} type="email" />
+        	<div><S.Input {...register("email", { required: true, pattern: /^\S+@\S+$/i })} type="email" />
 	        <span>
             <S.E_button type="button" onClick={handleSubmit(sendEmail)}>인증번호 보내기</S.E_button>
-            </span>
+          </span>
           {errors.email && errors.email.type === "pattern" && (
             <div>이메일 형식에 맞게 작성해주세요!</div>
           )}
           {errors.email && errors.email.type === "required" && <div>이메일을 작성해주세요!</div>}
           {isEmailSent ? (
             <div>이메일이 전송되었습니다. 인증코드를 확인해주세요.</div>
-          ) : (<span></span>)}
-
+          ) : (<div>이메일 전송 실패</div>)}
           </div>
           <S.Div><label>Email Verification Number</label></S.Div>
           <div><S.Input {...register("code", {required: true})} placeholder="이메일 인증번호를 입력해주세요."
@@ -150,6 +161,10 @@ const SignupForm = () => {
               <div>비밀번호가 일치하지 않습니다.</div>
             )}
         </div>
+        <div><label> select region</label></div>
+        <S.map>
+          <MapSelector/>
+        </S.map>
         <S.Button>Sign Up</S.Button>
       </S.Form>
   );
