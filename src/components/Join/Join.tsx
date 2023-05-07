@@ -4,7 +4,6 @@ import React, { useState, useRef } from "react";
 import * as S from "./JoinStyle";
 import axios from 'axios';
 import MapSelector from "../../utils/MapSelector";
-import useInput from "../../hooks/useInput";
 
 interface FormValue {
 	name: string
@@ -33,6 +32,7 @@ const SignupForm = () => {
       password_confirm: "",
     },
   });
+
     console.log(watch());
     const [isEmailSent, setIsEmailSent] = useState(false);
     const [emailError, setEmailError] = useState<string | null>(null);
@@ -56,9 +56,6 @@ const SignupForm = () => {
         console.log("이메일전송실패",data);
         console.log("이메일 전송에 실패했습니다.");
       }
-    } catch (error) {
-      console.log("이메일 전송에 실패했습니다.");
-    }
   };
 
   //이메일 전송번호 확인
@@ -139,7 +136,7 @@ const SignupForm = () => {
           )}
           {isEmailSent ? (
             <div>이메일이 전송되었습니다. 인증코드를 확인해주세요.</div>
-          ) : (<div>이메일 전송 실패</div>)}
+          ) : (<></>)}
           </div>
           <S.Div><label>Email Verification Number</label></S.Div>
           <div><S.Input {...register("code", {required: true})} placeholder="이메일 인증번호를 입력해주세요."
