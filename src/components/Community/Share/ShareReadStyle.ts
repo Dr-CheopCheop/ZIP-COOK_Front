@@ -53,7 +53,6 @@ export const TitleImage = styled.img`
 
 //내용부분 --제목,주소,내용
 export const ContentsContainer = styled.div`
-  border-bottom: 1px solid black;
   padding-bottom: 150px;
   h1 {
     font-size: 32px;
