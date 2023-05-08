@@ -7,17 +7,18 @@ import Icons from "../../../Styles/Icons";
 import url from "../../../constants/path";
 import Navbar from "../../Navbar/Navbar";
 import * as S from "./RecipeFormStyle";
+import ErrorMessage from "../../Error/ErrorMessage";
 import FormRequirements from "../FormRequriements";
+import { convertToHour, convertToMinute } from "../../../utils/TimeConvert";
 
 const {
-  cookTimeRequirements,
   titleRequirements,
   imageRequirements,
   difficultyRequirements,
+  foodIngredientRequirements,
 } = FormRequirements;
 
 const RecipeForm = () => {
-  const [level, setLevel] = useState<number>(1);
   const navigate = useNavigate();
   const axiosData = useAxios();
   const {
@@ -28,20 +29,27 @@ const RecipeForm = () => {
     setValue,
     formState: { errors },
   } = useForm<FormProps>({
-    defaultValues: { title: "", quantity: "1인분", foods: [] },
+    defaultValues: {
+      title: "",
+      quantity: "1인분",
+      foods: [],
+      manuals: [],
+      cookTimes: "1시간",
+    },
   });
 
   const { isLoading, error, sendRequest: sendFormRequest } = axiosData;
   const [imagePreview, setImagePreview] = useState<string>("");
-
+  const [level, setLevel] = useState<number>(1);
   const onSubmitHandler: SubmitHandler<FormProps> = (data) => {
     const formData = new FormData();
     formData.append("image", data.img[0]);
     formData.append("title", data.title);
     formData.append("quantity", data.quantity);
     formData.append("difficulty", data.difficulty);
-    formData.append("cookTime", data.cookTime);
+    formData.append("cookTimes", data.cookTimes);
     data.foods.forEach((food) => formData.append("foods", food));
+    data.manuals.forEach((manual) => formData.append("manuals", manual));
 
     for (let key of formData.values()) {
       console.log(key);
@@ -63,7 +71,8 @@ const RecipeForm = () => {
     );
   };
 
-  const { img, quantity } = watch();
+  const { img, quantity, title, cookTimes, difficulty, foods, manuals } =
+    watch();
 
   useEffect(() => {
     if (img && img.length > 0) {
@@ -85,21 +94,70 @@ const RecipeForm = () => {
         break;
     }
   };
-  if (isLoading) return <>Loading...</>;
-  if (error) return <>error</>;
+  const cookTimesHandler = (operation: string) => {
+    let num = parseInt(convertToMinute(cookTimes));
 
-  const showLevel = (num: number) => {
-    alert(num);
-    setLevel(num);
+    switch (operation) {
+      case "-":
+        if (num === 10) break;
+        setValue("cookTimes", convertToHour(num - 10));
+        break;
+
+      default:
+        setValue("cookTimes", convertToHour(num + 10));
+        break;
+    }
   };
 
+  const showLevel = (num: number) => {
+    switch (num) {
+      case 2:
+        if (img && title && quantity && cookTimes && difficulty) {
+          setLevel((level) => 2);
+        } else {
+        }
+        break;
+      case 3:
+        if (
+          img &&
+          title &&
+          quantity &&
+          cookTimes &&
+          difficulty &&
+          foods.length > 0
+        ) {
+          setLevel((level) => 3);
+        } else {
+        }
+        break;
+      default:
+        setLevel(num);
+        break;
+    }
+  };
+  if (isLoading) return <>Loading...</>;
+  if (error) return <>error</>;
   return (
     <>
       <Navbar />
       <S.LevelBar>
-        <button onClick={() => showLevel(1)}>1</button>
-        <button onClick={() => showLevel(2)}>2</button>
-        <button onClick={() => showLevel(3)}>3</button>
+        <S.LevelButton isActive={1 === level} onClick={() => showLevel(1)}>
+          1
+        </S.LevelButton>
+        <S.LevelButton
+          disabled={!(img && title && quantity && cookTimes && difficulty)}
+          isActive={2 === level}
+          onClick={() => showLevel(2)}
+        >
+          2
+        </S.LevelButton>
+        <S.LevelButton
+          disabled={foods.length === 0}
+          isActive={3 === level}
+          onClick={() => showLevel(3)}
+        >
+          3
+        </S.LevelButton>
       </S.LevelBar>
 
       <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -122,28 +180,34 @@ const RecipeForm = () => {
                 accept="image/*"
               />
             </label>
-            {errors.img && <S.Error> 이미지를 첨부해주세요!</S.Error>}
+            {errors.img && <ErrorMessage> {errors.img.message}</ErrorMessage>}
             <S.Input
               {...register("title", titleRequirements)}
               placeholder="레시피 이름"
             />
-            {errors.title && <S.Error> 레시피 제목을 입력해주세요!</S.Error>}
+            {errors.title && (
+              <ErrorMessage> {errors.title.message}</ErrorMessage>
+            )}
 
             <S.countContainer>
               <button type="button" onClick={() => quantityHandler("-")}>
                 -
               </button>
-              <S.Input {...register("quantity", { required: true })} readOnly />
+              <S.Input {...register("quantity")} readOnly />
               <button type="button" onClick={() => quantityHandler("+")}>
                 +
               </button>
             </S.countContainer>
-            <S.Input
-              {...register("cookTime", cookTimeRequirements)}
-              placeholder="조리 시간"
-            />
-            {errors.cookTime && <S.Error> {errors.cookTime.message}</S.Error>}
 
+            <S.countContainer>
+              <button type="button" onClick={() => cookTimesHandler("-")}>
+                -
+              </button>
+              <S.Input {...register("cookTimes")} readOnly />
+              <button type="button" onClick={() => cookTimesHandler("+")}>
+                +
+              </button>
+            </S.countContainer>
             <S.RadioContainer>
               <div>난이도</div>
               <input
@@ -168,18 +232,21 @@ const RecipeForm = () => {
               />
               <label htmlFor="하">하</label>
             </S.RadioContainer>
-            {errors.difficulty && <S.Error> 난이도를 입력해주세요!</S.Error>}
+            {errors.difficulty && (
+              <ErrorMessage> {errors.difficulty.message}</ErrorMessage>
+            )}
           </S.LevelByVIew>
 
           <S.LevelByVIew isView={level === 2}>
             <S.Manual>
               <p>레시피 재료를 추가해 주세요.</p>
+              {Icons.refrigerator}
             </S.Manual>
             <Controller
               name="foods"
               control={control}
               defaultValue={[]}
-              rules={{ required: true }}
+              rules={foodIngredientRequirements}
               render={({ field }) => (
                 <S.StyledTags
                   {...field}
@@ -189,16 +256,31 @@ const RecipeForm = () => {
                 />
               )}
             />
-            {errors.foods && <S.Error>재료를 추가해주세요</S.Error>}
+            {errors.foods && (
+              <ErrorMessage>{errors.foods.message}</ErrorMessage>
+            )}
           </S.LevelByVIew>
 
           <S.LevelByVIew isView={level === 3}>
             <S.Manual>
               <p>상세 정보를 입력해 주세요.</p>
             </S.Manual>
+            <Controller
+              name="manuals"
+              control={control}
+              defaultValue={[]}
+              rules={foodIngredientRequirements}
+              render={({ field }) => (
+                <S.StyledManuals
+                  {...field}
+                  value={field.value || []}
+                  onChange={field.onChange}
+                  inputProps={{ placeholder: `${manuals.length + 1}.설명` }}
+                />
+              )}
+            />
+            <S.Button type="submit">{Icons.chef}Cook!</S.Button>
           </S.LevelByVIew>
-
-          <S.Button type="submit">{Icons.chef}Cook!</S.Button>
         </S.Container>
       </S.Form>
     </>
