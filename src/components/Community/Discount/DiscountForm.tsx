@@ -1,20 +1,25 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useAxios from "../../../hooks/useAxios";
 
+import useAxios from "../../../hooks/useAxios";
 import Navbar from "../../Navbar/Navbar";
 import * as S from "./DiscountFormStyle";
 import Icons from "../../../Styles/Icons";
 import url from "../../../constants/path";
+import ErrorMessage from "../../Error/ErrorMessage";
+import FormRequirements from "../FormRequriements";
 import type { FormProps } from "../../../constants/interfaces";
 
 const DiscountForm = () => {
   const navigate = useNavigate();
+  const { titleRequirements, imageRequirements, priceRequirements } =
+    FormRequirements;
+
   const axiosData = useAxios();
   const { isLoading, error, sendRequest: sendFormRequest } = axiosData;
 
-  const [imagePreview, setImagePreview] = useState<any>("");
+  const [imagePreview, setImagePreview] = useState<string>("");
 
   const {
     register,
@@ -78,23 +83,26 @@ const DiscountForm = () => {
               )}
             </S.ImgView>
             <S.ImgInput
-              {...register("img", { required: "사진을 추가해주세요" })}
+              {...register("img", imageRequirements)}
               type="file"
               accept="image/*"
             />
           </label>
+          {errors.img && <ErrorMessage>{errors.img.message}</ErrorMessage>}
+
           <S.Input
             placeholder="할인 상품명"
-            {...register("title", { required: true })}
+            {...register("title", titleRequirements)}
           />
+          {errors.title && <ErrorMessage>{errors.title.message}</ErrorMessage>}
+
           <S.Input
             placeholder="할인 상품 가격"
-            {...register("price", { required: true })}
+            {...register("price", priceRequirements)}
           />
+          {errors.price && <ErrorMessage>{errors.price.message}</ErrorMessage>}
 
           {/* 모두채워졌을때 완료설정 */}
-          {errors.title?.type === "required" && "제목을 입력해주세요"}
-          {errors.price?.type === "required" && "가격을 입력해주세요"}
 
           <S.Button>작성</S.Button>
         </S.Container>

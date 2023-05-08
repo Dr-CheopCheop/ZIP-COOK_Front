@@ -3,10 +3,12 @@ export interface FormProps {
   title: string;
   price: string;
   contents: string;
-  cookTime: string;
+  cookTimes: string;
+
   quantity: string;
   difficulty: string;
   foods: string[];
+  manuals: string[];
 }
 
 export interface addressProps {
@@ -39,4 +41,7 @@ export interface levelViewProps {
 }
 export interface PostListProps {
   category: string;
+}
+export interface levelActiveProps {
+  isActive: boolean;
 }

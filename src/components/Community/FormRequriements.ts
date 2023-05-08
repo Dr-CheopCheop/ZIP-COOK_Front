@@ -1,15 +1,3 @@
-const cookTimeRequirements = {
-  required: {
-    value: true,
-    message: "시간을 입력해주세요!",
-  },
-  pattern: {
-    value:
-      /([01]?[0-9]|2[0-3])시간\s*(?:반)?\s*[0-5]?[0-9]분|[0-5]?[0-9]분|([01]?[0-9]|2[0-3])시간/,
-    message: "시간과 분을 사용하여 입력해주세요!",
-  },
-};
-
 const titleRequirements = {
   required: {
     value: true,
@@ -20,7 +8,7 @@ const titleRequirements = {
 const imageRequirements = {
   required: {
     value: true,
-    message: "이미지를 첨부해주세요!",
+    message: "이미지를 추가해주세요!",
   },
 };
 
@@ -30,12 +18,33 @@ const difficultyRequirements = {
     message: "난이도를 입력해주세요!",
   },
 };
+const contentsRequirements = {
+  required: {
+    value: true,
+    message: "내용을 입력해주세요!",
+  },
+};
+const priceRequirements = {
+  required: {
+    value: true,
+    message: "가격을 입력해주세요!",
+  },
+};
+
+const foodIngredientRequirements = {
+  required: {
+    value: true,
+    message: "레시피 재료를 1개이상 입력해주세요!",
+  },
+};
 
 const FormRequirements = {
-  cookTimeRequirements,
   titleRequirements,
   imageRequirements,
   difficultyRequirements,
+  contentsRequirements,
+  priceRequirements,
+  foodIngredientRequirements,
 };
 
 export default FormRequirements;

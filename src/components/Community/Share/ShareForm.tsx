@@ -7,12 +7,15 @@ import Navbar from "../../Navbar/Navbar";
 import * as S from "./ShareFormStyle";
 import Icons from "../../../Styles/Icons";
 import url from "../../../constants/path";
+import ErrorMessage from "../../Error/ErrorMessage";
+import FormRequirements from "../FormRequriements";
 import type { FormProps } from "../../../constants/interfaces";
 
 const ShareForm = () => {
   const navigate = useNavigate();
-
-  const [imagePreview, setImagePreview] = useState<any>("");
+  const { titleRequirements, imageRequirements, contentsRequirements } =
+    FormRequirements;
+  const [imagePreview, setImagePreview] = useState<string>("");
   const axiosData = useAxios();
 
   const { isLoading, error, sendRequest: sendFormRequest } = axiosData;
@@ -60,7 +63,12 @@ const ShareForm = () => {
       abc
     );
   };
-
+  if (isLoading)
+    return (
+      <>
+        <Navbar /> 로딩중...
+      </>
+    );
   return (
     <>
       <Navbar />
@@ -78,26 +86,29 @@ const ShareForm = () => {
               )}
             </S.ImgView>
             <S.ImgInput
-              {...register("img", { required: "사진을 추가해주세요" })}
+              {...register("img", imageRequirements)}
               type="file"
               accept="image/*"
             />
+            {errors.img && <ErrorMessage>{errors.img.message}</ErrorMessage>}
           </label>
           <S.Input
             placeholder="제목"
-            {...register("title", { required: true })}
+            {...register("title", titleRequirements)}
           />
-          {errors.title?.type === "required" && "제목을 입력해주세요"}
+          {errors.title && <ErrorMessage>{errors.title.message}</ErrorMessage>}
           <S.Input
             placeholder="내용"
-            {...register("contents", { required: true })}
+            {...register("contents", contentsRequirements)}
           />
 
-          {errors.contents?.type === "required" && "내용을 입력해주세요"}
+          {errors.contents && (
+            <ErrorMessage>{errors.contents.message}</ErrorMessage>
+          )}
 
           {/* 모두채워졌을때 완료설정 */}
           <S.Button>작성</S.Button>
-          {isLoading && "로딩중"}
+
           {error && "에러"}
         </S.Container>
       </S.Form>

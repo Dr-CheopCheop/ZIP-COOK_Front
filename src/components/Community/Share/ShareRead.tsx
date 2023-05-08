@@ -2,7 +2,7 @@ import Navbar from "../../Navbar/Navbar";
 // import { useParams } from "react-router-dom";
 // import DummyData from "../Dummydata";
 import * as S from "./ShareReadStyle";
-import CommentList from "../../Comment/CommentList";
+import CommentList from "../Comment/CommentList";
 const ShareRead = () => {
   // const { id } = useParams();
   // const selectData = DummyData.find((data) => data.id === Number(id));

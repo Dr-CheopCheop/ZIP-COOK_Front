@@ -52,21 +52,49 @@ export const TitleImage = styled.img`
 `;
 
 //내용부분 --제목,주소,내용
-export const ContentsContainer = styled.div`
-  border-bottom: 1px solid black;
-  padding-bottom: 150px;
+export const RecipeContentsSummaryBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  > div {
+    width: 300px;
+    position: relative;
+  }
+  > div:nth-child(1):after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 30px;
+    border-right: 2px solid black;
+    top: 50%;
+    left: 100%;
+    transform: translate(0%, -50%);
+    // 여백 조절을 위해 오른쪽 여백 값 조정
+  }
+  > div:nth-child(2):after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 30px;
+    border-right: 2px solid black;
+    top: 50%;
+    left: 100%;
+    transform: translate(0%, -50%);
+    // 여백 조절을 위해 오른쪽 여백 값 조정
+  }
+  span {
+    font-size: 24px;
+    text-shadow: 2px 2px 2px gray;
+  }
+`;
+
+export const RecipeContentsContainer = styled.div`
+  width: 1080px;
+  text-align: center;
+
+  margin: 0 auto;
   h1 {
-    font-size: 32px;
-    padding-bottom: 10px;
-  }
-
-  div:nth-child(2) {
-    font-size: 12px;
-    padding: 5px;
-  }
-
-  div:nth-child(3) {
-    font-size: 16px;
-    padding: 10px;
+    font-size: 40px;
   }
 `;
