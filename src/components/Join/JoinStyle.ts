@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-=======
 import { Link } from "react-router-dom";
->>>>>>> f7640fb402c31e1800daccbd65fa251f5eec6eb2
 import styled from "styled-components";
 import Colors from "../../Styles/Colors";
-import { Link } from "react-router-dom";
 
 export const Form = styled.div`
   width: 100%;
