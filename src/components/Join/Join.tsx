@@ -56,9 +56,6 @@ const SignupForm = () => {
         console.log("이메일전송실패",data);
         console.log("이메일 전송에 실패했습니다.");
       }
-    } catch (error) {
-      console.log("이메일 전송에 실패했습니다.");
-    }
   };
 
   //이메일 전송번호 확인
