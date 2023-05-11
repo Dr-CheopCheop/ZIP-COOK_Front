@@ -2,9 +2,10 @@ export interface FormProps {
   img: FileList;
   title: string;
   price: string;
+  discountPrice: string;
   contents: string;
   cookTimes: string;
-
+  place: string;
   quantity: string;
   difficulty: string;
   foods: string[];
