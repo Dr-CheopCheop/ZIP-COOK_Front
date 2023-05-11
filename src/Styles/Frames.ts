@@ -17,7 +17,7 @@ const FormBox = css`
 `;
 
 const Frames = {
-  navbar_height: "60px",
+  navbar_height: "80px",
   FormBox,
 };
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import GetPostList from "../../Post/GetPostList";
+import GetPostList from "../Post/GetPostList";
 const DiscountMain = () => {
   return (
     <div>

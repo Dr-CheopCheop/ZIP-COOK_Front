@@ -4,10 +4,12 @@ import Colors from "../../Styles/Colors";
 import Frames from "../../Styles/Frames";
 
 export const Header = styled.header`
-  width: 100%;
-  height: ${Frames.navbar_height};
-  align-items: center;
+  width: 1500px;
   margin: 0 auto;
+  height: ${Frames.navbar_height};
+  @media (max-width: 1500px) {
+    width: 1080px;
+  }
 `;
 
 export const Nav = styled.nav`
@@ -40,11 +42,10 @@ export const Div = styled.div`
 `;
 
 export const Logo = styled.div`
-  width: 160px;
   height: ${Frames.navbar_height};
   font-size: 35px;
   padding: 0;
-  line-height: 60px;
+  line-height: ${Frames.navbar_height};
   white-space: nowrap;
   cursor: pointer;
 `;
@@ -54,10 +55,4 @@ export const Li = styled.li`
   padding: 0 15px;
   align-items: center;
   white-space: nowrap;
-  &:hover {
-    font-size: 22px;
-  }
-  /* @media only screen and (max-width: 1080px) {
-    display: none;
-  } */
 `;
