@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import useAxios from "../../../hooks/useAxios";
 import Navbar from "../../Navbar/Navbar";
@@ -8,18 +8,30 @@ import * as S from "./DiscountFormStyle";
 import Icons from "../../../Styles/Icons";
 import url from "../../../constants/path";
 import ErrorMessage from "../../Error/ErrorMessage";
-import FormRequirements from "../FormRequriements";
+import FormRequirements from "../../../constants/FormRequriements";
 import type { FormProps } from "../../../constants/interfaces";
+import { defaultDiscountValue } from "../../../constants/defaultFormOption";
+import Loading from "../../Loading/Loading";
 
 const DiscountForm = () => {
   const navigate = useNavigate();
-  const { titleRequirements, imageRequirements, priceRequirements } =
-    FormRequirements;
+  const location = useLocation();
+
+  const {
+    titleRequirements,
+    imageRequirements,
+    discountPriceRequirements,
+    priceRequirements,
+  } = FormRequirements;
+  let defaultValue = defaultDiscountValue;
 
   const axiosData = useAxios();
   const { isLoading, error, sendRequest: sendFormRequest } = axiosData;
-
   const [imagePreview, setImagePreview] = useState<string>("");
+
+  if (location.state) {
+    defaultValue = location.state.datas;
+  }
 
   const {
     register,
@@ -27,7 +39,7 @@ const DiscountForm = () => {
     watch,
     formState: { errors },
   } = useForm<FormProps>({
-    defaultValues: { title: "", price: "" },
+    defaultValues: defaultValue,
   });
   const { img } = watch();
 
@@ -42,6 +54,8 @@ const DiscountForm = () => {
     const formData = new FormData();
     formData.append("image", data.img[0]);
     formData.append("price", data.price);
+    formData.append("place", data.place);
+    formData.append("discountPrice", data.discountPrice);
     formData.append("title", data.title);
 
     // formdata 콘솔확인용 추후 삭제 & tsconfig 수정
@@ -63,8 +77,6 @@ const DiscountForm = () => {
       abc
     );
   };
-
-  // const isButtonActive: boolean = imagePreview && title && price;
 
   return (
     <>
@@ -97,18 +109,31 @@ const DiscountForm = () => {
           {errors.title && <ErrorMessage>{errors.title.message}</ErrorMessage>}
 
           <S.Input
-            placeholder="할인 상품 가격"
+            placeholder="판매 장소"
+            {...register("place", priceRequirements)}
+          />
+          {errors.place && <ErrorMessage>{errors.place.message}</ErrorMessage>}
+
+          <S.Input
+            placeholder="상품 가격"
             {...register("price", priceRequirements)}
           />
           {errors.price && <ErrorMessage>{errors.price.message}</ErrorMessage>}
+          <S.Input
+            placeholder="할인 상품 가격"
+            {...register("discountPrice", discountPriceRequirements)}
+          />
+          {errors.discountPrice && (
+            <ErrorMessage>{errors.discountPrice.message}</ErrorMessage>
+          )}
 
           {/* 모두채워졌을때 완료설정 */}
 
           <S.Button>작성</S.Button>
         </S.Container>
-        {isLoading && "로딩중"}
-        {error && "에러발생"}
       </S.Form>
+      {isLoading ? <Loading /> : <></>}
+      {error && "에러발생"}
     </>
   );
 };

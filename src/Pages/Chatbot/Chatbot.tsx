@@ -1,10 +1,10 @@
-import * as S from "./ChatbotStyle";
 import Navbar from "../../components/Navbar/Navbar";
+import ChatbotPage from '../../components/Chatbot/Chatbot';
 const Chatbot = () => {
   return (
     <div>
       <Navbar />
-      <S.styledH1>chatbot page</S.styledH1>
+      <ChatbotPage />
     </div>
   );
 };

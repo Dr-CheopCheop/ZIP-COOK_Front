@@ -19,15 +19,17 @@ const datas = [
 const CommentList = () => {
   return (
     <S.CommentListWrapper>
-      <div>댓글 {datas.length}</div>
+      <S.CountComments>
+        댓글 <span>{datas.length}</span>
+      </S.CountComments>
       {datas.map((data) => (
-        <div key={data.id}>
+        <S.CommentItem key={data.id}>
           <div>
             {data.writer}
             <span>{data.time}</span>
           </div>
           <div>{data.comment}</div>
-        </div>
+        </S.CommentItem>
       ))}
       <CommentPost />
     </S.CommentListWrapper>

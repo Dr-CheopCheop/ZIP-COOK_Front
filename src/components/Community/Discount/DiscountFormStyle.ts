@@ -4,7 +4,7 @@ import Frames from "../../../Styles/Frames";
 
 export const Form = styled.form`
   border-top: 2px solid rgba(0, 0, 0, 0.5);
-  width: 900px;
+  width: 1080px;
   margin: 20px auto;
   label {
     display: inline-block;
@@ -34,6 +34,9 @@ export const Input = styled.input`
   &:focus {
     outline: none;
   }
+  /* &:nth-child(even) {
+    background-color: white;
+  } */
 `;
 
 export const ImgInput = styled(Input)`

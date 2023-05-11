@@ -30,11 +30,23 @@ const priceRequirements = {
     message: "가격을 입력해주세요!",
   },
 };
+const discountPriceRequirements = {
+  required: {
+    value: true,
+    message: "가격을 입력해주세요!",
+  },
+};
 
 const foodIngredientRequirements = {
   required: {
     value: true,
     message: "레시피 재료를 1개이상 입력해주세요!",
+  },
+};
+const manualRquirements = {
+  required: {
+    value: true,
+    message: "설명을 입력해주세요!",
   },
 };
 
@@ -45,6 +57,8 @@ const FormRequirements = {
   contentsRequirements,
   priceRequirements,
   foodIngredientRequirements,
+  manualRquirements,
+  discountPriceRequirements,
 };
 
 export default FormRequirements;

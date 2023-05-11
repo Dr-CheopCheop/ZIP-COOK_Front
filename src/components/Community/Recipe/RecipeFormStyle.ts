@@ -62,6 +62,10 @@ export const Manual = styled.div`
     width: 100px;
     height: 100px;
   }
+  p:nth-child(2) {
+    font-size: 24px;
+    font-weight: 700;
+  }
 `;
 
 export const Input = styled.input`
@@ -210,7 +214,7 @@ export const StyledManuals = styled(TagsInput)`
   overflow: hidden;
 
   /* padding-left: 5px; */
-  padding-top: 180px;
+  padding-top: 100px;
   .react-tagsinput-tag {
     background-color: ${Colors.postBackground};
     border-radius: 10px;
@@ -222,6 +226,7 @@ export const StyledManuals = styled(TagsInput)`
     width: 700px;
     text-align: left;
     padding: 20px;
+    position: relative;
     /* margin: 5px; */
   }
 
@@ -232,18 +237,23 @@ export const StyledManuals = styled(TagsInput)`
 
   .react-tagsinput-tag a::before {
     content: " ×";
+    font-size: 30px;
+
+    position: absolute;
+    top: 50%;
+    left: 95%;
+    transform: translate(-95%, -50%);
   }
 
   .react-tagsinput-input {
     display: block;
-    margin: 100px auto;
+    margin: 10px auto;
     background-color: ${Colors.postBackground};
     border-radius: 10px;
     border: 2px solid ${Colors.postBackgroundBorder};
     color: black;
     font-size: 20px;
-    margin-bottom: 6px;
-    margin-top: 1px;
+
     outline: none;
     padding: 20px;
     width: 700px;
