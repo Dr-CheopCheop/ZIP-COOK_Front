@@ -4,7 +4,7 @@ import Frames from "../../../Styles/Frames";
 
 export const Form = styled.form`
   border-top: 2px solid rgba(0, 0, 0, 0.5);
-  width: 900px;
+  width: 1080px;
   margin: 20px auto;
   label {
     display: inline-block;
@@ -28,6 +28,22 @@ export const Manual = styled.div`
 export const Input = styled.input`
   ${Frames.FormBox};
 
+  &:hover {
+    border: 4px solid ${Colors.postBackgroundBorder};
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+export const Textarea = styled.textarea`
+  ${Frames.FormBox};
+  font-size: 20px;
+  line-height: 23px;
+  background-color: white;
+  resize: none;
+  text-align: left;
+  padding: 20px 20px;
+  height: 300px;
   &:hover {
     border: 4px solid ${Colors.postBackgroundBorder};
   }

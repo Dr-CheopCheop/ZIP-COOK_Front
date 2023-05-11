@@ -5,6 +5,8 @@ const initialPostState: FormProps = {
   title: "",
   img: new FileList(),
   price: "",
+  place: "",
+  discountPrice: "",
   contents: "",
   cookTimes: "1시간",
   quantity: "1인분",

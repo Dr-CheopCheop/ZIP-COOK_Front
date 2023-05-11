@@ -55,18 +55,33 @@ export const TitleImage = styled.img`
 //내용부분 --제목,주소,내용
 export const ContentsContainer = styled.div`
   padding-bottom: 150px;
-  h1 {
-    font-size: 32px;
-    padding-bottom: 10px;
+
+  div:nth-child(1) {
+    h1 {
+      font-size: 32px;
+    }
+    span {
+      font-size: 12px;
+    }
+    margin-bottom: 50px;
   }
 
   div:nth-child(2) {
-    font-size: 12px;
-    padding: 5px;
-  }
-
-  div:nth-child(3) {
     font-size: 16px;
     padding: 10px;
+    height: 100px;
+    align-items: center;
+    p:nth-child(1) {
+      text-decoration: line-through;
+      font-size: 20px;
+      padding-bottom: 10px;
+    }
+    p:nth-child(2) {
+      font-size: 50px;
+    }
+    p:nth-child(3) {
+      font-size: 30px;
+      color: red;
+    }
   }
 `;
