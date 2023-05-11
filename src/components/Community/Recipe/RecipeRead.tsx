@@ -1,23 +1,47 @@
 import Navbar from "../../Navbar/Navbar";
-// import { useParams } from "react-router-dom";
 // import DummyData from "../Dummydata";
+import React from "react";
 import * as S from "./RecipeReadStyle";
 import CommentList from "../Comment/CommentList";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const readData = {
   title: "해물 떡볶이",
   difficulty: "상",
-  cookTime: "1시간 30분",
+  cookTimes: "1시간 30분",
   quantity: "2인분",
-  foods: ["고추장 3큰술", "떡 1봉지", "어묵 2장", "설탕 1큰술"],
+  foods: [
+    "고추장 3큰술",
+    "떡 1봉지",
+    "어묵 2장",
+    "설탕 1큰술",
+    "다진마늘 2큰술",
+    "진간장 3스푼",
+    "파",
+    "고춧가루",
+  ],
+  manuals: [
+    "1. 떡을 물에 담가서 불립니다.",
+    "2. 냄비에 고추장 3큰술을 넣고 중불로 끓여줍니다",
+    "3. 다진마늘을 넣고 진간장3스푼,설탕 1큰술을 넣어줍니다.",
+    "4. 가나다라마바사",
+    "5. 기호에맞게 ",
+    "6. 어쩌구저쩌구~~",
+    "7. 어쩌구저쩌구~~",
+  ],
 };
 
 const RecipeRead = () => {
-  // const { id } = useParams();
+  const { id } = useParams();
+  const navigate = useNavigate();
   // const selectData = DummyData.find((data) => data.id === Number(id));
   // const { title, difficulty, cookTime } = selectData ?? {
   //   title: "존재하지 않는 게시물 입니다.",
   // };
+  const onDeleteHandler = () => {
+    //삭제 로직 작성
+    navigate("/community/recipe");
+  };
 
   return (
     <>
@@ -26,8 +50,13 @@ const RecipeRead = () => {
         <S.TitleContainer>
           <S.TitleBox>
             <S.UpperTitle>
-              <S.TitleButton>수정</S.TitleButton>
-              <S.TitleButton>삭제</S.TitleButton>
+              <Link
+                to="/community/recipe/write"
+                state={{ update: true, datas: readData, num: id }}
+              >
+                <S.TitleButton>수정</S.TitleButton>
+              </Link>
+              <S.TitleButton onClick={onDeleteHandler}>삭제</S.TitleButton>
             </S.UpperTitle>
             <S.LowTitle>
               <p>작성자: cooker</p>
@@ -45,13 +74,31 @@ const RecipeRead = () => {
             </div>
             <div>
               <h4>조리시간</h4>
-              <span>{readData.cookTime}</span>
+              <span>{readData.cookTimes}</span>
             </div>
             <div>
               <h4>조리난이도</h4>
               <span>{readData.difficulty}</span>
             </div>
           </S.RecipeContentsSummaryBox>
+          <S.foodsListContainer>
+            <p>재료</p>
+            <div>
+              {readData.foods.map((food, idx) => (
+                <React.Fragment key={food}>
+                  <span> {food}</span>
+                  {idx !== readData.foods.length - 1 && <span>,</span>}
+                </React.Fragment>
+              ))}
+            </div>
+          </S.foodsListContainer>
+          <S.manualsListBox>
+            {readData.manuals.map((manual) => (
+              <React.Fragment key={manual}>
+                <h3> {manual}</h3>
+              </React.Fragment>
+            ))}
+          </S.manualsListBox>
         </S.RecipeContentsContainer>
         <CommentList />
       </S.ReadContainer>

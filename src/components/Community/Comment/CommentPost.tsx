@@ -2,6 +2,7 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 // import useAxios from "../../hooks/useAxios";
 // import url from "../../constants/path";
+import * as S from "./CommentPostStyle";
 
 interface CommentProps {
   comment: string;
@@ -21,10 +22,10 @@ const CommentPost = () => {
   //   if (error) return <>댓글 작성 오류발생</>;
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmitHandler)}>
+      <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
         <input type="text" {...register("comment")} />
         <button type="submit">작성</button>
-      </form>
+      </S.Form>
     </>
   );
 };

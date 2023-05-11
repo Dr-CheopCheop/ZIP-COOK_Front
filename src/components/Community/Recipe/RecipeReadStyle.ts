@@ -35,6 +35,7 @@ export const TitleButton = styled.button`
   &:hover {
     border: 2px solid ${Colors.postBackgroundBorder};
     background-color: ${Colors.postBackground};
+    cursor: pointer;
   }
 `;
 export const LowTitle = styled.div`
@@ -86,6 +87,29 @@ export const RecipeContentsSummaryBox = styled.div`
   span {
     font-size: 24px;
     text-shadow: 2px 2px 2px gray;
+  }
+`;
+
+export const foodsListContainer = styled.div`
+  margin: 10px auto;
+  p {
+    font-size: 16px;
+    margin: 20px 0;
+  }
+  div {
+    font-size: 18px;
+    width: 800px;
+    margin: 0 auto;
+    white-space: normal;
+  }
+`;
+
+export const manualsListBox = styled.div`
+  margin: 100px 0;
+  font-size: 24px;
+  font-weight: 700;
+  h3 {
+    margin: 20px 0;
   }
 `;
 

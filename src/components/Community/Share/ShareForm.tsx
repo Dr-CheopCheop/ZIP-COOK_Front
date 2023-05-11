@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import useAxios from "../../../hooks/useAxios";
 import Navbar from "../../Navbar/Navbar";
@@ -8,24 +8,35 @@ import * as S from "./ShareFormStyle";
 import Icons from "../../../Styles/Icons";
 import url from "../../../constants/path";
 import ErrorMessage from "../../Error/ErrorMessage";
-import FormRequirements from "../FormRequriements";
+import FormRequirements from "../../../constants/FormRequriements";
 import type { FormProps } from "../../../constants/interfaces";
+import { defaultShareValue } from "../../../constants/defaultFormOption";
+import Loading from "../../Loading/Loading";
+
+const { titleRequirements, imageRequirements, contentsRequirements } =
+  FormRequirements;
+let defaultValue = defaultShareValue;
 
 const ShareForm = () => {
   const navigate = useNavigate();
-  const { titleRequirements, imageRequirements, contentsRequirements } =
-    FormRequirements;
-  const [imagePreview, setImagePreview] = useState<string>("");
-  const axiosData = useAxios();
+  const location = useLocation();
 
+  const [imagePreview, setImagePreview] = useState<string>("");
+
+  const axiosData = useAxios();
   const { isLoading, error, sendRequest: sendFormRequest } = axiosData;
+
+  if (location.state) {
+    defaultValue = location.state.datas;
+  }
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<FormProps>({
-    defaultValues: { title: "", contents: "" },
+    defaultValues: defaultValue,
   });
   const { img } = watch();
 
@@ -63,12 +74,7 @@ const ShareForm = () => {
       abc
     );
   };
-  if (isLoading)
-    return (
-      <>
-        <Navbar /> 로딩중...
-      </>
-    );
+
   return (
     <>
       <Navbar />
@@ -97,8 +103,11 @@ const ShareForm = () => {
             {...register("title", titleRequirements)}
           />
           {errors.title && <ErrorMessage>{errors.title.message}</ErrorMessage>}
-          <S.Input
-            placeholder="내용"
+
+          <S.Textarea
+            placeholder="내용을 입력해주세요"
+            rows={5}
+            cols={33}
             {...register("contents", contentsRequirements)}
           />
 
@@ -109,6 +118,7 @@ const ShareForm = () => {
           {/* 모두채워졌을때 완료설정 */}
           <S.Button>작성</S.Button>
 
+          {isLoading ? <Loading /> : <></>}
           {error && "에러"}
         </S.Container>
       </S.Form>

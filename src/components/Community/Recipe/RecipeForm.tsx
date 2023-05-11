@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import useAxios from "../../../hooks/useAxios";
 import type { FormProps } from "../../../constants/interfaces";
 import Icons from "../../../Styles/Icons";
@@ -8,19 +8,35 @@ import url from "../../../constants/path";
 import Navbar from "../../Navbar/Navbar";
 import * as S from "./RecipeFormStyle";
 import ErrorMessage from "../../Error/ErrorMessage";
-import FormRequirements from "../FormRequriements";
+import FormRequirements from "../../../constants/FormRequriements";
 import { convertToHour, convertToMinute } from "../../../utils/TimeConvert";
-
+import { defaultRecipeValue } from "../../../constants/defaultFormOption";
+import Loading from "../../Loading/Loading";
 const {
   titleRequirements,
   imageRequirements,
   difficultyRequirements,
   foodIngredientRequirements,
+  manualRquirements,
 } = FormRequirements;
 
 const RecipeForm = () => {
+  const location = useLocation();
+  const [imagePreview, setImagePreview] = useState<string>("");
+  const [level, setLevel] = useState<number>(1);
+
+  let defaltValues = defaultRecipeValue;
   const navigate = useNavigate();
   const axiosData = useAxios();
+
+  if (location.state) {
+    defaltValues = location.state.datas;
+
+    console.log(defaltValues);
+  } else {
+    defaltValues = defaultRecipeValue;
+    console.log(defaltValues);
+  }
   const {
     register,
     handleSubmit,
@@ -29,18 +45,11 @@ const RecipeForm = () => {
     setValue,
     formState: { errors },
   } = useForm<FormProps>({
-    defaultValues: {
-      title: "",
-      quantity: "1인분",
-      foods: [],
-      manuals: [],
-      cookTimes: "1시간",
-    },
+    defaultValues: defaltValues,
   });
 
   const { isLoading, error, sendRequest: sendFormRequest } = axiosData;
-  const [imagePreview, setImagePreview] = useState<string>("");
-  const [level, setLevel] = useState<number>(1);
+
   const onSubmitHandler: SubmitHandler<FormProps> = (data) => {
     const formData = new FormData();
     formData.append("image", data.img[0]);
@@ -55,24 +64,27 @@ const RecipeForm = () => {
       console.log(key);
     }
 
+    console.log(formData);
     const abc = (responseData: object) => {
       console.log("Recipe upload Success!", responseData);
       navigate("/community");
     };
+    // defaltValues =
 
     sendFormRequest(
       {
+        //작성 수정여부에 따른 URL수정
         url: `${url}/recipe.json`,
         method: "POST",
-        data: formData,
         headers: { "Content-Type": "application/json" },
+        // headers: { "Content-Type": "multipart/form-data" },
+        data: formData,
       },
       abc
     );
   };
 
-  const { img, quantity, title, cookTimes, difficulty, foods, manuals } =
-    watch();
+  const { img, quantity, title, cookTimes, difficulty, foods } = watch();
 
   useEffect(() => {
     if (img && img.length > 0) {
@@ -135,7 +147,7 @@ const RecipeForm = () => {
         break;
     }
   };
-  if (isLoading) return <>Loading...</>;
+
   if (error) return <>error</>;
   return (
     <>
@@ -152,7 +164,10 @@ const RecipeForm = () => {
           2
         </S.LevelButton>
         <S.LevelButton
-          disabled={foods.length === 0}
+          disabled={
+            foods.length === 0 ||
+            !(img && title && quantity && cookTimes && difficulty)
+          }
           isActive={3 === level}
           onClick={() => showLevel(3)}
         >
@@ -264,18 +279,21 @@ const RecipeForm = () => {
           <S.LevelByVIew isView={level === 3}>
             <S.Manual>
               <p>상세 정보를 입력해 주세요.</p>
+              <p>만드는 과정</p>
             </S.Manual>
             <Controller
               name="manuals"
               control={control}
               defaultValue={[]}
-              rules={foodIngredientRequirements}
+              rules={manualRquirements}
               render={({ field }) => (
                 <S.StyledManuals
                   {...field}
                   value={field.value || []}
                   onChange={field.onChange}
-                  inputProps={{ placeholder: `${manuals.length + 1}.설명` }}
+                  inputProps={{
+                    placeholder: ` ${field.value.length + 1}. 설명`,
+                  }}
                 />
               )}
             />
@@ -283,6 +301,8 @@ const RecipeForm = () => {
           </S.LevelByVIew>
         </S.Container>
       </S.Form>
+
+      {isLoading ? <Loading /> : <></>}
     </>
   );
 };
