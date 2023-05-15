@@ -6,8 +6,7 @@ import axios from 'axios';
 import MapSelector from "../../utils/MapSelector";
 
 interface FormValue {
-	name: string
-	ID: string
+	username: string
   email : string
   code: number
   password: string
@@ -25,8 +24,7 @@ const SignupForm = () => {
     formState: { errors },
   } = useForm<FormValue>({
     defaultValues: {
-      name: "",
-      ID: "",
+      username: "",
       email: "",
       password: "",
       password_confirm: "",
@@ -80,16 +78,17 @@ const SignupForm = () => {
 
     const onSubmitHandler: SubmitHandler<FormValue> = async (data) => {
       try {
-        const {ID, name, email, password} = data;
+        const {username, email, password} = data;
+        
         //아이디 중복 체크
-        const idCheckRes = await axios.post('/api/checkId', {ID : ID}); //ID 중복 api 주소
+        const idCheckRes = await axios.post('/api/checkId', {UserName : username}); //ID 중복 api 주소
         if(idCheckRes.data.exists){
           throw new Error("이미 사용중인 아이디입니다.");
         }
         
         await sendEmail(data);
         //회원가입 api
-        const signUpRes = await axios.post('/api/signup', { name, ID, email, password}); //회원가입 api
+        const signUpRes = await axios.post('/api/signup', { username, email, password}); //회원가입 api
         console.log(signUpRes);
       } catch(error){
         console.error(error);
@@ -108,19 +107,14 @@ const SignupForm = () => {
         <S.p>Join Us</S.p>
       </S.Test>
       <div>
-	        <S.Div><label>Name</label></S.Div>
-        	<div><S.Input placeholder=" 이름을 입력해주세요." {...register("name", { required: true })} /></div>
-          {errors.name && errors.name.type === "required" && (
-            <div>이름을 작성해주세요!</div>
-          )}
 	        <S.Div><label>ID</label></S.Div>
         	<div>
-          <S.Input placeholder=" 6~8글자 이내로 입력해주세요" {...register("ID", { required: true, minLength : 6, maxLength: 8 })} />
+          <S.Input placeholder=" 6~8글자 이내로 입력해주세요" {...register("username", { required: true, minLength : 6, maxLength: 8 })} />
           </div>
-          {errors.ID && errors.ID.type === "required" && (
+          {errors.username && errors.username.type === "required" && (
             <div>아이디는 6~8글자 이내로 작성해주세요.</div>
           )}
-          {errors.ID && errors.ID.type === "maxLength" && (
+          {errors.username && errors.username.type === "maxLength" && (
             <div>아이디는 8글자 이내로 작성해주세요.</div>
           )}
 	        <S.Div><label>Email</label></S.Div>

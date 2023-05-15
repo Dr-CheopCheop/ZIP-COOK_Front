@@ -1,20 +1,22 @@
-import React from 'react';
 import * as L from "./LoginStyle";
 import icon from "../../img/Gb.jpeg";
-import {useEffect, useState} from 'react';
+import React,{useState} from 'react';
 import {useForm} from "react-hook-form";
+import { useDispatch } from 'react-redux';
 import {  useNavigate } from "react-router-dom";
+import {loginUser} from "../../reducer/userSlice"
 import axios from 'axios';
 
 interface FormValue {
-  ID: string;
-  PW: string;
+  username : string
+  password : string
 }
 
 const Loginpage = () => {
+  const dispatch = useDispatch();
   const movepage = useNavigate();
-  const [isLoding,setIsLoading] = useState(false);
-  const[errorMessage, setErrorMessage] = useState("");
+  const [isLoading,setIsLoading] = useState(false);
+  const [meg, setMsg] = useState("");
 
   function JoinPage() {
     movepage("/join");
@@ -34,29 +36,32 @@ const Loginpage = () => {
     formState: { errors },
   } = useForm<FormValue>();
 
-  const onSubmit = async (data: FormValue) => {
-    setIsLoading(true);
+  const onSubmit = async (data:FormValue) => {
+    //Loading 메세지 출력
+    setMsg("Loding...");
+
+    //API
     try {
-      const response = await axios.post("", data); //login api
+      const response = await axios.post("http://localhost:8080/auth/login", data); //login api
       console.log(response.data);
       setIsLoading(false);
-      alert("로그인 성공하셨습니다.");
-      movepage("/main");
-    } catch (error) {
-      console.log("로그인 실패하셨습니다.");
+      const code = response.data.code;
+      if(code === 400) {
+        //empty
+        alert("비어있는 내용입니다.");
+      } else if(code === 401){
+        alert("존재하지 않는 아이디입니다.");
+      } else if(code === 402){
+        alert("비밀번호가 일치하지 않습니다.");
+      } else {
+        dispatch(loginUser(response.data));
+      }
+    } catch (error){
+      console.log("Fail Login", error);
       setIsLoading(false);
-      setErrorMessage("로그인 실패하셨습니다.");
+      setMsg("로그인에 실패하셨습니다.");
     }
   };
-
-  // const onSuccess = (res:any) => {
-  //   console.log("LOGIN SUCCESS", res);
-  //   movepage('/main');
-  // }
-
-  // const onFailure = (res:any) => {
-  //   console.log("LOGIN FAIL", res);
-  // }
  
   return (
     <L.Container>
@@ -67,22 +72,22 @@ const Loginpage = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <L.Signinput
             type="text"
-            placeholder="ID"
-            {...register("ID", { required: true, minLength: 6, maxLength: 8 })}
+            placeholder="username"
+            {...register("username", { required: true, minLength: 6, maxLength: 8 })}
           />
-          {errors.ID && <span>아이디를 입력해주세요!</span>}
-          {errors.ID && errors.ID.type === "maxLength" && (
+          {errors.username && <span>아이디를 입력해주세요!</span>}
+          {errors.username && errors.username.type === "maxLength" && (
             <div>아이디는 8글자 이내로 작성해주세요.</div>
           )}
-        <L.Signinput type="password" placeholder="PassWord" {...register("PW", {required:true,
+        <L.Signinput type="password" placeholder="PassWord" {...register("password", {required:true,
         minLength: 8,
         pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
         })}/>
-        {errors.PW && <span>비밀번호를 입력해주세요!</span>}
-        {errors.PW && errors.PW.type === "pattern" && (
+        {errors.password && <span>비밀번호를 입력해주세요!</span>}
+        {errors.password && errors.password.type === "pattern" && (
               <div>비밀번호는 영문 대/소문자, 숫자, 특수문자를 포함해 8글자 이상 입력해주세요.</div>
             )}
-        <L.Loginbutton type="submit" disabled={isLoding}>{isLoding ? "LOGING..." : "LOGIN"}</L.Loginbutton>
+        <L.Loginbutton type="submit" disabled={isLoading}>{isLoading ? "LOGING..." : "LOGIN"}</L.Loginbutton>
         </form>
         <div>
           <L.button onClick={ForgotPage}>ID/PassWord Forgot</L.button>
