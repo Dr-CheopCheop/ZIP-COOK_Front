@@ -1,10 +1,11 @@
 export const defaultRecipeValue = {
   title: "",
-  difficulty: "중",
-  quantity: "1인분",
-  foods: [],
-  manuals: [],
-  cookTimes: "1시간",
+  level: "중",
+  serving: "1인분",
+  ingredients: [],
+  content: [],
+  time: "1시간",
+  summary: "",
 };
 
 export const defaultShareValue = {

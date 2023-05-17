@@ -14,13 +14,3 @@ export const CountComments = styled.div`
     color: ${Colors.postBackgroundBorder};
   }
 `;
-
-export const CommentItem = styled.div`
-  padding: 10px 30px;
-  border-bottom: 1px solid black;
-  span {
-    font-size: 10px;
-    color: gray;
-    padding-left: 4px;
-  }
-`;

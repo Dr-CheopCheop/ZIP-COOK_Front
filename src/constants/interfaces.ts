@@ -1,27 +1,32 @@
-export interface FormProps {
+export interface RecipeProps {
   img: FileList;
   title: string;
+  serving: string;
+  level: string;
+  ingredients: string[];
+  summary: string;
+  content: string[];
+  time: string;
+}
+
+export interface DiscountProps {
+  img: FileList;
   price: string;
-  discountPrice: string;
-  contents: string;
-  cookTimes: string;
   place: string;
-  quantity: string;
-  difficulty: string;
-  foods: string[];
-  manuals: string[];
+  discountPrice: string;
+  title: string;
+}
+
+export interface ShareProps {
+  img: FileList;
+  title: string;
+  content: string;
 }
 
 export interface addressProps {
   sido: string;
   sigugun: string;
   dong: string;
-}
-
-export interface buttonProps {
-  children: React.ReactNode;
-  color?: string;
-  active?: boolean;
 }
 
 export interface inputProps {
@@ -34,15 +39,29 @@ export interface inputProps {
 export interface requestConfigDataProps {
   url: string;
   method: string;
-  headers: object;
-  data: object | null;
+  headers?: object;
+  data?: object | null;
 }
+
 export interface levelViewProps {
   isView: boolean;
 }
+
 export interface PostListProps {
   category: string;
 }
+
 export interface levelActiveProps {
   isActive: boolean;
+}
+
+export interface commentDataProps {
+  id: number;
+  writer: string;
+  time: string;
+  content: string;
+}
+
+export interface CommentEditProps {
+  content: string;
 }

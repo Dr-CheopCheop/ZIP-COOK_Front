@@ -9,11 +9,11 @@ import Icons from "../../../Styles/Icons";
 import url from "../../../constants/path";
 import ErrorMessage from "../../Error/ErrorMessage";
 import FormRequirements from "../../../constants/FormRequriements";
-import type { FormProps } from "../../../constants/interfaces";
+import type { ShareProps } from "../../../constants/interfaces";
 import { defaultShareValue } from "../../../constants/defaultFormOption";
-import Loading from "../../Loading/Loading";
+import Loading from "../../Loading/PageLoading";
 
-const { titleRequirements, imageRequirements, contentsRequirements } =
+const { titleRequirements, imageRequirements, shareContentRequirements } =
   FormRequirements;
 let defaultValue = defaultShareValue;
 
@@ -35,7 +35,7 @@ const ShareForm = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormProps>({
+  } = useForm<ShareProps>({
     defaultValues: defaultValue,
   });
   const { img } = watch();
@@ -47,11 +47,11 @@ const ShareForm = () => {
     }
   }, [img]);
 
-  const onSubmitHandler: SubmitHandler<FormProps> = async (data) => {
+  const onSubmitHandler: SubmitHandler<ShareProps> = async (data) => {
     const formData = new FormData();
     formData.append("image", data.img[0]);
     formData.append("title", data.title);
-    formData.append("contents", data.contents);
+    formData.append("content", data.content);
 
     // formdata 콘솔확인용 추후 삭제 & tsconfig 수정
     for (let key of formData.values()) {
@@ -108,11 +108,11 @@ const ShareForm = () => {
             placeholder="내용을 입력해주세요"
             rows={5}
             cols={33}
-            {...register("contents", contentsRequirements)}
+            {...register("content", shareContentRequirements)}
           />
 
-          {errors.contents && (
-            <ErrorMessage>{errors.contents.message}</ErrorMessage>
+          {errors.content && (
+            <ErrorMessage>{errors.content.message}</ErrorMessage>
           )}
 
           {/* 모두채워졌을때 완료설정 */}

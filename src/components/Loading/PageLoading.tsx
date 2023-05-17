@@ -1,5 +1,5 @@
-import * as S from "./LoadingStyle";
-const Loading = () => {
+import * as S from "./PageLoadingStyle";
+const PageLoading = () => {
   return (
     <>
       <S.Wrapper>
@@ -12,4 +12,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default PageLoading;
