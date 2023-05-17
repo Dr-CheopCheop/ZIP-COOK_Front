@@ -70,7 +70,18 @@ export const Manual = styled.div`
 
 export const Input = styled.input`
   ${Frames.FormBox};
+  &:hover {
+    border: 4px solid ${Colors.postBackgroundBorder};
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+export const SummaryInput = styled.input`
+  ${Frames.FormBox};
+  background-color: white;
 
+  margin-top: 100px;
   &:hover {
     border: 4px solid ${Colors.postBackgroundBorder};
   }
@@ -214,7 +225,7 @@ export const StyledManuals = styled(TagsInput)`
   overflow: hidden;
 
   /* padding-left: 5px; */
-  padding-top: 100px;
+  padding-top: 60px;
   .react-tagsinput-tag {
     background-color: ${Colors.postBackground};
     border-radius: 10px;
