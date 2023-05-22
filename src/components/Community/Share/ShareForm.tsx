@@ -48,7 +48,7 @@ const ShareForm = () => {
 
   const onSubmitHandler: SubmitHandler<ShareProps> = async (data) => {
     const formData = new FormData();
-    formData.append("image", data.img[0]);
+    formData.append("file", data.img[0]);
     formData.append("title", data.title);
     formData.append("content", data.content);
 

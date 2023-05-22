@@ -51,7 +51,7 @@ const SaleForm = () => {
 
   const onSubmitHandler: SubmitHandler<SaleProps> = async (data) => {
     const formData = new FormData();
-    formData.append("image", data.img[0]);
+    formData.append("file", data.img[0]);
     formData.append("price", data.price);
     formData.append("place", data.place);
     formData.append("discountPrice", data.discountPrice);

@@ -5,14 +5,18 @@ import CommentItem from "./CommentItem";
 import type { commentDataProps } from "../../../constants/interfaces";
 import { useState, useEffect } from "react";
 import useAxios from "../../../hooks/useAxios";
+import { useLocation, useParams } from "react-router-dom";
 
 const CommentList = (props: any) => {
   const [datas, setDatas] = useState<commentDataProps[]>([]);
   const axiosData = useAxios();
   const { sendRequest: getCommentsRequest } = axiosData;
+  const location = useLocation();
+  const { id } = props;
+  const category = location.key;
+  const { sid } = useParams();
+  console.log(location.pathname, sid);
 
-  const { id, category } = props;
-  console.log(id, category);
   useEffect(() => {
     const loadCommentsList = (responseData: any) => {
       const loadedDatas: commentDataProps[] = [];

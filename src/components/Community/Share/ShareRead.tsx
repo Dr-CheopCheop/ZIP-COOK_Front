@@ -3,7 +3,7 @@ import Navbar from "../../Navbar/Navbar";
 // import DummyData from "../Dummydata";
 import * as S from "./ShareReadStyle";
 import CommentList from "../Comment/CommentList";
-import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 const readData = {
   title: "파프리카 가져가실분~",
@@ -13,12 +13,11 @@ const readData = {
 
 const ShareRead = () => {
   const { id } = useParams();
+
   // const selectData = DummyData.find((data) => data.id === Number(id));
   // const { title, difficulty, cookTime } = selectData ?? {
   //   title: "존재하지 않는 게시물 입니다.",
   // };
-  const location = useLocation();
-  console.log(location.state.category);
   const navigate = useNavigate();
 
   const onDeleteHandler = () => {
@@ -57,7 +56,7 @@ const ShareRead = () => {
             좋겠습니다! 유통기한 (~3/31)
           </div>
         </S.ContentsContainer>
-        <CommentList category={location.state.category} id={id} />
+        <CommentList id={id} />
       </S.ReadContainer>
     </>
   );
