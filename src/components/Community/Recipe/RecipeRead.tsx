@@ -7,10 +7,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 const readData = {
   title: "해물 떡볶이",
-  difficulty: "상",
-  cookTimes: "1시간 30분",
-  quantity: "2인분",
-  foods: [
+  level: "상",
+  time: "1시간 30분",
+  serving: "2인분",
+  summary: "불맛이 가득한",
+  ingredients: [
     "고추장 3큰술",
     "떡 1봉지",
     "어묵 2장",
@@ -20,7 +21,7 @@ const readData = {
     "파",
     "고춧가루",
   ],
-  manuals: [
+  content: [
     "1. 떡을 물에 담가서 불립니다.",
     "2. 냄비에 고추장 3큰술을 넣고 중불로 끓여줍니다",
     "3. 다진마늘을 넣고 진간장3스푼,설탕 1큰술을 넣어줍니다.",
@@ -35,7 +36,7 @@ const RecipeRead = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   // const selectData = DummyData.find((data) => data.id === Number(id));
-  // const { title, difficulty, cookTime } = selectData ?? {
+  // const { title, level, cookTime } = selectData ?? {
   //   title: "존재하지 않는 게시물 입니다.",
   // };
   const onDeleteHandler = () => {
@@ -70,30 +71,30 @@ const RecipeRead = () => {
           <S.RecipeContentsSummaryBox>
             <div>
               <h4>분량</h4>
-              <span>{readData.quantity}</span>
+              <span>{readData.serving}</span>
             </div>
             <div>
               <h4>조리시간</h4>
-              <span>{readData.cookTimes}</span>
+              <span>{readData.time}</span>
             </div>
             <div>
               <h4>조리난이도</h4>
-              <span>{readData.difficulty}</span>
+              <span>{readData.level}</span>
             </div>
           </S.RecipeContentsSummaryBox>
           <S.foodsListContainer>
             <p>재료</p>
             <div>
-              {readData.foods.map((food, idx) => (
+              {readData.ingredients.map((food, idx) => (
                 <React.Fragment key={food}>
                   <span> {food}</span>
-                  {idx !== readData.foods.length - 1 && <span>,</span>}
+                  {idx !== readData.ingredients.length - 1 && <span>,</span>}
                 </React.Fragment>
               ))}
             </div>
           </S.foodsListContainer>
           <S.manualsListBox>
-            {readData.manuals.map((manual) => (
+            {readData.content.map((manual) => (
               <React.Fragment key={manual}>
                 <h3> {manual}</h3>
               </React.Fragment>

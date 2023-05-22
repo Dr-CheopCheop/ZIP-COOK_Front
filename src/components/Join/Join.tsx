@@ -2,10 +2,9 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import {useNavigate } from "react-router-dom";
 import React, { useState, useRef } from "react";
 import * as S from "./JoinStyle";
-import axios from 'axios';
+import axios from "axios";
 import MapSelector from "../../utils/MapSelector";
 import { SignupProps } from "../../constants/interfaces";
-
 
 const SignupForm = () => {
   const navigate = useNavigate();

@@ -9,9 +9,9 @@ import Icons from "../../../Styles/Icons";
 import url from "../../../constants/path";
 import ErrorMessage from "../../Error/ErrorMessage";
 import FormRequirements from "../../../constants/FormRequriements";
-import type { FormProps } from "../../../constants/interfaces";
+import type { DiscountProps } from "../../../constants/interfaces";
 import { defaultDiscountValue } from "../../../constants/defaultFormOption";
-import Loading from "../../Loading/Loading";
+import Loading from "../../Loading/PageLoading";
 
 const DiscountForm = () => {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const DiscountForm = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormProps>({
+  } = useForm<DiscountProps>({
     defaultValues: defaultValue,
   });
   const { img } = watch();
@@ -50,7 +50,7 @@ const DiscountForm = () => {
     }
   }, [img]);
 
-  const onSubmitHandler: SubmitHandler<FormProps> = async (data) => {
+  const onSubmitHandler: SubmitHandler<DiscountProps> = async (data) => {
     const formData = new FormData();
     formData.append("image", data.img[0]);
     formData.append("price", data.price);

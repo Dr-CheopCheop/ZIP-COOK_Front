@@ -12,13 +12,13 @@ const imageRequirements = {
   },
 };
 
-const difficultyRequirements = {
+const levelRequirements = {
   required: {
     value: true,
     message: "난이도를 입력해주세요!",
   },
 };
-const contentsRequirements = {
+const shareContentRequirements = {
   required: {
     value: true,
     message: "내용을 입력해주세요!",
@@ -37,28 +37,51 @@ const discountPriceRequirements = {
   },
 };
 
-const foodIngredientRequirements = {
+const ingredientsRequirements = {
   required: {
     value: true,
     message: "레시피 재료를 1개이상 입력해주세요!",
   },
 };
-const manualRquirements = {
+const recipeContentRquirements = {
+  required: {
+    value: true,
+    message: "상세설명을 입력해주세요!",
+  },
+};
+
+const commentEditRequirements = {
+  required: {
+    value: true,
+    message: "댓글을 입력해주세요!",
+  },
+};
+const commentPostRequirements = {
   required: {
     value: true,
     message: "설명을 입력해주세요!",
   },
 };
 
+const summaryRequirements = {
+  required: {
+    value: true,
+    message: "한 줄 설명을 입력해주세요!",
+  },
+};
+
 const FormRequirements = {
   titleRequirements,
   imageRequirements,
-  difficultyRequirements,
-  contentsRequirements,
+  levelRequirements,
+  shareContentRequirements,
   priceRequirements,
-  foodIngredientRequirements,
-  manualRquirements,
+  ingredientsRequirements,
+  recipeContentRquirements,
   discountPriceRequirements,
+  commentEditRequirements,
+  commentPostRequirements,
+  summaryRequirements,
 };
 
 export default FormRequirements;
