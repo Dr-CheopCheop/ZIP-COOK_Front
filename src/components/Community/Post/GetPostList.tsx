@@ -8,7 +8,11 @@ const GetPostList = (props: PostListProps) => {
       <h1>{props.category}</h1>
       <ul>
         {DummyData.map((data) => (
-          <Link key={data.id} to={`/community/${props.category}/${data.id}`}>
+          <Link
+            key={data.id}
+            to={`/community/${props.category}/${data.id}`}
+            state={{ category: props.category }}
+          >
             {/* category에따라 구성변경 */}
             <li>{data.title}</li>
           </Link>

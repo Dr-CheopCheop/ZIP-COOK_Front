@@ -4,7 +4,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import useAxios from "../../../hooks/useAxios";
 import type { RecipeProps } from "../../../constants/interfaces";
 import Icons from "../../../Styles/Icons";
-import url from "../../../constants/path";
 import Navbar from "../../Navbar/Navbar";
 import * as S from "./RecipeFormStyle";
 import ErrorMessage from "../../Error/ErrorMessage";
@@ -75,7 +74,7 @@ const RecipeForm = () => {
     sendFormRequest(
       {
         //작성 수정여부에 따른 URL수정
-        url: `${url}/recipe.json`,
+        url: "/board-recipe",
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // headers: { "Content-Type": "multipart/form-data" },

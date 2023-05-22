@@ -4,16 +4,15 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import useAxios from "../../../hooks/useAxios";
 import Navbar from "../../Navbar/Navbar";
-import * as S from "./DiscountFormStyle";
+import * as S from "./SaleFormStyle";
 import Icons from "../../../Styles/Icons";
-import url from "../../../constants/path";
 import ErrorMessage from "../../Error/ErrorMessage";
 import FormRequirements from "../../../constants/FormRequriements";
-import type { DiscountProps } from "../../../constants/interfaces";
+import type { SaleProps } from "../../../constants/interfaces";
 import { defaultDiscountValue } from "../../../constants/defaultFormOption";
 import Loading from "../../Loading/PageLoading";
 
-const DiscountForm = () => {
+const SaleForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -38,7 +37,7 @@ const DiscountForm = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<DiscountProps>({
+  } = useForm<SaleProps>({
     defaultValues: defaultValue,
   });
   const { img } = watch();
@@ -50,7 +49,7 @@ const DiscountForm = () => {
     }
   }, [img]);
 
-  const onSubmitHandler: SubmitHandler<DiscountProps> = async (data) => {
+  const onSubmitHandler: SubmitHandler<SaleProps> = async (data) => {
     const formData = new FormData();
     formData.append("image", data.img[0]);
     formData.append("price", data.price);
@@ -69,7 +68,7 @@ const DiscountForm = () => {
 
     sendFormRequest(
       {
-        url: `${url}/discount.json`,
+        url: "/board-sale",
         method: "POST",
         data: formData,
         headers: { "Content-Type": "application/json" },
@@ -137,4 +136,4 @@ const DiscountForm = () => {
     </>
   );
 };
-export default DiscountForm;
+export default SaleForm;
