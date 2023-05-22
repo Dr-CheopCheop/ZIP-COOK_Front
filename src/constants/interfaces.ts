@@ -9,7 +9,7 @@ export interface RecipeProps {
   time: string;
 }
 
-export interface DiscountProps {
+export interface SaleProps {
   img: FileList;
   price: string;
   place: string;
