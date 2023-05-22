@@ -6,6 +6,7 @@ import RecipePosts from './RecipePosts';
 import SharingPosts from './SharingPosts';
 import SalePosts from './SalePosts';
 import Pagination from './Pagination';
+import icon from '../../img/MainPhoto.jpeg'
 
 const MainPage = () => {
     const [recipePosts, setRecipePosts] = useState([]);
@@ -65,6 +66,7 @@ const MainPage = () => {
     return (
         <M.Container>
             <M.FirstDiv>
+            <M.img src={icon}/>
                 <M.TextBox1>
                     Make Healthy<br />
                     Home-Cooked

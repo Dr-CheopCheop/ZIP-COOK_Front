@@ -1,6 +1,16 @@
 import * as S from "./NavbarStyle";
+import { useSelector, useDispatch } from "react-redux";
+import { clearUser } from "../../reducer/userSlice";
+import { RootState } from "../../reducer/rootReducer";
 
 const Navbar = () => {
+  const user = useSelector((state:RootState)=> state.user);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(clearUser());
+  }
+
   return (
     <>
       <S.Header>
@@ -23,15 +33,25 @@ const Navbar = () => {
               </S.Logo>
             </S.Div>
             <S.Div>
-              <S.Li>
-                <S.StyledLink to="/login">LOGIN</S.StyledLink>
-              </S.Li>
-              <S.Li>
-                <S.StyledLink to="/join">JOIN</S.StyledLink>
-              </S.Li>
-              <S.Li>
-                <S.StyledLink to="/mypage">MY PAGE</S.StyledLink>
-              </S.Li>
+              {user.isLogin ? (
+                <>
+                <S.Li>
+                  <button onClick={handleLogout}>LOGOUT</button>
+                </S.Li>
+                <S.Li>
+                  <S.StyledLink to="/mypage">MY PAGE</S.StyledLink>
+                </S.Li>
+                </>
+              ) : (
+                <>
+                <S.Li>
+                  <S.StyledLink to="/login">LOGIN</S.StyledLink>
+                </S.Li>
+                <S.Li>
+                  <S.StyledLink to="/join">JOIN</S.StyledLink>
+                </S.Li>
+                </>
+              )}
             </S.Div>
           </S.Ul>
         </S.Nav>
