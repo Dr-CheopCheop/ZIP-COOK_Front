@@ -1,15 +1,15 @@
 import * as S from "./NavbarStyle";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState, clearUser } from "../../reducer/userSlice";
-
+import { clearUser } from "../../reducer/userSlice";
+import { RootState } from "../../reducer/rootReducer";
 
 const Navbar = () => {
-  // const user = useSelector((state:RootState)=> state.user);
-  // const dispatch = useDispatch();
+  const user = useSelector((state:RootState)=> state.user);
+  const dispatch = useDispatch();
 
-  // const handleLogout = () => {
-  //   dispatch(clearUser());
-  // }
+  const handleLogout = () => {
+    dispatch(clearUser());
+  }
 
   return (
     <>
@@ -33,7 +33,7 @@ const Navbar = () => {
               </S.Logo>
             </S.Div>
             <S.Div>
-              {/* {user.isLogin ? (
+              {user.isLogin ? (
                 <>
                 <S.Li>
                   <button onClick={handleLogout}>LOGOUT</button>
@@ -42,7 +42,7 @@ const Navbar = () => {
                   <S.StyledLink to="/mypage">MY PAGE</S.StyledLink>
                 </S.Li>
                 </>
-              ) : ( */}
+              ) : (
                 <>
                 <S.Li>
                   <S.StyledLink to="/login">LOGIN</S.StyledLink>
@@ -51,7 +51,7 @@ const Navbar = () => {
                   <S.StyledLink to="/join">JOIN</S.StyledLink>
                 </S.Li>
                 </>
-              {/* )} */}
+              )}
             </S.Div>
           </S.Ul>
         </S.Nav>
