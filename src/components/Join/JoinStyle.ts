@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Colors from "../../Styles/Colors";
 
-export const Form = styled.div`
+export const FormContainer = styled.div`
   width: 100%;
   position: absolute;
   top: 50%;

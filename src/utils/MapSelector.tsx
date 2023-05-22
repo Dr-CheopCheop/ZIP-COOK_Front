@@ -1,67 +1,66 @@
 import Select from "react-select";
 import { map } from "../constants/map";
-import { useState } from "react";
-import type { addressProps } from "../constants/interfaces";
+import {
+  setSido,
+  setSigugun,
+  setDong,
+} from "../action/mapAddressAction"
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../reducer/rootReducer";
 
-const MapSelector = () => {
-  const { sido, sigugun, dong } = map;
 
-  const [addressPieces, setAddressPieces] = useState<addressProps>({
-    sido: "",
-    sigugun: "",
-    dong: "",
-  });
-  const filterdSidoList = sigugun.filter((e) => e.link === addressPieces.sido);
-  const filterdSidoSigugunList = dong.filter(
-    (e) => e.sido === addressPieces.sido && e.sigugun === addressPieces.sigugun
-  );
+const MapSelector= ({onSelect}: { onSelect: (sido: string, sigugun: string, dong: string) => void }) => {
+  const { sido, sigugun, dong } = useSelector((state:RootState) => state.address);
+  const dispatch = useDispatch();
+  
 
-  const address = `${addressPieces.sido} ${addressPieces.sigugun} ${addressPieces.dong}`;
+  const sidoArray = map.sido;
+  const sigugunArray = map.sigugun
+  .filter((item) => item.link === sido)
+  .map((item) => ({value : item.value, label: item.label}));
+  const dongArray = map.dong
+  .filter((item) => item.sido === sido && item.sigugun === sigugun)
+  .map((item) => ({ value: item.value, label: item.label}));
+
+  const address = `${sido} ${sigugun} ${dong}`;
   console.log(address);
-  const sidoHandler = (sido: string) => {
-    setAddressPieces({
-      sido: sido,
-      sigugun: "",
-      dong: "",
-    });
+
+  const sidoHandler = (selectedSido: any) => {
+    dispatch(setSido(selectedSido.value));
+    onSelect(selectedSido.value, sigugun, dong);
   };
-  const sigugunHandler = (sigugun: string) => {
-    setAddressPieces({
-      ...addressPieces,
-      sigugun: sigugun,
-      dong: "",
-    });
+  const sigugunHandler = (selectedSigugun:any) => {
+    dispatch(setSigugun(selectedSigugun.value));
+    onSelect(sido, selectedSigugun.value, dong);
   };
-  const dongHandler = (dong: string) => {
-    setAddressPieces({
-      ...addressPieces,
-      dong: dong,
-    });
+  const dongHandler = (selectedDong: any) => {
+    dispatch(setDong(selectedDong.value));
+    onSelect(sido, sigugun, selectedDong.value);
   };
   return (
     <>
       <Select
-        onChange={(e: any) => sidoHandler(e.value)}
-        options={sido}
+        onChange={sidoHandler}
+        options={sidoArray}
         placeholder="시/도 선택"
-        value={sido.filter((option) => option.value === addressPieces.sido)}
+        value={sidoArray.find((option) => option.value === sido)}
       />
       <Select
-        onChange={(e: any) => sigugunHandler(e.value)}
-        options={filterdSidoList}
+        onChange={sigugunHandler}
+        options={sigugunArray}
         placeholder="시/군/구 선택"
-        value={filterdSidoList.filter(
-          (option) => option.value === addressPieces.sigugun
+        value={sigugunArray.find(
+          (option) => option.value === sigugun
         )}
       />
       <Select
-        onChange={(e: any) => dongHandler(e.value)}
-        options={filterdSidoSigugunList}
+        onChange={dongHandler}
+        options={dongArray}
         placeholder="읍/면/동 선택"
-        value={filterdSidoSigugunList.filter(
-          (option) => option.value === addressPieces.dong
+        value={dongArray.find(
+          (option) => option.value === dong
         )}
-      />{" "}
+      />
     </>
   );
 };
