@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import GetPostList from "../Post/GetPostList";
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import DiscountPosts from './DiscountPosts';
-import DiscountPagination from './DiscountPagination';
-import * as D from './DiscountMainStyle'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import DiscountPosts from "./DiscountPosts";
+import DiscountPagination from "./DiscountPagination";
+import * as D from "./DiscountMainStyle";
 
 const DiscountMain = () => {
   const [discountPosts, setDiscountPosts] = useState([]);
@@ -15,9 +15,7 @@ const DiscountMain = () => {
   useEffect(() => {
     const fetchDiscountData = async () => {
       setLoading(true);
-      const response = await axios.get(
-        "/board-sale"
-      );
+      const response = await axios.get("/board-sale");
       setDiscountPosts(response.data);
       setLoading(false);
     };
@@ -26,12 +24,12 @@ const DiscountMain = () => {
   console.log(discountPosts);
 
   const indexOfLast = currentPage * postsPerPage;
-    const indexOfFirst = indexOfLast - postsPerPage;
-    const currentPosts = (posts: any) => {
-        let currentPosts = 0;
-        currentPosts = posts.slice(indexOfFirst, indexOfLast);
-        return currentPosts;
-    };
+  const indexOfFirst = indexOfLast - postsPerPage;
+  const currentPosts = (posts: any) => {
+    let currentPosts = 0;
+    currentPosts = posts.slice(indexOfFirst, indexOfLast);
+    return currentPosts;
+  };
 
   return (
     // <div>

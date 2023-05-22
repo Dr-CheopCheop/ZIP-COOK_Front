@@ -1,7 +1,7 @@
 import Navbar from "../../Navbar/Navbar";
 import * as S from "./SaleReadStyle";
 import CommentList from "../Comment/CommentList";
-import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Icons from "../../../Styles/Icons";
 const readData = {
   title: "딸기 한박스",
@@ -13,7 +13,6 @@ const readData = {
 const DiscountRead = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const onDeleteHandler = () => {
     //삭제 로직 작성
@@ -53,7 +52,7 @@ const DiscountRead = () => {
             <p>할인가 : {readData.discountPrice}</p>
           </div>
         </S.ContentsContainer>
-        <CommentList category={location.state.category} id={id} />
+        <CommentList id={id} />
       </S.ReadContainer>
     </>
   );
