@@ -6,7 +6,6 @@ import useAxios from "../../../hooks/useAxios";
 import Navbar from "../../Navbar/Navbar";
 import * as S from "./ShareFormStyle";
 import Icons from "../../../Styles/Icons";
-import url from "../../../constants/path";
 import ErrorMessage from "../../Error/ErrorMessage";
 import FormRequirements from "../../../constants/FormRequriements";
 import type { ShareProps } from "../../../constants/interfaces";
@@ -65,7 +64,7 @@ const ShareForm = () => {
 
     sendFormRequest(
       {
-        url: `${url}/share.json`,
+        url: "/board-share",
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // headers: { "Content-Type": "multipart/form-data" },
