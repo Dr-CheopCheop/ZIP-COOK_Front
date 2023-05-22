@@ -42,7 +42,7 @@ const Loginpage = () => {
 
     //API
     try {
-      const response = await axios.post("http://localhost:8080/auth/login", data); //login api
+      const response = await axios.post("https://b0d2bc38-cfd6-424a-ba7d-49f70bab80b4.mock.pstmn.io/login", data); //login api
       console.log(response.data);
       setIsLoading(false);
       const code = response.data.code;
@@ -53,8 +53,9 @@ const Loginpage = () => {
         alert("존재하지 않는 아이디입니다.");
       } else if(code === 402){
         alert("비밀번호가 일치하지 않습니다.");
-      } else {
+      } else if(code === 200) {
         dispatch(loginUser(response.data));
+        movepage('/main');
       }
     } catch (error){
       console.log("Fail Login", error);
@@ -68,8 +69,7 @@ const Loginpage = () => {
       <L.Test to={"/main"}>
         <h1>LOGO 넣기</h1>
       </L.Test>
-      <L.Sign>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <L.Sign onSubmit={handleSubmit(onSubmit)}>
           <L.Signinput
             type="text"
             placeholder="username"
@@ -88,7 +88,7 @@ const Loginpage = () => {
               <div>비밀번호는 영문 대/소문자, 숫자, 특수문자를 포함해 8글자 이상 입력해주세요.</div>
             )}
         <L.Loginbutton type="submit" disabled={isLoading}>{isLoading ? "LOGING..." : "LOGIN"}</L.Loginbutton>
-        </form>
+        </L.Sign>
         <div>
           <L.button onClick={ForgotPage}>ID/PassWord Forgot</L.button>
           <L.P></L.P>
@@ -100,7 +100,6 @@ const Loginpage = () => {
             <L.img src={icon} />
           </L.Googleb>
         </L.Div>
-      </L.Sign>
     </L.Container>
   );
 };

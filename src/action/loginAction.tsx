@@ -1,0 +1,2 @@
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const SET_DEFULT_USER = 'SET_DEFULT_USER';

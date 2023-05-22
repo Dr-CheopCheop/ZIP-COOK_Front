@@ -46,3 +46,16 @@ export interface PostListProps {
 export interface levelActiveProps {
   isActive: boolean;
 }
+
+export interface SignupProps {
+  username: string;
+  nickname: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+}
+
+export interface LoginProps {
+  username: string;
+  password: string;
+}
