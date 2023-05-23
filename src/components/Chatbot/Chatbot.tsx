@@ -51,7 +51,7 @@ const ChatbotPage = () => {
     useEffect(() => {
         const getChatBotResponse = async () => {
             setLoading(true);
-            await axios.post("/chatbot/messgae", {
+            await axios.post("/chatbot/message", {
                 question: userRequest,
             })
             .then ((response) => {
