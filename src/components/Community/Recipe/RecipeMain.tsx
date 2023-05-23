@@ -15,7 +15,9 @@ const RecipeMain = () => {
   useEffect(() => {
     const fetchRecipeData = async () => {
       setLoading(true);
-      const response = await axios.get("/board-recipe");
+      const response = await axios.get(
+        "/board-recipe?page=1"
+      );
       setRecipePosts(response.data);
       setLoading(false);
     };
@@ -39,7 +41,7 @@ const RecipeMain = () => {
       <R.FirstDiv>
         <R.FirstDivText>RECIPE</R.FirstDivText>
         <R.SearchInput></R.SearchInput>
-        <R.WriteButton to="/community/recipe/writer">글쓰기</R.WriteButton>
+        <R.WriteButton to="/community/recipe/write">글쓰기</R.WriteButton>
       </R.FirstDiv>
       <R.SecondDiv>
         <RecipePosts posts={currentPosts(recipePosts)} loading={loading} />
