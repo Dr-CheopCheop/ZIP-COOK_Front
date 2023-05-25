@@ -34,7 +34,11 @@ const ShareRead = () => {
             <S.UpperTitle>
               <Link
                 to="/community/share/write"
-                state={{ update: true, datas: readData, num: id }}
+                state={{
+                  update: true,
+                  datas: readData,
+                  num: id,
+                }}
               >
                 <S.TitleButton>수정</S.TitleButton>
               </Link>

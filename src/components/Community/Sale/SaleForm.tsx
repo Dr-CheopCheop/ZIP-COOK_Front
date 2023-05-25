@@ -15,6 +15,10 @@ import Loading from "../../Loading/PageLoading";
 const SaleForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosData = useAxios();
+  const [imagePreview, setImagePreview] = useState<string>("");
+  //유저정보에서 위치정보 가져올예정
+  const sido = "seoul";
 
   const {
     titleRequirements,
@@ -24,9 +28,7 @@ const SaleForm = () => {
   } = FormRequirements;
   let defaultValue = defaultDiscountValue;
 
-  const axiosData = useAxios();
   const { isLoading, error, sendRequest: sendFormRequest } = axiosData;
-  const [imagePreview, setImagePreview] = useState<string>("");
 
   if (location.state) {
     defaultValue = location.state.datas;
@@ -57,6 +59,7 @@ const SaleForm = () => {
     formData.append("discountPrice", data.discountPrice);
     formData.append("title", data.title);
 
+    formData.append("location", sido);
     // formdata 콘솔확인용 추후 삭제 & tsconfig 수정
     for (let key of formData.values()) {
       console.log(key);
@@ -65,13 +68,15 @@ const SaleForm = () => {
       console.log("Discount upload Success!", responseData);
       navigate("/community");
     };
-
+    console.log(location.state);
     sendFormRequest(
       {
-        url: "/board-sale",
-        method: "POST",
+        url: location.state
+          ? `/board-sale/${sido}/${location.state.num}`
+          : "/board-sale",
+        method: location.state ? "PUT" : "POST",
         data: formData,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "multipart/form-data" },
       },
       abc
     );
