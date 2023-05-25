@@ -24,15 +24,16 @@ const RecipeForm = () => {
   const location = useLocation();
   const [imagePreview, setImagePreview] = useState<string>("");
   const [levels, setLevels] = useState<number>(1);
-
-  let defaltValues = defaultRecipeValue;
-  const navigate = useNavigate();
   const axiosData = useAxios();
+  //유저정보에서 위치정보 가져올예정
+  const sido = "seoul";
 
-  if (location.state) defaltValues = location.state.datas;
-  else defaltValues = defaultRecipeValue;
+  let defaultValues = defaultRecipeValue;
+  const navigate = useNavigate();
 
-  console.log(defaltValues);
+  //수정 여부
+  if (location.state) defaultValues = location.state.datas;
+  else defaultValues = defaultRecipeValue;
 
   const {
     register,
@@ -42,7 +43,7 @@ const RecipeForm = () => {
     setValue,
     formState: { errors },
   } = useForm<RecipeProps>({
-    defaultValues: defaltValues,
+    defaultValues: defaultValues,
   });
 
   const { isLoading, error, sendRequest: sendFormRequest } = axiosData;
@@ -55,6 +56,8 @@ const RecipeForm = () => {
     formData.append("level", data.level);
     formData.append("time", data.time);
     formData.append("summary", data.summary);
+    formData.append("location", sido);
+
     data.ingredients.forEach((intredient) =>
       formData.append("ingredients", intredient)
     );
@@ -69,15 +72,15 @@ const RecipeForm = () => {
       console.log("Recipe upload Success!", responseData);
       navigate("/community");
     };
-    // defaltValues =
+    // defaultValues =
 
     sendFormRequest(
       {
-        //작성 수정여부에 따른 URL수정
-        url: "/board-recipe",
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        // headers: { "Content-Type": "multipart/form-data" },
+        url: location.state
+          ? `/board-recipe/${sido}/${location.state.num}`
+          : "/board-recipe",
+        method: location.state ? "PUT" : "POST",
+        headers: { "Content-Type": "multipart/form-data" },
         data: formData,
       },
       abc

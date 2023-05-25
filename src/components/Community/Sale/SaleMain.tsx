@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import GetPostList from "../Post/GetPostList";
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import SalePosts from './SalePosts';
-import SalePagination from './SalePagination';
-import * as S from './SaleMainStyle'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import SalePosts from "./SalePosts";
+import SalePagination from "./SalePagination";
+import * as S from "./SaleMainStyle";
 
 const SaleMain = () => {
   const [salePosts, setSalePosts] = useState([]);
@@ -15,9 +15,7 @@ const SaleMain = () => {
   useEffect(() => {
     const fetchSaleData = async () => {
       setLoading(true);
-      const response = await axios.get(
-        "/board-sale?page=1"
-      );
+      const response = await axios.get("/board-sale?page=1");
       setSalePosts(response.data);
       setLoading(false);
     };
@@ -26,12 +24,12 @@ const SaleMain = () => {
   console.log(salePosts);
 
   const indexOfLast = currentPage * postsPerPage;
-    const indexOfFirst = indexOfLast - postsPerPage;
-    const currentPosts = (posts: any) => {
-        let currentPosts = 0;
-        currentPosts = posts.slice(indexOfFirst, indexOfLast);
-        return currentPosts;
-    };
+  const indexOfFirst = indexOfLast - postsPerPage;
+  const currentPosts = (posts: any) => {
+    let currentPosts = 0;
+    currentPosts = posts.slice(indexOfFirst, indexOfLast);
+    return currentPosts;
+  };
 
   return (
     // <div>
@@ -42,7 +40,7 @@ const SaleMain = () => {
       <S.FirstDiv>
         <S.FirstDivText>BARGAIN SALE</S.FirstDivText>
         <S.SearchInput></S.SearchInput>
-        <S.WriteButton to="/community/discount/write">글쓰기</S.WriteButton>
+        <S.WriteButton to="/community/sale/write">글쓰기</S.WriteButton>
       </S.FirstDiv>
       <S.SecondDiv>
         <SalePosts posts={currentPosts(salePosts)} loading={loading} />
