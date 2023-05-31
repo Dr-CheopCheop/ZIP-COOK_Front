@@ -109,15 +109,15 @@ const SignupForm = () => {
           <S.Div><S.p>Join Us</S.p></S.Div>
         </S.Test>
           <S.Div>
-            <label>UserName</label>
+            <label>ID</label>
           </S.Div>
           <div>
-            <S.Input placeholder="이름을 입력해주세요." {...register("username", { required: true })} />
+            <S.Input placeholder="ID을 입력해주세요." {...register("username", { required: true })} />
             <span>
              <S.E_button type="button" onClick={()=>idCheckRes}>중복체크</S.E_button>
             </span>
           </div>
-          {errors.username && <div>username을 작성해주세요!</div>}
+          {errors.username && <div>ID를 작성해주세요!</div>}
           <S.Div>
             <label>Nick Name</label>
           </S.Div>
