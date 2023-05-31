@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import {  useNavigate } from "react-router-dom";
 import {loginUser} from "../../reducer/userSlice"
 import axios from 'axios';
+import { SET_TOKEN } from "../../reducer/tokenSlice";
 
 interface FormValue {
   username : string
@@ -37,58 +38,66 @@ const Loginpage = () => {
   } = useForm<FormValue>();
 
   const onSubmit = async (data:FormValue) => {
+    setIsLoading(true);
     //Loading 메세지 출력
     setMsg("Loding...");
 
     //API
-    try {
-      const response = await axios.post("https://b0d2bc38-cfd6-424a-ba7d-49f70bab80b4.mock.pstmn.io/login", data); //login api
-      console.log(response.data);
-      setIsLoading(false);
-      const code = response.data.code;
-      if(code === 400) {
-        //empty
-        alert("비어있는 내용입니다.");
-      } else if(code === 401){
-        alert("존재하지 않는 아이디입니다.");
-      } else if(code === 402){
-        alert("비밀번호가 일치하지 않습니다.");
-      } else if(code === 200) {
-        dispatch(loginUser(response.data));
-        movepage('/main');
-      }
-    } catch (error){
-      console.log("Fail Login", error);
-      setIsLoading(false);
-      setMsg("로그인에 실패하셨습니다.");
-    }
-  };
+    try{
+      const response = await axios.post("http://localhost:8080/auth/login", data,{
+        headers : {
+          "Content-Type": "application/json"
+        },
+      });
+      const user = response.data;
+      const jwtToken = user.token;
+      //token 저장
+      localStorage.setItem("accessToken",jwtToken);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
+      axios.get('http://localhost:8080/auth/user')
+      .then(res => {
+        console.log(res);
+        const userInfo = res.data;
+        dispatch(loginUser(userInfo));
+      })
+      dispatch(SET_TOKEN(jwtToken));
+      dispatch(loginUser(user));
+      movepage('/main');
+    }catch(error) {
+      console.log('login fail', error);
+    }  
+  }
  
   return (
     <L.Container>
       <L.Test to={"/main"}>
         <h1>LOGO 넣기</h1>
       </L.Test>
-        <L.Sign onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+        <L.Sign>
           <L.Signinput
-            type="text"
-            placeholder="username"
-            {...register("username", { required: true, minLength: 6, maxLength: 8 })}
-          />
-          {errors.username && <span>아이디를 입력해주세요!</span>}
-          {errors.username && errors.username.type === "maxLength" && (
-            <div>아이디는 8글자 이내로 작성해주세요.</div>
-          )}
-        <L.Signinput type="password" placeholder="PassWord" {...register("password", {required:true,
-        minLength: 8,
-        pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-        })}/>
-        {errors.password && <span>비밀번호를 입력해주세요!</span>}
-        {errors.password && errors.password.type === "pattern" && (
-              <div>비밀번호는 영문 대/소문자, 숫자, 특수문자를 포함해 8글자 이상 입력해주세요.</div>
+              type="text"
+              placeholder="username"
+              {...register("username", { required: true})}
+            />
+            {errors.username && <span>username를 입력해주세요!</span>}
+            {errors.username && errors.username.type === "maxLength" && (
+              <div>username는 8글자 이내로 작성해주세요.</div>
             )}
-        <L.Loginbutton type="submit" disabled={isLoading}>{isLoading ? "LOGING..." : "LOGIN"}</L.Loginbutton>
+          <L.Signinput type="password" placeholder="PassWord" {...register("password", {required:true,
+          minLength: 8,
+          pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+          })}/>
+          {errors.password && errors.password.type === "minLength" && (
+            <div>8글자 이상 입력해주세요</div>
+          )}
+          {errors.password && errors.password.type === "pattern" && (
+                <div>비밀번호는 영문 대/소문자, 숫자, 특수문자를 포함해 입력해주세요.</div>
+          )}
+          <L.Loginbutton type="submit" disabled={isLoading}>{isLoading ? "LOGING..." : "LOGIN"}</L.Loginbutton>
         </L.Sign>
+        </form>
         <div>
           <L.button onClick={ForgotPage}>ID/PassWord Forgot</L.button>
           <L.P></L.P>
@@ -100,6 +109,7 @@ const Loginpage = () => {
             <L.img src={icon} />
           </L.Googleb>
         </L.Div>
+      </div>
     </L.Container>
   );
 };
