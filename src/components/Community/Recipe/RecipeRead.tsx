@@ -1,5 +1,4 @@
 import Navbar from "../../Navbar/Navbar";
-// import DummyData from "../Dummydata";
 import React from "react";
 import * as S from "./RecipeReadStyle";
 import CommentList from "../Comment/CommentList";
@@ -35,6 +34,7 @@ const readData = {
 const RecipeRead = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+
   // const selectData = DummyData.find((data) => data.id === Number(id));
   // const { title, level, cookTime } = selectData ?? {
   //   title: "존재하지 않는 게시물 입니다.",
@@ -101,7 +101,7 @@ const RecipeRead = () => {
             ))}
           </S.manualsListBox>
         </S.RecipeContentsContainer>
-        <CommentList />
+        <CommentList id={id} />
       </S.ReadContainer>
     </>
   );

@@ -6,7 +6,6 @@ import useAxios from "../../../hooks/useAxios";
 import Navbar from "../../Navbar/Navbar";
 import * as S from "./ShareFormStyle";
 import Icons from "../../../Styles/Icons";
-import url from "../../../constants/path";
 import ErrorMessage from "../../Error/ErrorMessage";
 import FormRequirements from "../../../constants/FormRequriements";
 import type { ShareProps } from "../../../constants/interfaces";
@@ -20,10 +19,11 @@ let defaultValue = defaultShareValue;
 const ShareForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const [imagePreview, setImagePreview] = useState<string>("");
-
   const axiosData = useAxios();
+
+  //유저정보에서 위치정보 가져올예정
+  const sido = "seoul";
   const { isLoading, error, sendRequest: sendFormRequest } = axiosData;
 
   if (location.state) {
@@ -49,10 +49,10 @@ const ShareForm = () => {
 
   const onSubmitHandler: SubmitHandler<ShareProps> = async (data) => {
     const formData = new FormData();
-    formData.append("image", data.img[0]);
+    formData.append("file", data.img[0]);
     formData.append("title", data.title);
     formData.append("content", data.content);
-
+    formData.append("location", sido);
     // formdata 콘솔확인용 추후 삭제 & tsconfig 수정
     for (let key of formData.values()) {
       console.log(key);
@@ -65,11 +65,12 @@ const ShareForm = () => {
 
     sendFormRequest(
       {
-        url: `${url}/share.json`,
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        // headers: { "Content-Type": "multipart/form-data" },
+        url: location.state
+          ? `/board-share/${sido}/${location.state.num}`
+          : "/board-share",
+        method: location.state ? "PUT" : "POST",
         data: formData,
+        headers: { "Content-Type": "multipart/form-data" },
       },
       abc
     );

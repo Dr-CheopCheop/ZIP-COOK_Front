@@ -5,6 +5,9 @@ import React, { useRef } from 'react';
 import foodImg from '../../img/HomeImg1.png';
 import peopleIcon from '../../img/HomeImg2.png';
 import robotIcon from '../../img/HomeImg3.png';
+import recipeImg from '../../img/RecipeImg.png';
+import sharingImg from '../../img/SharingImg.png';
+import saleImg from '../../img/SaleImg.png';
 // import UseScrollSnap from '../../hooks/UseScrollSnap';
 
 const HomePage = () => {
@@ -52,7 +55,57 @@ const HomePage = () => {
                     <H.img3 src={robotIcon} />
                 </H.SecondBox3>
             </H.SecondDiv>
-            <H.ThirdDiv />
+            <H.RecipeDiv>
+                <H.RecipeText1>
+                  SHARE YOUR <br />
+                  OWN RECIPE !
+                </H.RecipeText1>
+                <H.RecipeBox>
+                    <H.RecipeImg src={recipeImg} />
+                    <H.RecipeBox2>
+                        <H.RecipeText2>
+                          SHARE YOUR OWN RECIPE! <br />
+                          AND REFER TO OHTER’S OWN <br />
+                          RECIPE!
+                        </H.RecipeText2>
+                        <H.RecipeButton2 to="/community/recipe">RECIPE</H.RecipeButton2>
+                    </H.RecipeBox2>
+                </H.RecipeBox>
+            </H.RecipeDiv>
+            <H.SharingDiv>
+                <H.SharingText1>
+                  SHARE THE <br />
+                  LEFTOVER INGREDIENTS !
+                </H.SharingText1>
+                <H.SharingBox>
+                    <H.SharingImg src={sharingImg} />
+                    <H.SharingBox2>
+                        <H.SharingText2>
+                          남아서 버리기 아까웠던 식재료 <br />
+                          이제는 ZIP-COOK 유저들과 <br />
+                          나눠보세요 !
+                        </H.SharingText2>
+                        <H.SharingButton to="/community/share">SHARING</H.SharingButton>
+                    </H.SharingBox2>
+                </H.SharingBox>
+            </H.SharingDiv>
+            <H.SaleDiv>
+                <H.SaleText1>
+                  YOU CAN BUY INGREDIENTS <br />
+                  AT A CHEAPER PRICE !
+                </H.SaleText1>
+                <H.SaleBox>
+                    <H.SaleImg src={saleImg} />
+                    <H.SaleBox2>
+                        <H.SaleText2>
+                          주변 마트의 식재료 할인정보 <br />
+                          ZIP-COOK 유저들과 공유할 수 <br />
+                          있어요
+                        </H.SaleText2>
+                        <H.SaleButton to="/community/sale">SALE</H.SaleButton>
+                    </H.SaleBox2>
+                </H.SaleBox>
+            </H.SaleDiv>
         </H.Container>
     )
 }

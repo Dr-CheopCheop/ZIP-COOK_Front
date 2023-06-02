@@ -4,7 +4,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import useAxios from "../../../hooks/useAxios";
 import type { RecipeProps } from "../../../constants/interfaces";
 import Icons from "../../../Styles/Icons";
-import url from "../../../constants/path";
 import Navbar from "../../Navbar/Navbar";
 import * as S from "./RecipeFormStyle";
 import ErrorMessage from "../../Error/ErrorMessage";
@@ -25,15 +24,16 @@ const RecipeForm = () => {
   const location = useLocation();
   const [imagePreview, setImagePreview] = useState<string>("");
   const [levels, setLevels] = useState<number>(1);
-
-  let defaltValues = defaultRecipeValue;
-  const navigate = useNavigate();
   const axiosData = useAxios();
+  //유저정보에서 위치정보 가져올예정
+  const sido = "seoul";
 
-  if (location.state) defaltValues = location.state.datas;
-  else defaltValues = defaultRecipeValue;
+  let defaultValues = defaultRecipeValue;
+  const navigate = useNavigate();
 
-  console.log(defaltValues);
+  //수정 여부
+  if (location.state) defaultValues = location.state.datas;
+  else defaultValues = defaultRecipeValue;
 
   const {
     register,
@@ -43,19 +43,21 @@ const RecipeForm = () => {
     setValue,
     formState: { errors },
   } = useForm<RecipeProps>({
-    defaultValues: defaltValues,
+    defaultValues: defaultValues,
   });
 
   const { isLoading, error, sendRequest: sendFormRequest } = axiosData;
 
   const onSubmitHandler: SubmitHandler<RecipeProps> = (data) => {
     const formData = new FormData();
-    formData.append("image", data.img[0]);
+    formData.append("file", data.img[0]);
     formData.append("title", data.title);
     formData.append("serving", data.serving);
     formData.append("level", data.level);
     formData.append("time", data.time);
     formData.append("summary", data.summary);
+    formData.append("location", sido);
+
     data.ingredients.forEach((intredient) =>
       formData.append("ingredients", intredient)
     );
@@ -70,15 +72,15 @@ const RecipeForm = () => {
       console.log("Recipe upload Success!", responseData);
       navigate("/community");
     };
-    // defaltValues =
+    // defaultValues =
 
     sendFormRequest(
       {
-        //작성 수정여부에 따른 URL수정
-        url: `${url}/recipe.json`,
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        // headers: { "Content-Type": "multipart/form-data" },
+        url: location.state
+          ? `/board-recipe/${sido}/${location.state.num}`
+          : "/board-recipe",
+        method: location.state ? "PUT" : "POST",
+        headers: { "Content-Type": "multipart/form-data" },
         data: formData,
       },
       abc

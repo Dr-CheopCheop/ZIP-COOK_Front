@@ -1,22 +1,22 @@
 import React from 'react';
-import * as R from './RecipeMainStyle';
+import * as S from './SaleMainStyle';
 
-const RecipePosts = ({ posts, loading }: any) => {
+const SalePosts = ({ posts, loading }: any) => {
     return (
       <>
         {loading && <div> loading... </div>}
         <div>
           {posts.map((post: any) => (
-            <R.PostSpan key={post.id}>
+            <S.PostSpan key={post.id}>
               {post[post.id].filepath}{<br />}
               {post[post.id].title}{<br />}
-              TIME: {post[post.id].time}{<br />}
-              LEVEL: {post[post.id].level}
-            </R.PostSpan>
+              PRICE: {post[post.id].discountPrice}{<br />}
+              LOCATION: {post[post.id].location}
+            </S.PostSpan>
           ))}
         </div>
       </>
     );
   };
 
-  export default RecipePosts;
+  export default SalePosts;

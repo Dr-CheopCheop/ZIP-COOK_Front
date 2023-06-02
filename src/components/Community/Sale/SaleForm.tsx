@@ -4,18 +4,21 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import useAxios from "../../../hooks/useAxios";
 import Navbar from "../../Navbar/Navbar";
-import * as S from "./DiscountFormStyle";
+import * as S from "./SaleFormStyle";
 import Icons from "../../../Styles/Icons";
-import url from "../../../constants/path";
 import ErrorMessage from "../../Error/ErrorMessage";
 import FormRequirements from "../../../constants/FormRequriements";
-import type { DiscountProps } from "../../../constants/interfaces";
+import type { SaleProps } from "../../../constants/interfaces";
 import { defaultDiscountValue } from "../../../constants/defaultFormOption";
 import Loading from "../../Loading/PageLoading";
 
-const DiscountForm = () => {
+const SaleForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosData = useAxios();
+  const [imagePreview, setImagePreview] = useState<string>("");
+  //유저정보에서 위치정보 가져올예정
+  const sido = "seoul";
 
   const {
     titleRequirements,
@@ -25,9 +28,7 @@ const DiscountForm = () => {
   } = FormRequirements;
   let defaultValue = defaultDiscountValue;
 
-  const axiosData = useAxios();
   const { isLoading, error, sendRequest: sendFormRequest } = axiosData;
-  const [imagePreview, setImagePreview] = useState<string>("");
 
   if (location.state) {
     defaultValue = location.state.datas;
@@ -38,7 +39,7 @@ const DiscountForm = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<DiscountProps>({
+  } = useForm<SaleProps>({
     defaultValues: defaultValue,
   });
   const { img } = watch();
@@ -50,14 +51,15 @@ const DiscountForm = () => {
     }
   }, [img]);
 
-  const onSubmitHandler: SubmitHandler<DiscountProps> = async (data) => {
+  const onSubmitHandler: SubmitHandler<SaleProps> = async (data) => {
     const formData = new FormData();
-    formData.append("image", data.img[0]);
+    formData.append("file", data.img[0]);
     formData.append("price", data.price);
     formData.append("place", data.place);
     formData.append("discountPrice", data.discountPrice);
     formData.append("title", data.title);
 
+    formData.append("location", sido);
     // formdata 콘솔확인용 추후 삭제 & tsconfig 수정
     for (let key of formData.values()) {
       console.log(key);
@@ -66,13 +68,15 @@ const DiscountForm = () => {
       console.log("Discount upload Success!", responseData);
       navigate("/community");
     };
-
+    console.log(location.state);
     sendFormRequest(
       {
-        url: `${url}/discount.json`,
-        method: "POST",
+        url: location.state
+          ? `/board-sale/${sido}/${location.state.num}`
+          : "/board-sale",
+        method: location.state ? "PUT" : "POST",
         data: formData,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "multipart/form-data" },
       },
       abc
     );
@@ -137,4 +141,4 @@ const DiscountForm = () => {
     </>
   );
 };
-export default DiscountForm;
+export default SaleForm;

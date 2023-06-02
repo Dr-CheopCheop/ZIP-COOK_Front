@@ -15,7 +15,7 @@ const Community = () => {
           <Link to="/community/share">공유</Link>
         </li>
         <li>
-          <Link to="/community/discount">할인정보</Link>
+          <Link to="/community/sale">할인정보</Link>
         </li>
       </ul>
     </div>

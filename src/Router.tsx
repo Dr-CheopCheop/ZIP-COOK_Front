@@ -10,15 +10,15 @@ import RecipeRead from "./components/Community/Recipe/RecipeRead";
 import Share from "./Pages/Community/Share/Share";
 import ShareForm from "./components/Community/Share/ShareForm";
 import ShareRead from "./components/Community/Share/ShareRead";
-import Discount from "./Pages/Community/Discount/Discount";
-import DiscountForm from "./components/Community/Discount/DiscountForm";
-import DiscountRead from "./components/Community/Discount/DiscountRead";
 import Login from "./Pages/Login/Login";
 import Join from "./Pages/Join/Join";
 import MyPage from "./Pages/MyPage/MyPage";
 import NotFound from "./Pages/NotFound/NotFound";
 import Home from "./Pages/Home/Home";
 import Forgot from "./Pages/Forgot/Forgot";
+import Sale from "./Pages/Community/Sale/Sale";
+import SaleForm from "./components/Community/Sale/SaleForm";
+import SaleRead from "./components/Community/Sale/SaleRead";
 
 const Router = () => {
   return (
@@ -37,9 +37,9 @@ const Router = () => {
         <Route path="/community/share/write" element={<ShareForm />} />
         <Route path="/community/share/:id" element={<ShareRead />} />
 
-        <Route path="/community/discount" element={<Discount />} />
-        <Route path="/community/discount/write" element={<DiscountForm />} />
-        <Route path="/community/discount/:id" element={<DiscountRead />} />
+        <Route path="/community/sale" element={<Sale />} />
+        <Route path="/community/sale/write" element={<SaleForm />} />
+        <Route path="/community/sale/:id" element={<SaleRead />} />
 
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/login" element={<Login />} />

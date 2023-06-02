@@ -9,7 +9,7 @@ export interface RecipeProps {
   time: string;
 }
 
-export interface DiscountProps {
+export interface SaleProps {
   img: FileList;
   price: string;
   place: string;
@@ -56,7 +56,7 @@ export interface levelActiveProps {
 }
 
 export interface SignupProps {
-  username: string;
+  username: string; 
   nickname: string;
   email: string;
   password: string;
@@ -77,4 +77,7 @@ export interface commentDataProps {
 
 export interface CommentEditProps {
   content: string;
+}
+export interface buttonProps {
+  active: boolean;
 }

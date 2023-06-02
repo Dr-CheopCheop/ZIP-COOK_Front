@@ -6,15 +6,12 @@ export const Container = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    /* justify-content: center;
-    align-items: center; */
     text-align: center;
 `;
 
 export const FirstDiv = styled.div`
     display: flex;
     flex-direction: row;
-    /* justify-content: ;  */
     align-items: flex-start;
     margin: 2%;
 `;
@@ -23,7 +20,7 @@ export const FirstDivText = styled.div`
     display: flex;
     font-size: 1.5rem;
     font-weight: bolder;
-
+    margin-left: 7%;
 `;
 
 export const SearchInput = styled.input`
@@ -52,6 +49,10 @@ export const SecondDiv = styled.div`
 `;
 
 export const PostSpan = styled.span`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border: 1px solid black;
     border-radius: 15px;
 `;

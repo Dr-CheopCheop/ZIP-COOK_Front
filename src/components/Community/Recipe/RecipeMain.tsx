@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import GetPostList from "../Post/GetPostList";
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import RecipePosts from './RecipePosts';
-import RecipePagination from './RecipePagination';
-import * as R from './RecipeMainStyle'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import RecipePosts from "./RecipePosts";
+import RecipePagination from "./RecipePagination";
+import * as R from "./RecipeMainStyle";
 
 const RecipeMain = () => {
   const [recipePosts, setRecipePosts] = useState([]);
@@ -16,7 +16,7 @@ const RecipeMain = () => {
     const fetchRecipeData = async () => {
       setLoading(true);
       const response = await axios.get(
-        "/board-recipe"
+        "/board-recipe?page=1"
       );
       setRecipePosts(response.data);
       setLoading(false);
@@ -28,9 +28,9 @@ const RecipeMain = () => {
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
   const currentPosts = (posts: any) => {
-      let currentPosts = 0;
-      currentPosts = posts.slice(indexOfFirst, indexOfLast);
-      return currentPosts;
+    let currentPosts = 0;
+    currentPosts = posts.slice(indexOfFirst, indexOfLast);
+    return currentPosts;
   };
   return (
     // <>
@@ -41,7 +41,7 @@ const RecipeMain = () => {
       <R.FirstDiv>
         <R.FirstDivText>RECIPE</R.FirstDivText>
         <R.SearchInput></R.SearchInput>
-        <R.WriteButton to="/community/recipe/writer">글쓰기</R.WriteButton>
+        <R.WriteButton to="/community/recipe/write">글쓰기</R.WriteButton>
       </R.FirstDiv>
       <R.SecondDiv>
         <RecipePosts posts={currentPosts(recipePosts)} loading={loading} />

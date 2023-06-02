@@ -1,7 +1,7 @@
 import React from 'react';
-import * as D from './DiscountMainStyle';
+import * as S from './SaleMainStyle';
 
-const DiscountPagination = ({ postsPerPage, totalPosts, paginate }: any ) => {
+const SalePagination = ({ postsPerPage, totalPosts, paginate }: any ) => {
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
         pageNumbers.push(i);
@@ -9,16 +9,16 @@ const DiscountPagination = ({ postsPerPage, totalPosts, paginate }: any ) => {
     return (
         <div>
             <nav>
-                <D.PageButtonWrap>
+                <S.PageButtonWrap>
                     {pageNumbers.map((number) => (
-                        <D.PageButton onClick={() => paginate(number)}>
+                        <S.PageButton onClick={() => paginate(number)}>
                             {number}
-                        </D.PageButton>
+                        </S.PageButton>
                     ))}
-                </D.PageButtonWrap>
+                </S.PageButtonWrap>
             </nav>
         </div>
     )
 };
 
-export default DiscountPagination;
+export default SalePagination;

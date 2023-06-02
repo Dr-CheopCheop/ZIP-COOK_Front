@@ -13,6 +13,7 @@ const readData = {
 
 const ShareRead = () => {
   const { id } = useParams();
+
   // const selectData = DummyData.find((data) => data.id === Number(id));
   // const { title, difficulty, cookTime } = selectData ?? {
   //   title: "존재하지 않는 게시물 입니다.",
@@ -33,7 +34,11 @@ const ShareRead = () => {
             <S.UpperTitle>
               <Link
                 to="/community/share/write"
-                state={{ update: true, datas: readData, num: id }}
+                state={{
+                  update: true,
+                  datas: readData,
+                  num: id,
+                }}
               >
                 <S.TitleButton>수정</S.TitleButton>
               </Link>
@@ -55,7 +60,7 @@ const ShareRead = () => {
             좋겠습니다! 유통기한 (~3/31)
           </div>
         </S.ContentsContainer>
-        <CommentList />
+        <CommentList id={id} />
       </S.ReadContainer>
     </>
   );
