@@ -27,7 +27,7 @@ export const Button = styled.button<buttonProps>`
   display: inline-block;
   width: 25%;
   border: 1rem;
-  font-color: black;
+  color: black;
   background-color: ${(props) => (props.active ? "#cde990" : "transparent")};
   font-weight: bold;
   cursor: pointer;

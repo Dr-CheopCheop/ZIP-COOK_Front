@@ -78,3 +78,6 @@ export interface commentDataProps {
 export interface CommentEditProps {
   content: string;
 }
+export interface buttonProps {
+  active: boolean;
+}
