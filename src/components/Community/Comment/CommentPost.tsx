@@ -1,40 +1,37 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import useAxios from "../../../hooks/useAxios";
 import * as S from "./CommentPostStyle";
 import { url } from "../../../constants/serverURL";
+import axios from "axios";
 
 interface CommentProps {
   content: string;
 }
 
 const CommentPost = (props: any) => {
-  const axiosData = useAxios();
-
   const { register, handleSubmit, reset } = useForm<CommentProps>({});
-  const { sendRequest: sendCommentRequest } = axiosData;
 
-  const abc = (responseData: any) => {
-    console.log(responseData);
-    reset();
-  };
-  const onSubmitHandler: SubmitHandler<CommentProps> = (data) => {
+  const onSubmitHandler: SubmitHandler<CommentProps> = async (data) => {
     const postData = {
       id: Math.random(),
       writer: "Lee Ga yeong",
       time: "10분전",
       content: data.content,
     };
-    props.onAddComment(postData);
-    sendCommentRequest(
-      {
+    try {
+      const response = await axios({
         url: `${url}/recipe-comment`,
         method: "POST",
         data: postData,
         headers: { "Content-Type": "application/json" },
-      },
-      abc
-    );
+      });
+      console.log(response.data);
+
+      props.onAddComment(postData);
+      reset();
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
