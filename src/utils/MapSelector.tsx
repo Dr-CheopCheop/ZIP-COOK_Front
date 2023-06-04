@@ -7,6 +7,7 @@ import {
 } from "../action/mapAddressAction"
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../reducer/rootReducer";
+import { useEffect } from "react";
 
 
 const MapSelector= ({onSelect}: { onSelect: (sido: string, sigugun: string, dong: string) => void }) => {
@@ -37,6 +38,11 @@ const MapSelector= ({onSelect}: { onSelect: (sido: string, sigugun: string, dong
     dispatch(setDong(selectedDong.value));
     onSelect(sido, sigugun, selectedDong.value);
   };
+  
+  useEffect(() => {
+    onSelect(sido, sigugun, dong);
+  },[sido,sigugun, dong, onSelect]);
+
   return (
     <>
       <Select

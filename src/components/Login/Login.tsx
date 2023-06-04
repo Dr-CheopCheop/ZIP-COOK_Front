@@ -58,13 +58,11 @@ const Loginpage = () => {
       //token 저장
       localStorage.setItem("accessToken", jwtToken);
       axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
-      axios.get("http://localhost:8080/auth/user").then((res) => {
-        console.log(res);
-        const userInfo = res.data;
-        dispatch(loginUser(userInfo));
-      });
+      const userInfoRes = await axios.get("http://localhost:8080/auth/user");
+      const userInfo = userInfoRes.data;
+
       dispatch(SET_TOKEN(jwtToken));
-      dispatch(loginUser(user));
+      dispatch(loginUser(userInfo));
       movepage("/main");
     } catch (error) {
       console.log("login fail", error);
