@@ -20,7 +20,7 @@ const MainPage = () => {
         const fetchRecipeData = async () => {
             setLoading(true);
             const response = await axios.get(
-                "/board-recipe"
+                "http://localhost:8080/board-recipe?page=1"
             );
             setRecipePosts(response.data);
             setLoading(false);
@@ -33,7 +33,7 @@ const MainPage = () => {
         const fetchSharingData = async () => {
             setLoading(true);
             const response = await axios.get(
-                "/board-sharing"
+                "http://localhost:8080/board-share?locaton=seoul&page=1"
             );
             setSharingPosts(response.data);
             setLoading(false);
@@ -46,7 +46,7 @@ const MainPage = () => {
         const fetchSaleData = async () => {
             setLoading(true);
             const response = await axios.get(
-                "/board-sale"
+                "http://localhost:8080/board-sale?locaton=seoul&page=1"
             );
             setSalePosts(response.data);
             setLoading(false);
