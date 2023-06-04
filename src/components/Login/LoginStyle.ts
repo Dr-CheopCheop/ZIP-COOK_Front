@@ -16,7 +16,7 @@ export const Test = styled(Link)`
   text-decoration: none;
 `;
 
-export const Sign = styled.form`
+export const Sign = styled.div`
   width: 80%;
   max-width: 30rem;
   margin: 2rem auto 0;
