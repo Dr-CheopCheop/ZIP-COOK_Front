@@ -136,7 +136,9 @@ export const ChatbotResponseText = styled.div`
     width: 80%;
 `;
 
-export const UserInput = styled.input``;
+export const UserInput = styled.input`
+    width: 100%;
+`;
 
 export const ChatbotForm = styled.form``;
 
