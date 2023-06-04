@@ -25,8 +25,6 @@ const RecipeForm = () => {
   const [imagePreview, setImagePreview] = useState<string>("");
   const [levels, setLevels] = useState<number>(1);
   const axiosData = useAxios();
-  //유저정보에서 위치정보 가져올예정
-  const sido = "seoul";
 
   let defaultValues = defaultRecipeValue;
   const navigate = useNavigate();
@@ -56,7 +54,6 @@ const RecipeForm = () => {
     formData.append("level", data.level);
     formData.append("time", data.time);
     formData.append("summary", data.summary);
-    formData.append("location", sido);
 
     data.ingredients.forEach((intredient) =>
       formData.append("ingredients", intredient)
@@ -77,7 +74,7 @@ const RecipeForm = () => {
     sendFormRequest(
       {
         url: location.state
-          ? `/board-recipe/${sido}/${location.state.num}`
+          ? `/board-recipe/${location.state.num}`
           : "/board-recipe",
         method: location.state ? "PUT" : "POST",
         headers: { "Content-Type": "multipart/form-data" },
