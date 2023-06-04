@@ -48,22 +48,22 @@ const RecipeForm = () => {
   const onSubmitHandler: SubmitHandler<RecipeProps> = async (data) => {
     const formData = new FormData();
     formData.append("file", data.img[0]);
-    formData.append("title", data.title);
-    formData.append("serving", data.serving);
-    formData.append("level", data.level);
-    formData.append("time", data.time);
-    formData.append("summary", data.summary);
 
-    data.ingredients.forEach((intredient) =>
-      formData.append("ingredients", intredient)
-    );
-    data.content.forEach((content) => formData.append("content", content));
+    const recipepost = {
+      title: data.title,
+      serving: data.serving,
+      level: data.level,
+      time: data.time,
+      summary: data.summary,
+      ingredients: data.ingredients,
+      content: data.content,
+    };
 
     for (let key of formData.values()) {
       console.log(key);
     }
 
-    console.log(formData);
+    console.log(recipepost);
 
     try {
       const response = await axios({
@@ -73,6 +73,9 @@ const RecipeForm = () => {
         method: location.state ? "PUT" : "POST",
         headers: { "Content-Type": "multipart/form-data" },
         data: formData,
+        params: {
+          recpepost: JSON.stringify(recipepost),
+        },
       });
       console.log(response.data);
 

@@ -1,17 +1,15 @@
 import * as S from "./CommentListStyle";
-// import useAxios from "../../hooks/useAxios";
 import CommentPost from "./CommentPost";
 import CommentItem from "./CommentItem";
 import type { commentDataProps } from "../../../constants/interfaces";
 import { useState, useEffect } from "react";
-import useAxios from "../../../hooks/useAxios";
 import { useLocation, useParams } from "react-router-dom";
 import { url } from "../../../constants/serverURL";
+import axios from "axios";
 
 const CommentList = (props: any) => {
   const [datas, setDatas] = useState<commentDataProps[]>([]);
-  const axiosData = useAxios();
-  const { sendRequest: getCommentsRequest } = axiosData;
+
   const location = useLocation();
   const { id } = props;
   const category = location.key;
@@ -19,27 +17,30 @@ const CommentList = (props: any) => {
   console.log(location.pathname, sid);
 
   useEffect(() => {
-    const loadCommentsList = (responseData: any) => {
-      const loadedDatas: commentDataProps[] = [];
-
-      for (const key in responseData) {
-        loadedDatas.push({
-          id: responseData[key].id,
-          writer: responseData[key].writer,
-          time: responseData[key].time,
-          content: responseData[key].content,
+    const fetchData = async () => {
+      try {
+        const response = await axios({
+          method: "GET",
+          url: `${url}/${category}-comment/${id}`,
         });
+        const responseData = await response.data;
+        const loadedDatas: commentDataProps[] = [];
+        for (const key in responseData) {
+          loadedDatas.push({
+            id: responseData[key].id,
+            writer: responseData[key].writer,
+            time: responseData[key].time,
+            content: responseData[key].content,
+          });
+        }
+
+        setDatas(loadedDatas);
+      } catch (error) {
+        console.error(error);
       }
-      setDatas(loadedDatas);
     };
-    getCommentsRequest(
-      {
-        url: `${url}/${category}-comment/${id}`,
-        method: "GET",
-      },
-      loadCommentsList
-    );
-  }, [getCommentsRequest, category, id]);
+    fetchData();
+  });
 
   const onAddCommentHanlder = (content: any) => {
     setDatas([...datas, content]);
