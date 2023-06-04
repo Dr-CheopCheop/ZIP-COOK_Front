@@ -1,6 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "../reducer/userSlice";
-import addressReducer from "../reducer/addressReducer";
 import rootReducer from "../reducer/rootReducer";
 
 const store = configureStore({

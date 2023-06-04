@@ -1,6 +1,4 @@
-import * as M from "./MypageStyle";
-import React, {useState, useRef, useEffect} from 'react';
-import axios from 'axios';
+import React from 'react';
 import {useSelector} from 'react-redux'
 import { RootState } from "../../reducer/rootReducer"
 
