@@ -56,7 +56,7 @@ export interface levelActiveProps {
 }
 
 export interface SignupProps {
-  username: string;
+  username: string; 
   nickname: string;
   email: string;
   password: string;

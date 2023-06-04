@@ -2,15 +2,27 @@ import * as S from "./NavbarStyle";
 import { useSelector, useDispatch } from "react-redux";
 import { clearUser } from "../../reducer/userSlice";
 import { RootState } from "../../reducer/rootReducer";
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { DELETE_TOKEN } from "../../reducer/tokenSlice";
 
 const Navbar = () => {
   const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    dispatch(clearUser());
-  };
-
+    const handleLogout = () => {
+      axios.get("http://localhost:8080/auth/logout")
+      .then(res => {
+        if(res.data.success){
+          navigate('/main');
+          dispatch(clearUser());
+          dispatch(DELETE_TOKEN());
+        }else {
+          console.log("logout failed", res.data);
+        }
+      })
+    }
   return (
     <>
       <S.Header>

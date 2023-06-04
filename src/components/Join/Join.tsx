@@ -24,12 +24,13 @@ const SignupForm = () => {
     console.log(watch());
     const passwordRef = useRef<string | null>(null);
     passwordRef.current = watch("password");
-    const [, setSelectedLocation] = useState("");
+    const [selectedLocation, setSelectedLocation] = useState("");
     const [,setIdCheckResult] = useState("");
     const [,setNicknameResult] = useState("");
     const [,setEmailCheckResult] = useState("");
     const handleMapSelection = (sido:string, sigugun:string, dong:string) => {
-      setSelectedLocation(`${sido} ${sigugun} ${dong}`);
+      const address = `${sido} ${sigugun} ${dong}`;
+      setSelectedLocation(address);
       console.log(sido, sigugun, dong);
     }
 
@@ -41,6 +42,7 @@ const SignupForm = () => {
               throw new Error("이미 사용중인 username입니다.");
             }
             console.log("사용가능한 아이디");
+            alert("사용가능한 아이디입니다.");
             setIdCheckResult("사용가능한 username입니다");
           } catch(error) {
             console.log(error);
@@ -55,6 +57,7 @@ const SignupForm = () => {
           throw new Error("이미 사용중인 username입니다.");
         }
         console.log("사용가능한 아이디");
+        alert("사용가능한 닉네임입니다.")
         setNicknameResult("사용가능한 닉네임입니다");
       } catch(error) {
         console.log(error);
@@ -68,8 +71,8 @@ const SignupForm = () => {
         if(CheckRes.data.exist === true) {
           throw new Error("이미 사용중인 username입니다.");
         }
-        console.log("사용가능한 아이디");
-        setEmailCheckResult("사용가능한 닉네임입니다");
+        console.log("사용가능한 이메일입니다.");
+        setEmailCheckResult("사용가능한 이메일입니다");
       } catch(error) {
         console.log(error);
       }
@@ -83,7 +86,7 @@ const SignupForm = () => {
         nickname : data.nickname,
         email : data.email,
         password: data.password,
-        location: setSelectedLocation,
+        location: selectedLocation,
       }
 
       axios.post("http://localhost:8080/auth/signup", formData,{

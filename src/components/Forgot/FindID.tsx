@@ -15,18 +15,19 @@ const FindID = () => {
   const {register, handleSubmit, formState : {errors}} = useForm<FormValue>();
 
   const onSubmitHandler: SubmitHandler<FormValue> = (data) => {
-    // axios.get(`http://localhost:8080/auth/findId/${data.email}`)
-    // .then(response => {
-    //   const username = response.data.username;
-    //   setUserId(username);
-    //   setCheckId(true);
-    // }).catch((error) => {
-    //   console.log("아이디 찾기 실패", error);
+    axios.get(`http://localhost:8080/auth/findId/${data.email}`)
+    .then(response => {
+      const username = response.data.username;
+      setUserId(username);
+      setCheckId(true);
+      console.log('아이디 찾기 성공');
+    }).catch((error) => {
+      console.log("아이디 찾기 실패", error);
 
-    // })
-    setCheckId(true);
-    setUserId("dustn123");
-    console.log("아이디찾기성공!");
+    })
+    // setCheckId(true);
+    // setUserId("dustn123");
+    // console.log("아이디찾기성공!");
   }
 
   function handleLogin() {
