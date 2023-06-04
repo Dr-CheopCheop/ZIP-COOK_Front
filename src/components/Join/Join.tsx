@@ -46,10 +46,10 @@ const SignupForm = () => {
       );
       if (CheckRes.data.exist === true) {
         throw new Error("이미 사용중인 username입니다.");
+        console.log("사용가능한 아이디");
+        alert("사용가능한 아이디입니다.");
+        setIdCheckResult("사용가능한 username입니다");
       }
-      console.log("사용가능한 아이디");
-      alert("사용가능한 아이디입니다.");
-      setIdCheckResult("사용가능한 username입니다");
     } catch (error) {
       console.log(error);
     }
