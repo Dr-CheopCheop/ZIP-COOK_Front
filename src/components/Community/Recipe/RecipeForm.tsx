@@ -10,7 +10,7 @@ import ErrorMessage from "../../Error/ErrorMessage";
 import FormRequirements from "../../../constants/FormRequriements";
 import { convertToHour, convertToMinute } from "../../../utils/TimeConvert";
 import { defaultRecipeValue } from "../../../constants/defaultFormOption";
-import Loading from "../../Loading/PageLoading";
+// import Loading from "../../Loading/PageLoading";
 import { url } from "../../../constants/serverURL";
 import axios from "axios";
 const {
@@ -50,6 +50,8 @@ const RecipeForm = () => {
     formData.append("file", data.img[0]);
 
     const recipepost = {
+      uid: 1,
+      nickname: "김모씨",
       title: data.title,
       serving: data.serving,
       level: data.level,
@@ -64,6 +66,7 @@ const RecipeForm = () => {
     }
 
     console.log(recipepost);
+    console.log(JSON.stringify(recipepost));
 
     try {
       const response = await axios({
@@ -74,7 +77,7 @@ const RecipeForm = () => {
         headers: { "Content-Type": "multipart/form-data" },
         data: formData,
         params: {
-          recpepost: JSON.stringify(recipepost),
+          recipepost: JSON.stringify(recipepost),
         },
       });
       console.log(response.data);
