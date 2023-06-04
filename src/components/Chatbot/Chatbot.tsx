@@ -1,13 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import * as C from './ChatbotStyle';
 import axios from 'axios';
+import Year from 'react-live-clock';
+import Month from 'react-live-clock';
+import Day from 'react-live-clock';
 
 const ChatbotPage = () => {
     const [loading, setLoading] = useState(false);
     const [weatherData, setWeatherData] = useState([]);
     const [dateData, setDateData] = useState([]);
     const [chatbotResponse, setChatbotResponse] = useState([]);
-    const [userRequest, setUserRequest] = useState([]);
+    const [userRequest, setUserRequest] = useState("");
+    
+    const onChange = (e: React.FormEvent<HTMLInputElement>): void => {
+      const {
+          currentTarget: { value },
+      } = e;
+      setUserRequest(value)
+    };
+
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(userRequest);
+    }
 
     useEffect(() => {
         const fetchWeatherData = async () => {
@@ -67,8 +82,15 @@ const ChatbotPage = () => {
         <C.Container>
             <C.FirstDiv>
                 <C.WeatherBox>
-                    <C.WeatherIcon>{weatherData}날씨</C.WeatherIcon>
-                    <C.DateBox>{dateData}2023-05-08</C.DateBox>
+                    <C.WeatherIcon>날씨</C.WeatherIcon>
+                    <C.DateBox>
+                        <Year
+                          format={"YYYY"}
+                          ticking={false}
+                          timezone={"KR/Pacific"}
+                        />
+                        <Month format={"MMM"} ticking={false} timezone={"KR/Pacific"} />
+                    </C.DateBox>
                 </C.WeatherBox>
                 <C.FoodBox>
                     <C.FoodText1>제철 음식</C.FoodText1>
@@ -80,7 +102,7 @@ const ChatbotPage = () => {
                 {userRequest}
                 “Hi, the weather is cloudy today. 
                 Please recommend a cooking recipe 
-                accordingly”
+                accordingly”dkfslfkjsa;dkf';kdfs;ldfjk;sjfdkjsdkfasksdl
                 </C.UserRequestText>
                 <C.ChatbotResponseText>
                 {chatbotResponse}
@@ -89,9 +111,14 @@ const ChatbotPage = () => {
                 cheese sandwiches.
                 Here's a simple recipe you can try: .... ”
                 </C.ChatbotResponseText>
-                <C.UserInput>
-                    
-                </C.UserInput>
+                <C.ChatbotForm onSubmit={onSubmit}>
+                    <C.UserInput
+                      value={userRequest}
+                      onChange={onChange}
+                      type="text"
+                    />
+                    <C.SubmitButton>전송</C.SubmitButton>
+                </C.ChatbotForm>
             </C.SecondDiv>
         </C.Container>
     )
