@@ -60,6 +60,7 @@ const RecipeForm = () => {
       ingredients: data.ingredients,
       content: data.content,
     };
+    formData.append("recipepost", JSON.stringify(recipepost));
 
     for (let key of formData.values()) {
       console.log(key);
@@ -71,14 +72,11 @@ const RecipeForm = () => {
     try {
       const response = await axios({
         url: location.state
-          ? `${url}/board-recipe/${location.state.num}`
-          : `${url}/board-recipe`,
+          ? `/board-recipe/${location.state.num}`
+          : `/board-recipe`,
         method: location.state ? "PUT" : "POST",
         headers: { "Content-Type": "multipart/form-data" },
         data: formData,
-        params: {
-          recipepost: JSON.stringify(recipepost),
-        },
       });
       console.log(response.data);
 
