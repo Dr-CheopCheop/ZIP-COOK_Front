@@ -5,6 +5,7 @@ import axios from "axios";
 import RecipePosts from "./RecipePosts";
 import RecipePagination from "./RecipePagination";
 import * as R from "./RecipeMainStyle";
+import { url } from "../../../constants/serverURL";
 
 const RecipeMain = () => {
   const [recipePosts, setRecipePosts] = useState([]);
@@ -15,9 +16,7 @@ const RecipeMain = () => {
   useEffect(() => {
     const fetchRecipeData = async () => {
       setLoading(true);
-      const response = await axios.get(
-        "/board-recipe?page=1"
-      );
+      const response = await axios.get(`${url}/board-recipe?page=1`);
       setRecipePosts(response.data);
       setLoading(false);
     };

@@ -3,6 +3,7 @@ import React from "react";
 import * as S from "./RecipeReadStyle";
 import CommentList from "../Comment/CommentList";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { url } from "../../../constants/serverURL";
 
 const readData = {
   title: "해물 떡볶이",
@@ -41,7 +42,7 @@ const RecipeRead = () => {
   // };
   const onDeleteHandler = () => {
     //삭제 로직 작성
-    navigate("/community/recipe");
+    navigate(`${url}/community/recipe`);
   };
 
   return (

@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import useAxios from "../../../hooks/useAxios";
+
 import type { RecipeProps } from "../../../constants/interfaces";
 import Icons from "../../../Styles/Icons";
 import Navbar from "../../Navbar/Navbar";
@@ -11,6 +11,8 @@ import FormRequirements from "../../../constants/FormRequriements";
 import { convertToHour, convertToMinute } from "../../../utils/TimeConvert";
 import { defaultRecipeValue } from "../../../constants/defaultFormOption";
 import Loading from "../../Loading/PageLoading";
+import { url } from "../../../constants/serverURL";
+import axios from "axios";
 const {
   titleRequirements,
   imageRequirements,
@@ -24,7 +26,6 @@ const RecipeForm = () => {
   const location = useLocation();
   const [imagePreview, setImagePreview] = useState<string>("");
   const [levels, setLevels] = useState<number>(1);
-  const axiosData = useAxios();
 
   let defaultValues = defaultRecipeValue;
   const navigate = useNavigate();
@@ -44,9 +45,7 @@ const RecipeForm = () => {
     defaultValues: defaultValues,
   });
 
-  const { isLoading, error, sendRequest: sendFormRequest } = axiosData;
-
-  const onSubmitHandler: SubmitHandler<RecipeProps> = (data) => {
+  const onSubmitHandler: SubmitHandler<RecipeProps> = async (data) => {
     const formData = new FormData();
     formData.append("file", data.img[0]);
     formData.append("title", data.title);
@@ -65,23 +64,22 @@ const RecipeForm = () => {
     }
 
     console.log(formData);
-    const abc = (responseData: object) => {
-      console.log("Recipe upload Success!", responseData);
-      navigate("/community");
-    };
-    // defaultValues =
 
-    sendFormRequest(
-      {
+    try {
+      const response = await axios({
         url: location.state
-          ? `/board-recipe/${location.state.num}`
-          : "/board-recipe",
+          ? `${url}/board-recipe/${location.state.num}`
+          : `${url}/board-recipe`,
         method: location.state ? "PUT" : "POST",
         headers: { "Content-Type": "multipart/form-data" },
         data: formData,
-      },
-      abc
-    );
+      });
+      console.log(response.data);
+
+      navigate("/community");
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const { img, serving, title, time, level, ingredients } = watch();
@@ -148,7 +146,6 @@ const RecipeForm = () => {
     }
   };
 
-  if (error) return <>error</>;
   return (
     <>
       <Navbar />
@@ -311,8 +308,6 @@ const RecipeForm = () => {
           </S.LevelByVIew>
         </S.Container>
       </S.Form>
-
-      {isLoading ? <Loading /> : <></>}
     </>
   );
 };
