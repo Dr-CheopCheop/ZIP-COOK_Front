@@ -2,6 +2,7 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useAxios from "../../../hooks/useAxios";
 import * as S from "./CommentPostStyle";
+import { url } from "../../../constants/serverURL";
 
 interface CommentProps {
   content: string;
@@ -27,7 +28,7 @@ const CommentPost = (props: any) => {
     props.onAddComment(postData);
     sendCommentRequest(
       {
-        url: "/recipe-comment",
+        url: `${url}/recipe-comment`,
         method: "POST",
         data: postData,
         headers: { "Content-Type": "application/json" },

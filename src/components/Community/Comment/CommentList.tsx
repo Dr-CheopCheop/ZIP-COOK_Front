@@ -6,6 +6,7 @@ import type { commentDataProps } from "../../../constants/interfaces";
 import { useState, useEffect } from "react";
 import useAxios from "../../../hooks/useAxios";
 import { useLocation, useParams } from "react-router-dom";
+import { url } from "../../../constants/serverURL";
 
 const CommentList = (props: any) => {
   const [datas, setDatas] = useState<commentDataProps[]>([]);
@@ -33,7 +34,7 @@ const CommentList = (props: any) => {
     };
     getCommentsRequest(
       {
-        url: `/${category}-comment/${id}`,
+        url: `${url}/${category}-comment/${id}`,
         method: "GET",
       },
       loadCommentsList

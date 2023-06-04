@@ -2,7 +2,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import useAxios from "../../../hooks/useAxios";
 import Navbar from "../../Navbar/Navbar";
 import * as S from "./ShareFormStyle";
 import Icons from "../../../Styles/Icons";
@@ -11,6 +10,8 @@ import FormRequirements from "../../../constants/FormRequriements";
 import type { ShareProps } from "../../../constants/interfaces";
 import { defaultShareValue } from "../../../constants/defaultFormOption";
 import Loading from "../../Loading/PageLoading";
+import { url } from "../../../constants/serverURL";
+import axios from "axios";
 
 const { titleRequirements, imageRequirements, shareContentRequirements } =
   FormRequirements;
@@ -20,11 +21,8 @@ const ShareForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [imagePreview, setImagePreview] = useState<string>("");
-  const axiosData = useAxios();
-
   //유저정보에서 위치정보 가져올예정
   const sido = "seoul";
-  const { isLoading, error, sendRequest: sendFormRequest } = axiosData;
 
   if (location.state) {
     defaultValue = location.state.datas;
@@ -58,22 +56,21 @@ const ShareForm = () => {
       console.log(key);
     }
 
-    const abc = (responseData: object) => {
-      console.log("Share upload Success!", responseData);
-      navigate("/community");
-    };
-
-    sendFormRequest(
-      {
+    try {
+      const response = await axios({
         url: location.state
-          ? `/board-share/${sido}/${location.state.num}`
-          : "/board-share",
+          ? `${url}/board-recipe/${location.state.num}`
+          : `${url}/board-recipe`,
         method: location.state ? "PUT" : "POST",
-        data: formData,
         headers: { "Content-Type": "multipart/form-data" },
-      },
-      abc
-    );
+        data: formData,
+      });
+      console.log(response.data);
+
+      navigate("/community");
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -118,9 +115,6 @@ const ShareForm = () => {
 
           {/* 모두채워졌을때 완료설정 */}
           <S.Button>작성</S.Button>
-
-          {isLoading ? <Loading /> : <></>}
-          {error && "에러"}
         </S.Container>
       </S.Form>
     </>

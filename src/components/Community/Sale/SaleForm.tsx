@@ -2,7 +2,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import useAxios from "../../../hooks/useAxios";
 import Navbar from "../../Navbar/Navbar";
 import * as S from "./SaleFormStyle";
 import Icons from "../../../Styles/Icons";
@@ -10,12 +9,13 @@ import ErrorMessage from "../../Error/ErrorMessage";
 import FormRequirements from "../../../constants/FormRequriements";
 import type { SaleProps } from "../../../constants/interfaces";
 import { defaultDiscountValue } from "../../../constants/defaultFormOption";
-import Loading from "../../Loading/PageLoading";
+// import Loading from "../../Loading/PageLoading";
+import { url } from "../../../constants/serverURL";
+import axios from "axios";
 
 const SaleForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const axiosData = useAxios();
   const [imagePreview, setImagePreview] = useState<string>("");
   //유저정보에서 위치정보 가져올예정
   const sido = "seoul";
@@ -27,8 +27,6 @@ const SaleForm = () => {
     priceRequirements,
   } = FormRequirements;
   let defaultValue = defaultDiscountValue;
-
-  const { isLoading, error, sendRequest: sendFormRequest } = axiosData;
 
   if (location.state) {
     defaultValue = location.state.datas;
@@ -64,22 +62,21 @@ const SaleForm = () => {
     for (let key of formData.values()) {
       console.log(key);
     }
-    const abc = (responseData: object) => {
-      console.log("Discount upload Success!", responseData);
-      navigate("/community");
-    };
-    console.log(location.state);
-    sendFormRequest(
-      {
+    try {
+      const response = await axios({
         url: location.state
-          ? `/board-sale/${sido}/${location.state.num}`
-          : "/board-sale",
+          ? `${url}/board-recipe/${location.state.num}`
+          : `${url}/board-recipe`,
         method: location.state ? "PUT" : "POST",
-        data: formData,
         headers: { "Content-Type": "multipart/form-data" },
-      },
-      abc
-    );
+        data: formData,
+      });
+      console.log(response.data);
+
+      navigate("/community");
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -136,8 +133,6 @@ const SaleForm = () => {
           <S.Button>작성</S.Button>
         </S.Container>
       </S.Form>
-      {isLoading ? <Loading /> : <></>}
-      {error && "에러발생"}
     </>
   );
 };
