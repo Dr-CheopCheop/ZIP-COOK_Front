@@ -88,8 +88,8 @@ export const SecondDiv = styled.div`
     padding: 1%; */
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    position: relative;
+    /* justify-content: flex-start; */
+    /* position: relative; */
     width: 50%;
     background-color: #C5DEC6;
     border-radius: 15px;
@@ -98,15 +98,19 @@ export const SecondDiv = styled.div`
 
 export const UserRequestText = styled.div`
     display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
     align-items: center;
-    position: absolute;
+    text-align: right;
+    width: 80%;
+    /* position: absolute; */
     font-size: 1rem;
     background-color: white;
     border-radius: 15px;
     padding: 1.2%;
     margin: 1%;
-    overflow: hidden;
-    left: 100px;
+    /* overflow: hidden; */
+    /* left: 100px; */
 `;
 
 export const ChatbotResponseText = styled.div`
@@ -120,6 +124,7 @@ export const ChatbotResponseText = styled.div`
     padding: 1.2%;
     margin: 1%; */
     display: flex;
+    justify-content: flex-start;
     align-items: center;
     text-align: left;
     font-size: 1rem;
@@ -127,8 +132,12 @@ export const ChatbotResponseText = styled.div`
     border-radius: 15px;
     padding: 1.2%;
     margin: 1%;
-    overflow: hidden;
-    width: 60%;
+    /* overflow: hidden; */
+    width: 80%;
 `;
 
 export const UserInput = styled.input``;
+
+export const ChatbotForm = styled.form``;
+
+export const SubmitButton = styled.button``;
