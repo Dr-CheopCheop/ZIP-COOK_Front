@@ -10,7 +10,6 @@ import FormRequirements from "../../../constants/FormRequriements";
 import type { ShareProps } from "../../../constants/interfaces";
 import { defaultShareValue } from "../../../constants/defaultFormOption";
 import Loading from "../../Loading/PageLoading";
-import { url } from "../../../constants/serverURL";
 import axios from "axios";
 
 const { titleRequirements, imageRequirements, shareContentRequirements } =
@@ -59,8 +58,8 @@ const ShareForm = () => {
     try {
       const response = await axios({
         url: location.state
-          ? `${url}/board-recipe/${location.state.num}`
-          : `${url}/board-recipe`,
+          ? `/board-recipe/${location.state.num}`
+          : `/board-recipe`,
         method: location.state ? "PUT" : "POST",
         headers: { "Content-Type": "multipart/form-data" },
         data: formData,

@@ -8,9 +8,9 @@ const RecipePosts = ({ posts, loading }: any) => {
         <div>
           {posts.map((post: any) => (
             <M.PostSpan key={post.id}>
-              {post[post.id].image}{<br />}
-              {post[post.id].title}{<br />}
-              {post[post.id].level}
+              {post.image}{<br />}
+              {post.title}{<br />}
+              {post.level}
             </M.PostSpan>
           ))}
         </div>
