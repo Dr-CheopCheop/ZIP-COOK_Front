@@ -49,9 +49,6 @@ const SaleForm = () => {
   }, [img]);
 
   const onSubmitHandler: SubmitHandler<SaleProps> = async (data) => {
-    const formData = new FormData();
-    formData.append("file", data.img[0]);
-
     const salepost = {
       price: data.price,
       place: data.place,
@@ -59,11 +56,18 @@ const SaleForm = () => {
       title: data.title,
       location: sido,
     };
-    formData.append("salepost", JSON.stringify(salepost));
+
+    const formData = new FormData();
+    formData.append("file", data.img[0]);
+    formData.append(
+      "salepost",
+      new Blob([JSON.stringify(salepost)], { type: "application/json" })
+    );
     // formdata 콘솔확인용 추후 삭제 & tsconfig 수정
     for (let key of formData.values()) {
       console.log(key);
     }
+
     try {
       const response = await axios({
         url: location.state

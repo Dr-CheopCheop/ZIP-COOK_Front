@@ -46,9 +46,6 @@ const RecipeForm = () => {
   });
 
   const onSubmitHandler: SubmitHandler<RecipeProps> = async (data) => {
-    const formData = new FormData();
-    formData.append("file", data.img[0]);
-
     const recipepost = {
       uid: 1,
       nickname: "김모씨",
@@ -60,7 +57,13 @@ const RecipeForm = () => {
       ingredients: data.ingredients,
       content: data.content,
     };
-    formData.append("recipepost", JSON.stringify(recipepost));
+
+    const formData = new FormData();
+    formData.append("file", data.img[0]);
+    formData.append(
+      "recipepost",
+      new Blob([JSON.stringify(recipepost)], { type: "application/json" })
+    );
 
     for (let key of formData.values()) {
       console.log(key);
@@ -73,7 +76,7 @@ const RecipeForm = () => {
       const response = await axios({
         url: location.state
           ? `/board-recipe/${location.state.num}`
-          : `/api/board-recipe`,
+          : `/board-recipe`,
         method: location.state ? "PUT" : "POST",
         headers: { "Content-Type": "multipart/form-data" },
         data: formData,

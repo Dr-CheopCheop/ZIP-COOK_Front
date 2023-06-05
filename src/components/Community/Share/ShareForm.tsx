@@ -45,9 +45,6 @@ const ShareForm = () => {
   }, [img]);
 
   const onSubmitHandler: SubmitHandler<ShareProps> = async (data) => {
-    const formData = new FormData();
-    formData.append("file", data.img[0]);
-
     const sharepost = {
       uid: 1,
       nickname: "김모씨",
@@ -55,7 +52,13 @@ const ShareForm = () => {
       content: data.content,
       location: sido,
     };
-    formData.append("sharepost", JSON.stringify(sharepost));
+    const formData = new FormData();
+
+    formData.append("file", data.img[0]);
+    formData.append(
+      "sharepost",
+      new Blob([JSON.stringify(sharepost)], { type: "application/json" })
+    );
 
     try {
       const response = await axios({

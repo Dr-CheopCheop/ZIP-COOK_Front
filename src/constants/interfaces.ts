@@ -56,7 +56,7 @@ export interface levelActiveProps {
 }
 
 export interface SignupProps {
-  username: string; 
+  username: string;
   nickname: string;
   email: string;
   password: string;
@@ -70,8 +70,7 @@ export interface LoginProps {
 
 export interface commentDataProps {
   id: number;
-  writer: string;
-  time: string;
+  nickname: string;
   content: string;
 }
 

@@ -3,7 +3,7 @@ import CommentPost from "./CommentPost";
 import CommentItem from "./CommentItem";
 import type { commentDataProps } from "../../../constants/interfaces";
 import { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 const CommentList = (props: any) => {
@@ -12,8 +12,7 @@ const CommentList = (props: any) => {
   const location = useLocation();
   const { id } = props;
   const category = location.key;
-  const { sid } = useParams();
-  console.log(location.pathname, sid);
+  console.log("댓글목록", id);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,8 +26,7 @@ const CommentList = (props: any) => {
         for (const key in responseData) {
           loadedDatas.push({
             id: responseData[key].id,
-            writer: responseData[key].writer,
-            time: responseData[key].time,
+            nickname: responseData[key].nickname,
             content: responseData[key].content,
           });
         }
