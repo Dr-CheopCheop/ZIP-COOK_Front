@@ -5,16 +5,19 @@ import { RootState } from "../../reducer/rootReducer";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { DELETE_TOKEN } from "../../reducer/tokenSlice";
+import { access } from "fs";
 
 const Navbar = () => {
-  const user = useSelector(loginUser);
+  const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
     const handleLogout = () => {
+      console.log(localStorage.removeItem("accessToken"));
+      localStorage.removeItem("accessToken")
       axios.get("/auth/logout")
       .then(res => {
-        if(res.data.success){
+        if(res.status === 200){
           navigate('/main');
           dispatch(clearUser());
           dispatch(DELETE_TOKEN());
@@ -42,7 +45,7 @@ const Navbar = () => {
               </S.Logo>
             </S.Div>
             <S.Div>
-              {user ? (
+              {user.isLogin ? (
                 <>
                   <S.Li>
                     <button onClick={handleLogout}>LOGOUT</button>

@@ -4,7 +4,8 @@ export const initialState = {
   username : "",
   password : "",
   isLoding : false,
-  isLogin : null,
+  isLogin : false,
+  token : null,
 }
 
 export const userSlice = createSlice({
@@ -17,7 +18,8 @@ export const userSlice = createSlice({
       //name, id에 API 값 받아오기
       state.username = id;
       state.password = password;
-  
+      state.isLoding = true;
+      state.isLogin = true;
       //state 변화 알림
       return state;
     },
@@ -26,12 +28,24 @@ export const userSlice = createSlice({
       //name, id null
       state.username = "";
       state.password = "";
+      state.isLoding = false;
+      state.isLogin = false;
       return state;
+    },
+    SET_TOKEN : (state, action) => {
+      state.isLogin = true;
+      state.isLoding = false;
+      state.token = action.payload;
+    },
+    DELETE_TOKEN: (state) => {
+      state.isLogin = false;
+      state.isLoding = false;
+      state.token = null;
     },
   },
 });
 
 
-export const {loginUser, clearUser} = userSlice.actions;
+export const {loginUser, clearUser, SET_TOKEN, DELETE_TOKEN} = userSlice.actions;
 
 export default userSlice.reducer;

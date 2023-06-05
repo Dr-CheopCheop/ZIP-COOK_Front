@@ -4,9 +4,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../../reducer/userSlice";
+import { loginUser, SET_TOKEN } from "../../reducer/userSlice";
 import axios from "axios";
-import { SET_TOKEN } from "../../reducer/tokenSlice";
+import setAuthorizationToken from '../../utils/setAuthorizationToken'
 
 interface FormValue {
   username: string;
@@ -17,7 +17,7 @@ const Loginpage = () => {
   const dispatch = useDispatch();
   const movepage = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [meg, setMsg] = useState("");
+  const [msg, setMsg] = useState("");
 
   function JoinPage() {
     movepage("/join");
@@ -53,11 +53,10 @@ const Loginpage = () => {
           },
         }
       );
-      const user = response.data;
-      const jwtToken = user.token;
+      const jwtToken = response.data.token;
       //token 저장
       localStorage.setItem("accessToken", jwtToken);
-      axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
+      //setAuthorizationToken(jwtToken);
       const userInfoRes = await axios.get("/auth/user");
       const userInfo = userInfoRes.data;
 
