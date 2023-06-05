@@ -12,7 +12,7 @@ const FindPW = () => {
   const [checkPw, setCheckPw] = useState(false); //아이디 표시상태 여부
   const [userPw, setUserPw] = useState("");
   const navigate = useNavigate();
-  const {register, handleSubmit, formState : {errors}} = useForm<FormValue>();
+  const {register, handleSubmit, formState : {errors}, watch} = useForm<FormValue>();
 
   const onSubmitHandler: SubmitHandler<FormValue> = (data) => {
     axios.get(`/auth/findPassword/${data.username}`)
@@ -55,7 +55,7 @@ const FindPW = () => {
       </form>
       ) : (
       <F.Div>
-          <F.P>{userPw} 회원님!</F.P>
+          <F.P>{watch("username")}회원님!</F.P>
           <F.P>회원님의 이메일로 임시비밀번호를 발급해드렸습니다. </F.P>
           <F.P>확인 후, 회원 아이디와 임시비밀번호를 입력 후 로그인하세요.</F.P>
           <F.P>(비밀번호는 my page에서 수정해주세요)</F.P>
