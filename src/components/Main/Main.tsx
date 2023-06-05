@@ -17,13 +17,6 @@ const MainPage = () => {
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(5);
-    const [selectedLocation, setSelectedLocation] = useState("");
-
-    const handleMapSelection = (sido : string) => {
-        const address = `${sido}`;
-        setSelectedLocation(address);
-        console.log(sido);
-    }
 
     useEffect(() => {
         const fetchRecipeData = async () => {
@@ -42,23 +35,24 @@ const MainPage = () => {
         const fetchSharingData = async () => {
             setLoading(true);
             const response = await axios.get(
-                `/board-share?location=${selectedLocation}&page=1`
+                `/board-share/main?page=1`
             );
             setSharingPosts(response.data);
+            console.log(response);
             setLoading(false);
         };
         fetchSharingData();
-    }, []);
+    },[]);
     console.log(sharingPosts);
 
     useEffect(() => {
-        console.log(selectedLocation);
         const fetchSaleData = async () => {
             setLoading(true);
             const response = await axios.get(
-                `/board-sale?location=${selectedLocation}&page=1`
+                `/board-sale/main?page=1`
             );
             setSalePosts(response.data);
+            console.log(response);
             setLoading(false);
         };
         fetchSaleData();
@@ -92,7 +86,6 @@ const MainPage = () => {
                 <M.RecipeButton to="/community/recipe">RECIPE</M.RecipeButton>
                 <M.SharingButton to="/community/share">SHARING INREDIENTS</M.SharingButton>
                 <M.DiscountButton to="/community/discount">DISCOUNT</M.DiscountButton>
-                <MapSelectorSido onSelect={handleMapSelection}/>
             </M.SecondDiv>
             <M.ThirdDiv>
                 <M.RecipeText>RECIPE</M.RecipeText>

@@ -8,10 +8,10 @@ const SalePosts = ({ posts, loading }: any) => {
         <div>
           {posts.map((post: any) => (
             <S.PostSpan key={post.id}>
-              {post[post.id].filepath}{<br />}
-              {post[post.id].title}{<br />}
-              PRICE: {post[post.id].discountPrice}{<br />}
-              LOCATION: {post[post.id].location}
+              {post.filepath}{<br />}
+              {post.title}{<br />}
+              PRICE: {post.discountPrice}{<br />}
+              LOCATION: {post.location}
             </S.PostSpan>
           ))}
         </div>
