@@ -1,4 +1,4 @@
-import * as S from "./CommentListStyle";
+import * as S from "./RecipeCommentListStyle";
 import CommentPost from "./CommentPost";
 import CommentItem from "./CommentItem";
 import type { commentDataProps } from "../../../constants/interfaces";
@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
-const CommentList = (props: any) => {
+const RecipeCommentList = (props: any) => {
   const [datas, setDatas] = useState<commentDataProps[]>([]);
 
   const location = useLocation();
@@ -73,4 +73,4 @@ const CommentList = (props: any) => {
   );
 };
 
-export default CommentList;
+export default RecipeCommentList;

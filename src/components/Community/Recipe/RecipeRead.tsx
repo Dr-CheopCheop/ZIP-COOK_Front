@@ -1,21 +1,25 @@
 import Navbar from "../../Navbar/Navbar";
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./RecipeReadStyle";
-import CommentList from "../Comment/CommentList";
+// import CommentList from "../Comment/CommentList";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { url } from "../../../constants/serverURL";
+import tbk from "../../../img/tteokbbokki.jpg";
+import RecipeCommentList from "../Comment/RecipeCommentList";
+
+import Icons from "../../../Styles/Icons";
 
 const readData = {
-  title: "해물 떡볶이",
+  title: "치즈 해물 떡볶이",
   level: "상",
   time: "1시간 30분",
   serving: "2인분",
-  summary: "불맛이 가득한",
+  summary: "#불맛이 가득한",
   ingredients: [
     "고추장 3큰술",
     "떡 1봉지",
     "어묵 2장",
     "설탕 1큰술",
+    "모짜렐라 치즈",
     "다진마늘 2큰술",
     "진간장 3스푼",
     "파",
@@ -35,6 +39,7 @@ const readData = {
 const RecipeRead = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [commentViewToggle, setCommentViewToggle] = useState<boolean>(false);
 
   // const selectData = DummyData.find((data) => data.id === Number(id));
   // const { title, level, cookTime } = selectData ?? {
@@ -42,12 +47,12 @@ const RecipeRead = () => {
   // };
   const onDeleteHandler = () => {
     //삭제 로직 작성
-    navigate(`${url}/community/recipe`);
+    navigate(`/community/recipe`);
   };
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar />
       <S.ReadContainer>
         <S.TitleContainer>
           <S.TitleBox>
@@ -103,7 +108,65 @@ const RecipeRead = () => {
           </S.manualsListBox>
         </S.RecipeContentsContainer>
         <CommentList id={id} />
-      </S.ReadContainer>
+      </S.ReadContainer> */}
+      <Navbar />
+      <S.MealKitContainer>
+        <S.MainImg>
+          <img src={tbk} alt="main_img" />
+          <S.MainTitle>
+            <h1>{readData.title}</h1>
+            <p>{readData.summary}</p>
+          </S.MainTitle>
+          <S.Option>
+            <div>
+              {Icons.level}
+              <span>{readData.level}</span>
+            </div>
+            <div>
+              {Icons.spoon}
+              <span>{readData.serving}</span>
+            </div>
+            <div>
+              {Icons.clock}
+              <span>{readData.time}</span>
+            </div>
+          </S.Option>
+        </S.MainImg>
+        <S.explainBox>
+          <S.editButtonBox>
+            <Link
+              to="/community/recipe/write"
+              state={{ update: true, datas: readData, num: id }}
+            >
+              <button>수정</button>
+            </Link>
+            <button onClick={onDeleteHandler}>삭제</button>
+            <button onClick={() => setCommentViewToggle(!commentViewToggle)}>
+              {Icons.comment}
+              댓글
+            </button>
+          </S.editButtonBox>
+          <>
+            <p>재료</p>
+            <div>
+              {readData.ingredients.map((food, idx) => (
+                <React.Fragment key={food}>
+                  <span> {food}</span>
+                  {idx !== readData.ingredients.length - 1 && <span>,</span>}
+                </React.Fragment>
+              ))}
+            </div>
+          </>
+          <>
+            {readData.content.map((manual) => (
+              <React.Fragment key={manual}>
+                <h3> {manual}</h3>
+              </React.Fragment>
+            ))}
+          </>
+        </S.explainBox>
+      </S.MealKitContainer>
+      {commentViewToggle && <RecipeCommentList id={id} />}
     </>
   );
 };

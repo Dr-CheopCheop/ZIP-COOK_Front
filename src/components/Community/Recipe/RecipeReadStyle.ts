@@ -116,9 +116,92 @@ export const manualsListBox = styled.div`
 export const RecipeContentsContainer = styled.div`
   width: 1080px;
   text-align: center;
-
   margin: 0 auto;
   h1 {
     font-size: 40px;
+  }
+`;
+
+//새로운 디자인
+export const MealKitContainer = styled.div`
+  width: 1080px;
+  height: 700px;
+  margin: 20px auto 0;
+  display: flex;
+  border: 2px solid black;
+`;
+
+export const MainImg = styled.div`
+  width: 50%;
+  height: 100%;
+  position: relative;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const MainTitle = styled.div`
+  position: absolute;
+  top: 50px;
+  left: 20px;
+
+  color: white;
+  text-shadow: 2px 2px 2px #000;
+  h1 {
+    font-size: 50px;
+  }
+`;
+
+export const Option = styled.div`
+  position: absolute;
+  bottom: 50px;
+  left: 20px;
+  display: flex;
+  color: black;
+
+  div {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: black;
+    margin: 0 2px;
+    svg {
+      display: block;
+      font-size: 28px;
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -30%);
+      fill: white;
+    }
+    span {
+      position: absolute;
+      top: 80%;
+      left: 50%;
+      width: 100%;
+      text-align: center;
+      transform: translate(-50%, -80%);
+      font-size: 10px;
+      color: white;
+    }
+  }
+`;
+
+export const explainBox = styled.div`
+  width: 50%;
+  height: 100%;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const editButtonBox = styled.div`
+  button {
+    all: unset;
+    cursor: pointer;
   }
 `;

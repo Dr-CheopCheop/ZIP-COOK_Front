@@ -5,8 +5,11 @@ import { WiDirectionDown } from "react-icons/wi";
 import { CgSmartHomeRefrigerator } from "react-icons/cg";
 import { IoTrashOutline } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
-import { AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineCheck, AiOutlineComment } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
+import { TfiAlarmClock } from "react-icons/tfi";
+import { ImSpoonKnife } from "react-icons/im";
+import { MdOutlineMilitaryTech } from "react-icons/md";
 
 const Icons = {
   camera: <BsCamera />,
@@ -19,6 +22,10 @@ const Icons = {
   edit: <CiEdit />,
   check: <AiOutlineCheck />,
   cross: <RxCross1 />,
+  clock: <TfiAlarmClock />,
+  spoon: <ImSpoonKnife />,
+  level: <MdOutlineMilitaryTech />,
+  comment: <AiOutlineComment />,
 };
 
 export default Icons;

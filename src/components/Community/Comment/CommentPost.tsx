@@ -1,9 +1,8 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as S from "./CommentPostStyle";
-import { url } from "../../../constants/serverURL";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 interface CommentProps {
   content: string;
@@ -11,7 +10,10 @@ interface CommentProps {
 
 const CommentPost = (props: any) => {
   const { register, handleSubmit, reset } = useForm<CommentProps>({});
-  const { id } = useParams();
+
+  const location = useLocation();
+  const { id } = props;
+  const category = location.pathname.split("/")[2];
 
   const onSubmitHandler: SubmitHandler<CommentProps> = async (data) => {
     const postData = {
@@ -21,7 +23,7 @@ const CommentPost = (props: any) => {
     };
     try {
       const response = await axios({
-        url: `${url}/recipe-comment`,
+        url: `/${category}-comment`,
         method: "POST",
         data: postData,
         headers: { "Content-Type": "application/json" },
