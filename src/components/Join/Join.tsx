@@ -59,7 +59,7 @@ const SignupForm = () => {
     console.log(username);
     try {
       const CheckRes = await axios.get(
-        `/exist/username/${username}`
+        `/auth/exist/username/${username}`
       );
       if (CheckRes.data.duplicate === true) {
         throw new Error("이미 사용중인 아이디입니다.");

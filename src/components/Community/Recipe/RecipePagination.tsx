@@ -11,7 +11,7 @@ const RecipePagination = ({ postsPerPage, totalPosts, paginate }: any ) => {
             <nav>
                 <R.PageButtonWrap>
                     {pageNumbers.map((number) => (
-                        <R.PageButton onClick={() => paginate(number)}>
+                        <R.PageButton key={number} onClick={() => paginate(number)}>
                             {number}
                         </R.PageButton>
                     ))}

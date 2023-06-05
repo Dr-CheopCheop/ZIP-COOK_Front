@@ -8,9 +8,9 @@ const SharingPosts = ({ posts, loading }: any) => {
         <div>
           {posts.map((post: any) => (
             <M.PostSpan key={post.id}>
-              {post[post.id].image}{<br />}
-              {post[post.id].title}{<br />}
-              {post[post.id].date}
+              {post.image}{<br />}
+              {post.title}{<br />}
+              {post.date}
             </M.PostSpan>
           ))}
         </div>

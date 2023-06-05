@@ -4,7 +4,6 @@ import CommentItem from "./CommentItem";
 import type { commentDataProps } from "../../../constants/interfaces";
 import { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { url } from "../../../constants/serverURL";
 import axios from "axios";
 
 const CommentList = (props: any) => {
@@ -21,7 +20,7 @@ const CommentList = (props: any) => {
       try {
         const response = await axios({
           method: "GET",
-          url: `${url}/${category}-comment/${id}`,
+          url: `/${category}-comment/${id}`,
         });
         const responseData = await response.data;
         const loadedDatas: commentDataProps[] = [];

@@ -15,7 +15,7 @@ const FindPW = () => {
   const {register, handleSubmit, formState : {errors}} = useForm<FormValue>();
 
   const onSubmitHandler: SubmitHandler<FormValue> = (data) => {
-    axios.get(`http://localhost:8080/auth/findPassword/${data.username}`)
+    axios.get(`/auth/findPassword/${data.username}`)
     .then(response => {
       const password = response.data.password;
       setUserPw(password);
