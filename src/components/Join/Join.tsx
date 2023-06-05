@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import * as S from "./JoinStyle";
 import axios from "axios";
 import MapSelector from "../../utils/MapSelector";
@@ -29,40 +29,58 @@ const SignupForm = () => {
   const passwordRef = useRef<string | null>(null);
   passwordRef.current = watch("password");
   const [selectedLocation, setSelectedLocation] = useState("");
-  const [, setIdCheckResult] = useState("");
-  const [, setNicknameResult] = useState("");
-  const [, setEmailCheckResult] = useState("");
+  const [idCheckResult, setIdCheckResult] = useState("");
+  const [nicknameResult, setNicknameResult] = useState("");
+  const [emailCheckResult, setEmailCheckResult] = useState("");
   const handleMapSelection = (sido: string, sigugun: string, dong: string) => {
     const address = `${sido} ${sigugun} ${dong}`;
     setSelectedLocation(address);
     console.log(sido, sigugun, dong);
   };
 
-  const idCheckRes = async (data: SignupProps) => {
+  // const idCheckRes = async (data: SignupProps) => {
+  //   try {
+  //     const { username } = data;
+  //     const CheckRes = await axios.get(
+  //       `http://localhost/auth/exist/username/${username}`
+  //     );
+  //     if (CheckRes.data.exist === true) {
+  //       throw new Error("이미 사용중인 username입니다.");
+  //       console.log("사용가능한 아이디");
+  //       alert("사용가능한 아이디입니다.");
+  //       setIdCheckResult("사용가능한 username입니다");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const idCheckRes = async (username : string) => {
+    console.log(username);
     try {
-      const { username } = data;
       const CheckRes = await axios.get(
-        `http://localhost/auth/exist/username/${username}`
+        `/exist/username/${username}`
       );
-      if (CheckRes.data.exist === true) {
-        throw new Error("이미 사용중인 username입니다.");
-        console.log("사용가능한 아이디");
-        alert("사용가능한 아이디입니다.");
-        setIdCheckResult("사용가능한 username입니다");
+      if (CheckRes.data.duplicate === true) {
+        throw new Error("이미 사용중인 아이디입니다.");
       }
+      console.log("사용가능한 아이디");
+      alert("사용가능한 아이디입니다.");
+      setIdCheckResult("사용가능한 아이디입니다");
     } catch (error) {
       console.log(error);
     }
   };
 
-  const NicknameCheckRes = async (data: SignupProps) => {
+  
+  const NicknameCheckRes = async (nickname : string) => {
+    console.log(nickname);
     try {
-      const { nickname } = data;
       const CheckRes = await axios.get(
-        `http://localhost/auth/exist/nickname/${nickname}`
+        `/auth/exist/nickname/${nickname}`
       );
-      if (CheckRes.data.exist === true) {
-        throw new Error("이미 사용중인 username입니다.");
+      if (CheckRes.data.duplicate === true) {
+        throw new Error("이미 사용중인 닉네임입니다.");
       }
       console.log("사용가능한 아이디");
       alert("사용가능한 닉네임입니다.");
@@ -72,14 +90,13 @@ const SignupForm = () => {
     }
   };
 
-  const EmailCheckRes = async (data: SignupProps) => {
+  const EmailCheckRes = async (email : string) => {
     try {
-      const { email } = data;
       const CheckRes = await axios.get(
-        `http://localhost/auth/exist/email/${email}`
+        `/auth/exist/email/${email}`
       );
-      if (CheckRes.data.exist === true) {
-        throw new Error("이미 사용중인 username입니다.");
+      if (CheckRes.data.duplicate === true) {
+        throw new Error("이미 사용중인 이메일입니다.");
       }
       console.log("사용가능한 이메일입니다.");
       setEmailCheckResult("사용가능한 이메일입니다");
@@ -87,7 +104,7 @@ const SignupForm = () => {
       console.log(error);
     }
   };
-
+  
   const onSubmitHandler: SubmitHandler<SignupProps> = (data) => {
     console.log(data);
     const formData = {
@@ -99,7 +116,7 @@ const SignupForm = () => {
     };
 
     axios
-      .post("http://localhost:8080/auth/signup", formData, {
+      .post(`/auth/signup`, formData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -131,7 +148,7 @@ const SignupForm = () => {
             {...register("username", { required: true })}
           />
           <span>
-            <S.E_button type="button" onClick={() => idCheckRes}>
+            <S.E_button type="button" onClick={() => idCheckRes(watch("username"))}>
               중복체크
             </S.E_button>
           </span>
@@ -146,7 +163,7 @@ const SignupForm = () => {
             {...register("nickname", { required: true, maxLength: 4 })}
           />
           <span>
-            <S.E_button type="button" onClick={() => NicknameCheckRes}>
+            <S.E_button type="button" onClick={() => NicknameCheckRes(watch("nickname"))}>
               중복체크
             </S.E_button>
           </span>
@@ -173,7 +190,7 @@ const SignupForm = () => {
             })}
           />
           <span>
-            <S.E_button type="button" onClick={() => EmailCheckRes}>
+            <S.E_button type="button" onClick={() => EmailCheckRes(watch("email"))}>
               중복체크
             </S.E_button>
           </span>

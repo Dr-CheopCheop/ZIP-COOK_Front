@@ -45,7 +45,7 @@ const Loginpage = () => {
     //API
     try {
       const response = await axios.post(
-        "http://localhost:8080/auth/login",
+        "/auth/login",
         data,
         {
           headers: {
@@ -58,7 +58,7 @@ const Loginpage = () => {
       //token 저장
       localStorage.setItem("accessToken", jwtToken);
       axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
-      const userInfoRes = await axios.get("http://localhost:8080/auth/user");
+      const userInfoRes = await axios.get("/auth/user");
       const userInfo = userInfoRes.data;
 
       dispatch(SET_TOKEN(jwtToken));
