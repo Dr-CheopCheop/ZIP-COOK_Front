@@ -50,6 +50,7 @@ const SaleForm = () => {
 
   const onSubmitHandler: SubmitHandler<SaleProps> = async (data) => {
     const salepost = {
+      nickname: "로그인전 닉네임",
       price: data.price,
       place: data.place,
       discountPrice: data.discountPrice,
