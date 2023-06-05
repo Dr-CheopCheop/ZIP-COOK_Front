@@ -47,7 +47,6 @@ const RecipeForm = () => {
 
   const onSubmitHandler: SubmitHandler<RecipeProps> = async (data) => {
     const recipepost = {
-      uid: 1,
       nickname: "김모씨",
       title: data.title,
       serving: data.serving,
