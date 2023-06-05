@@ -22,7 +22,7 @@ const FindID = () => {
       const username = response.data.username;
       setUserId(username);
       setCheckId(true);
-      console.log('아이디 찾기 성공');
+      console.log(username);
     }).catch((error) => {
       console.log("아이디 찾기 실패", error);
 
