@@ -48,7 +48,7 @@ const MainPage = () => {
             setLoading(false);
         };
         fetchSharingData();
-    }, []);
+    },[]);
     console.log(sharingPosts);
 
     useEffect(() => {

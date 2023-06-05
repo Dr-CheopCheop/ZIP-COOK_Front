@@ -11,7 +11,7 @@ const SalePagination = ({ postsPerPage, totalPosts, paginate }: any ) => {
             <nav>
                 <S.PageButtonWrap>
                     {pageNumbers.map((number) => (
-                        <S.PageButton onClick={() => paginate(number)}>
+                        <S.PageButton key={number} onClick={() => paginate(number)}>
                             {number}
                         </S.PageButton>
                     ))}

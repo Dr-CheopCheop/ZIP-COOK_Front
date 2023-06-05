@@ -28,7 +28,7 @@ const ChatbotPage = () => {
     const getChatBotResponse = async () => {
       setLoading(true);
       await axios
-        .post(`${url}/chatbot/message`, {
+        .post(`/chatbot/message`, {
           question: userRequest,
         })
         .then((response) => {
