@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import * as S from "./CommentPostStyle";
 import { url } from "../../../constants/serverURL";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 interface CommentProps {
   content: string;
@@ -10,12 +11,12 @@ interface CommentProps {
 
 const CommentPost = (props: any) => {
   const { register, handleSubmit, reset } = useForm<CommentProps>({});
+  const { id } = useParams();
 
   const onSubmitHandler: SubmitHandler<CommentProps> = async (data) => {
     const postData = {
-      id: Math.random(),
-      writer: "Lee Ga yeong",
-      time: "10분전",
+      board_id: id,
+      nickname: "Lee Ga yeong",
       content: data.content,
     };
     try {

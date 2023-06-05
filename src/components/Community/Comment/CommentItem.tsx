@@ -6,7 +6,7 @@ import * as S from "./CommentItemStyle";
 const CommentItem = (props: any) => {
   const [editToggle, setEditToggle] = useState<boolean>();
   const [editComment, setEditComment] = useState<string>();
-  const { writer, time, content, id } = props.data;
+  const { nickname, content, id } = props.data;
 
   const onChangeCommentHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditComment(e.target.value);
@@ -29,10 +29,7 @@ const CommentItem = (props: any) => {
       <S.CommentContent>
         {!editToggle ? (
           <>
-            <div>
-              {writer}
-              <span>{time}</span>
-            </div>
+            <div>{nickname}</div>
             <div>{content}</div>
           </>
         ) : (
