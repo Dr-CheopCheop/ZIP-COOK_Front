@@ -15,7 +15,7 @@ const FindID = () => {
   const {register, handleSubmit, formState : {errors}} = useForm<FormValue>();
 
   const onSubmitHandler: SubmitHandler<FormValue> = (data) => {
-    axios.get(`http://localhost:8080/auth/findId/${data.email}`)
+    axios.get(`/auth/findId/${data.email}`)
     .then(response => {
       const username = response.data.username;
       setUserId(username);
