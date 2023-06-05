@@ -10,7 +10,6 @@ import FormRequirements from "../../../constants/FormRequriements";
 import type { SaleProps } from "../../../constants/interfaces";
 import { defaultDiscountValue } from "../../../constants/defaultFormOption";
 // import Loading from "../../Loading/PageLoading";
-import { url } from "../../../constants/serverURL";
 import axios from "axios";
 
 const SaleForm = () => {
@@ -52,12 +51,15 @@ const SaleForm = () => {
   const onSubmitHandler: SubmitHandler<SaleProps> = async (data) => {
     const formData = new FormData();
     formData.append("file", data.img[0]);
-    formData.append("price", data.price);
-    formData.append("place", data.place);
-    formData.append("discountPrice", data.discountPrice);
-    formData.append("title", data.title);
 
-    formData.append("location", sido);
+    const salepost = {
+      price: data.price,
+      place: data.place,
+      discountPrice: data.discountPrice,
+      title: data.title,
+      location: sido,
+    };
+    formData.append("salepost", JSON.stringify(salepost));
     // formdata 콘솔확인용 추후 삭제 & tsconfig 수정
     for (let key of formData.values()) {
       console.log(key);
@@ -65,8 +67,8 @@ const SaleForm = () => {
     try {
       const response = await axios({
         url: location.state
-          ? `${url}/board-recipe/${location.state.num}`
-          : `${url}/board-recipe`,
+          ? `/board-sale/${location.state.num}`
+          : `/board-sale`,
         method: location.state ? "PUT" : "POST",
         headers: { "Content-Type": "multipart/form-data" },
         data: formData,

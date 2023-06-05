@@ -47,19 +47,21 @@ const ShareForm = () => {
   const onSubmitHandler: SubmitHandler<ShareProps> = async (data) => {
     const formData = new FormData();
     formData.append("file", data.img[0]);
-    formData.append("title", data.title);
-    formData.append("content", data.content);
-    formData.append("location", sido);
-    // formdata 콘솔확인용 추후 삭제 & tsconfig 수정
-    for (let key of formData.values()) {
-      console.log(key);
-    }
+
+    const sharepost = {
+      uid: 1,
+      nickname: "김모씨",
+      title: data.title,
+      content: data.content,
+      location: sido,
+    };
+    formData.append("sharepost", JSON.stringify(sharepost));
 
     try {
       const response = await axios({
         url: location.state
-          ? `/board-recipe/${location.state.num}`
-          : `/board-recipe`,
+          ? `/board-share/${location.state.num}`
+          : `/board-share`,
         method: location.state ? "PUT" : "POST",
         headers: { "Content-Type": "multipart/form-data" },
         data: formData,
