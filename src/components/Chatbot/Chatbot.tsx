@@ -11,7 +11,7 @@ const ChatbotPage = () => {
     const [monthFoods, setMonthFoods] = useState([]);
     const [chatbotResponse, setChatbotResponse] = useState("");
     const [userRequest, setUserRequest] = useState("");
-    let monthArray: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    let monthArray: string[] = ['january', 'feburary', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
     let now = new Date();
     let tempMonth = now.getMonth();
     // setMonth(monthArray[tempMonth]);
@@ -39,7 +39,7 @@ const ChatbotPage = () => {
   useEffect(() => {
     const fetchFoodData = async () => {
       setLoading(true);
-      const response = await axios.get(`/monthFood/${month}`);
+      const response = await axios.get(`/chatbot/${month}`);
       setMonthFoods(response.data);
       setLoading(false);
     };
@@ -63,7 +63,7 @@ const ChatbotPage = () => {
             question: userRequest,
           });
           console.log(response.data);
-          setChatbotResponse(response.data.choices.text);
+          setChatbotResponse(response.data.choices[0].text);
         } catch (error) {
           console.error(error);
         } finally {

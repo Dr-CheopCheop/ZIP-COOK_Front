@@ -11,6 +11,14 @@ const RecipeMain = () => {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(15);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const getValue = (e: React.FormEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = e;
+    setSearchQuery(value.toLowerCase());
+  }
 
   useEffect(() => {
     const fetchRecipeData = async () => {
@@ -25,11 +33,23 @@ const RecipeMain = () => {
 
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
+  // const currentPosts = (posts: any) => {
+  //   let currentPosts = 0;
+  //   currentPosts = posts.slice(indexOfFirst, indexOfLast);
+  //   return currentPosts;
+  // };
   const currentPosts = (posts: any) => {
-    let currentPosts = 0;
-    currentPosts = posts.slice(indexOfFirst, indexOfLast);
-    return currentPosts;
+    let filteredPosts = posts.filter((post: any) =>
+      post.title.toLowerCase().includes(searchQuery)
+    );
+    filteredPosts = filteredPosts.slice(indexOfFirst, indexOfLast);
+    return filteredPosts;
+  }
+
+  const searchPosts = () => {
+    setCurrentPage(1);
   };
+
   return (
     // <>
     //   <GetPostList category="recipe" />
@@ -38,7 +58,10 @@ const RecipeMain = () => {
     <R.Container>
       <R.FirstDiv>
         <R.FirstDivText>RECIPE</R.FirstDivText>
-        <R.SearchInput></R.SearchInput>
+        <R.SearchForm>
+          <R.SearchInput onChange={getValue} />
+          <R.SearchButton type="submit" onClick={searchPosts}>검색</R.SearchButton>
+        </R.SearchForm>
         <R.WriteButton to="/community/recipe/write">글쓰기</R.WriteButton>
       </R.FirstDiv>
       <R.SecondDiv>

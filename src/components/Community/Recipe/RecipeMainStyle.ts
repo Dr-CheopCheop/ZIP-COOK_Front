@@ -23,9 +23,26 @@ export const FirstDivText = styled.div`
     margin-left: 7%;
 `;
 
+export const SearchForm = styled.form`
+    display: flex;
+    width: 70%;
+    margin-left: 40%;
+`;
+
 export const SearchInput = styled.input`
-    width: 10%;
-    margin-left: 60%;
+    width: 50%;
+    /* margin-left: 60%; */
+`;
+
+export const SearchButton = styled.button`
+    --webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    width: 10px;
+    height: 20px;
+    margin-left: 2%;
 `;
 
 export const WriteButton = styled(Link)`
