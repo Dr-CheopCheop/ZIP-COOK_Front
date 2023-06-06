@@ -5,18 +5,20 @@ import axios from "axios";
 import SalePosts from "./SalePosts";
 import SalePagination from "./SalePagination";
 import * as S from "./SaleMainStyle";
-import { url } from "../../../constants/serverURL";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/rootReducer";
 
 const SaleMain = () => {
   const [salePosts, setSalePosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(15);
+  const { sido } = useSelector((state: RootState) => state.address);
 
   useEffect(() => {
     const fetchSaleData = async () => {
       setLoading(true);
-      const response = await axios.get(`/board-sale?page=1`);
+      const response = await axios.get(`/board-sale?location=${sido}&page=${currentPage}`);
       setSalePosts(response.data);
       setLoading(false);
     };

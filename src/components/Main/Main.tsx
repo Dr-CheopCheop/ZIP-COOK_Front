@@ -22,7 +22,7 @@ const MainPage = () => {
         const fetchRecipeData = async () => {
             setLoading(true);
             const response = await axios.get(
-                `/board-recipe/main?page=1`
+                `/board-recipe/main?page=${currentPage}`
             );
             setRecipePosts(response.data);
             setLoading(false);
@@ -35,7 +35,7 @@ const MainPage = () => {
         const fetchSharingData = async () => {
             setLoading(true);
             const response = await axios.get(
-                `/board-share/main?page=1`
+                `/board-share/main?page=${currentPage}`
             );
             setSharingPosts(response.data);
             console.log(response);
@@ -49,7 +49,7 @@ const MainPage = () => {
         const fetchSaleData = async () => {
             setLoading(true);
             const response = await axios.get(
-                `/board-sale/main?page=1`
+                `/board-sale/main?page=${currentPage}`
             );
             setSalePosts(response.data);
             console.log(response);
@@ -85,7 +85,7 @@ const MainPage = () => {
                 <M.AllButton to="/main">All</M.AllButton>
                 <M.RecipeButton to="/community/recipe">RECIPE</M.RecipeButton>
                 <M.SharingButton to="/community/share">SHARING INREDIENTS</M.SharingButton>
-                <M.DiscountButton to="/community/discount">DISCOUNT</M.DiscountButton>
+                <M.DiscountButton to="/community/sale">DISCOUNT</M.DiscountButton>
             </M.SecondDiv>
             <M.ThirdDiv>
                 <M.RecipeText>RECIPE</M.RecipeText>
