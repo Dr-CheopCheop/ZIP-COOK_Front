@@ -22,7 +22,7 @@ const MainPage = () => {
         const fetchRecipeData = async () => {
             setLoading(true);
             const response = await axios.get(
-                `/board-recipe?page=1`
+                `/board-recipe/main?page=1`
             );
             setRecipePosts(response.data);
             setLoading(false);
