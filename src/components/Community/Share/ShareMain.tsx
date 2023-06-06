@@ -5,18 +5,20 @@ import SharePosts from "./SharePosts";
 import SharePagination from "./SharePagination";
 import * as S from "./ShareMainStyle";
 import GetPostList from "../Post/GetPostList";
-import { url } from "../../../constants/serverURL";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/rootReducer";
 
 const ShareMain = () => {
   const [sharePosts, setSharePosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(15);
+  const { sido } = useSelector((state: RootState) => state.address);
 
   useEffect(() => {
     const fetchShareData = async () => {
       setLoading(true);
-      const response = await axios.get(`${url}/board-share?page=1`);
+      const response = await axios.get(`/board-share?location=${sido}&page=${currentPage}`);
       setSharePosts(response.data);
       setLoading(false);
     };
