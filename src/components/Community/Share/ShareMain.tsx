@@ -13,7 +13,15 @@ const ShareMain = () => {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(15);
+  const [searchQuery, setSearchQuery] = useState("");
   const { sido } = useSelector((state: RootState) => state.address);
+
+  const getValue = (e: React.FormEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = e;
+    setSearchQuery(value.toLowerCase());
+  }
 
   useEffect(() => {
     const fetchShareData = async () => {
@@ -29,10 +37,16 @@ const ShareMain = () => {
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
   const currentPosts = (posts: any) => {
-    let currentPosts = 0;
-    currentPosts = posts.slice(indexOfFirst, indexOfLast);
-    return currentPosts;
+    let filteredPosts = posts.filter((post: any) =>
+      post.title.toLowerCase().includes(searchQuery)
+    );
+    filteredPosts = filteredPosts.slice(indexOfFirst, indexOfLast);
+    return filteredPosts;
   };
+
+  const searchPosts = () => {
+    setCurrentPage(1);
+  }
 
   return (
     // <div>
@@ -42,7 +56,10 @@ const ShareMain = () => {
     <S.Container>
       <S.FirstDiv>
         <S.FirstDivText>SHARING</S.FirstDivText>
-        <S.SearchInput></S.SearchInput>
+        <S.SearchForm>
+          <S.SearchInput onChange={getValue} />
+          <S.SearchButton type="submit" onClick={searchPosts}>검색</S.SearchButton>
+        </S.SearchForm>
         <S.WriteButton to="/community/share/write">글쓰기</S.WriteButton>
       </S.FirstDiv>
       <S.SecondDiv>
