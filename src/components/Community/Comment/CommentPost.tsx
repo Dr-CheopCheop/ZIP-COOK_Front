@@ -22,7 +22,6 @@ const CommentPost = (props: any) => {
       content: data.content,
     };
 
-    console.log("댓글확인", id);
     try {
       const response = await axios({
         url: `/${category}-comment`,
