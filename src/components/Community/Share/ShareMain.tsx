@@ -16,7 +16,7 @@ const ShareMain = () => {
   useEffect(() => {
     const fetchShareData = async () => {
       setLoading(true);
-      const response = await axios.get(`${url}/board-share?page=1`);
+      const response = await axios.get(`/board-share?page=1`);
       setSharePosts(response.data);
       setLoading(false);
     };

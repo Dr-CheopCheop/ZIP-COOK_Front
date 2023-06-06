@@ -51,10 +51,10 @@ const RecipeForm = () => {
       title: data.title,
       serving: data.serving,
       level: data.level,
-      time: data.time,
-      summary: data.summary,
-      ingredients: data.ingredients,
+      // ingredients: data.ingredients,
+      // summary: data.summary,
       content: data.content,
+      time: data.time,
     };
 
     const formData = new FormData();
@@ -67,9 +67,6 @@ const RecipeForm = () => {
     for (let key of formData.values()) {
       console.log(key);
     }
-
-    console.log(recipepost);
-    console.log(JSON.stringify(recipepost));
 
     try {
       const response = await axios({
