@@ -118,7 +118,14 @@ const ChatbotPage = () => {
                   {userRequest}
                 </C.UserRequestText>
                 <C.ChatbotResponseText>
-                {chatbotResponse}
+                {chatbotResponse.split('<br>').map((line) => {
+                  return (
+                    <>
+                      {line}
+                      <br />
+                    </>
+                  );
+                })}
                 </C.ChatbotResponseText>
                 <C.ChatbotForm onSubmit={onSubmit}>
                     <C.UserInput
