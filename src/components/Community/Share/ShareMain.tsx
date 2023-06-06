@@ -1,13 +1,11 @@
-import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SharePosts from "./SharePosts";
 import SharePagination from "./SharePagination";
 import * as S from "./ShareMainStyle";
-import GetPostList from "../Post/GetPostList";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducer/rootReducer";
-
+import Icons from "../../../Styles/Icons";
 const ShareMain = () => {
   const [sharePosts, setSharePosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -18,7 +16,9 @@ const ShareMain = () => {
   useEffect(() => {
     const fetchShareData = async () => {
       setLoading(true);
-      const response = await axios.get(`/board-share?location=${sido}&page=${currentPage}`);
+      const response = await axios.get(
+        `/board-share?location=${sido}&page=${currentPage}`
+      );
       setSharePosts(response.data);
       setLoading(false);
     };
@@ -35,16 +35,18 @@ const ShareMain = () => {
   };
 
   return (
-    // <div>
-    //   <GetPostList category="share" />
-    //   <Link to="/community/share/write">작성</Link>
-    // </div>
     <S.Container>
-      <S.FirstDiv>
-        <S.FirstDivText>SHARING</S.FirstDivText>
-        <S.SearchInput></S.SearchInput>
-        <S.WriteButton to="/community/share/write">글쓰기</S.WriteButton>
-      </S.FirstDiv>
+      <S.CommunityListHeader>
+        <span>SHARING</span>
+        <div>
+          <S.InputBox>
+            <input type="text" value="zz" />
+            {Icons.search}
+          </S.InputBox>
+          <S.WriteButton to="/community/share/write">글쓰기</S.WriteButton>
+        </div>
+      </S.CommunityListHeader>
+
       <S.SecondDiv>
         <SharePosts posts={currentPosts(sharePosts)} loading={loading} />
         <SharePagination
