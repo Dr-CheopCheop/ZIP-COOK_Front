@@ -13,11 +13,12 @@ export const Container = styled.div`
 
 export const FirstDiv = styled.div`
     display: flex;
-    width: 50%;
+    width: 40%;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     background-color: white;
+    margin: 0%;
 `;
 
 export const WeatherBox = styled.div`
@@ -34,11 +35,12 @@ export const WeatherBox = styled.div`
     text-align: left;
 `;
 
-export const WeatherIcon = styled.div`
+export const WeatherIcon = styled.img`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5%;
+    width: 100px;
+    height: 100px;
 `;
 
 export const DateBox = styled.div`
@@ -46,7 +48,7 @@ export const DateBox = styled.div`
     justify-content: center;
     align-items: center;
     margin: 5%;
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: left;
 `;
 
@@ -65,64 +67,59 @@ export const FoodBox = styled.div`
 
 export const FoodText1 = styled.div`
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: #006B2B;
-    margin: 5%;
+    margin-top: 5%;
 `;
 
-export const FoodText2 = styled.div`
+export const MonthFoodBox = styled.ul`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     font-size: 1rem;
     margin: 5%;
 `;
 
-export const SecondDiv = styled.div`
-    /* display: flex;
-    width: 50%;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    background-color: #C5DEC6;
-    border-radius: 20px 20px 20px 20px;
-    padding: 1%; */
+export const MonthFoodList = styled.li`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1rem;
+    /* margin: 2%; */
+`;
+
+export const ChatbotDiv = styled.div`
     display: flex;
     flex-direction: column;
-    /* justify-content: flex-start; */
-    /* position: relative; */
-    width: 50%;
+    align-items: center;
+    width: 60%;
+    height: 70vh;
     background-color: #C5DEC6;
     border-radius: 15px;
     padding: 1%;
+    margin: 5%;
+    position: relative;
 `;
 
 export const UserRequestText = styled.div`
     display: flex;
     flex-direction: row-reverse;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     text-align: right;
-    width: 80%;
-    /* position: absolute; */
+    width: 90%;
     font-size: 1rem;
     background-color: white;
     border-radius: 15px;
-    padding: 1.2%;
+    /* padding: 1.2%; */
     margin: 1%;
-    /* overflow: hidden; */
-    /* left: 100px; */
 `;
 
 export const ChatbotResponseText = styled.div`
-    /* display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    text-align: left;
-    font-size: 1rem;
-    background-color: #FEFFC7;
-    border-radius: 15px;
-    padding: 1.2%;
-    margin: 1%; */
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -130,16 +127,30 @@ export const ChatbotResponseText = styled.div`
     font-size: 1rem;
     background-color: #FEFFC7;
     border-radius: 15px;
-    padding: 1.2%;
+    /* padding: 1.2%; */
     margin: 1%;
-    /* overflow: hidden; */
-    width: 80%;
+    width: 90%;
 `;
 
 export const UserInput = styled.input`
-    width: 100%;
+    width: 650px;
+    height: 30px;
 `;
 
-export const ChatbotForm = styled.form``;
+export const ChatbotForm = styled.form`
+    display: flex;
+    position: absolute;
+    top: 100%;
+    transform: translateY(-200%);
+`;
 
-export const SubmitButton = styled.button``;
+export const SubmitButton = styled.button`
+    --webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    width: 10px;
+    height: 20px;
+    margin-left: 2%;
+`;

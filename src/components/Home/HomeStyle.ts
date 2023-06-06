@@ -1,52 +1,54 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import HomeImg1 from '../../img/HomeImg1.jpeg';
 
-export const Container = styled.div<{ ref: any }>`
+export const Container = styled.div`
   width: 100%;
   text-align: center;
 `;
+
 export const FirstDiv = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  position: relative;
+  padding: 7% 15% 7% 15%;
+  ::after {
+    width: 100%;
+    height: 100%;
+    content: "";
+    background-image: url(${HomeImg1});
+    opacity: 0.4;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
 `;
 
 export const FirstBox1 = styled.div`
-  width: 45%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  font-weight: bold;
-  font-size: 4rem;
-  text-align: center;
-  padding-top: 5%;
-  align-items: center;
+  font-weight: bolder;
+  font-size: 5rem;
+  text-align: left;
+  align-items: flex-start;
   justify-content: center;
 `;
 
 export const FirstBox2 = styled.div`
-  width: 55%;
-  top: 20%;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  padding: 10%;
-  padding-top: 15%;
-`;
-
-export const RightText1 = styled.div`
-  display: flex;
-  margin: 3%;
-  font-size: 3rem;
-  font-weight: bold;
-`;
-
-export const RightText2 = styled.div`
-  display: flex;
-  margin: 3%;
-  font-size: small;
+  font-size: 1.5rem;
+  font-weight: normal;
+  text-align: left;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 5%;
 `;
 
 export const ButtonWrap = styled.div`
@@ -54,12 +56,16 @@ export const ButtonWrap = styled.div`
   height: 100%;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 5%;
+  font-weight: bold;
 `;
 
-export const RecipeButton = styled(Link)`
-  /* width: 30%; */
+export const ChatbotButton = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
@@ -69,13 +75,15 @@ export const RecipeButton = styled(Link)`
   border: none;
   text-align: center;
   border-radius: 20px 20px 20px 20px;
-  margin: 3%;
-  padding: 4%;
+  width: 200px;
+  height: 50px;
   box-shadow: 3px 3px 5px gray;
 `;
 
 export const MainButton = styled(Link)`
-  /* width: 40%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
@@ -85,21 +93,20 @@ export const MainButton = styled(Link)`
   border: none;
   text-align: center;
   border-radius: 20px 20px 20px 20px;
-  margin: 3%;
-  padding: 4%;
+  margin-right: 3%;
+  width: 200px;
+  height: 50px;
   box-shadow: 3px 3px 5px gray;
   white-space: nowrap;
 `;
 
 export const SecondDiv = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   background-color: #cde990;
   width: 100%;
   height: 100vh;
-  padding: 6%;
-  padding-left: 20%;
-  padding-right: 20%;
+  padding: 7% 15% 7% 15%;
 `;
 
 export const SecondBox1 = styled.div`
@@ -114,10 +121,10 @@ export const SecondText1 = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
-  align-items: left;
-  justify-content: left;
-  font-size: 2.5rem;
-  font-weight: bold;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 5rem;
+  font-weight: bolder;
   line-height: 130%;
 `;
 
@@ -127,200 +134,143 @@ export const SecondText2 = styled.div`
   text-align: left;
   align-items: left;
   justify-content: left;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  margin-top: 3%;
+  margin-bottom: 7%;
 `;
 
 export const SecondBox2 = styled.div`
   display: flex;
-  flex-direction: row;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin: 0%;
+  padding: 0%;
 `;
 
-export const SecondText3 = styled.div`
+export const ChatbotImg = styled.img`
   display: flex;
-  flex-direction: row;
-  text-align: left;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  background-color: white;
-  border-radius: 20px 20px 20px 20px;
-  padding: 1%;
-`;
-
-export const SecondBox3 = styled.div`
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const SecondText4 = styled.div`
-  display: flex;
-  flex-direction: row;
-  text-align: left;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  background-color: white;
-  border-radius: 20px 20px 20px 20px;
-  padding: 1%;
-`;
-
-export const img1 = styled.img`
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
-  margin: 4%;
-  box-shadow: 50px 50px #cceecc;
-`;
-
-export const img2 = styled.img`
-  display: flex;
-  width: 8%;
-  height: 40%;
-  margin: 4%;
-`;
-
-export const img3 = styled.img`
-  display: flex;
-  width: 8%;
-  height: 40%;
-  margin: 4%;
+  width: 500px;
+  height: 450px;
+  margin: auto 0 0 auto;
 `;
 
 export const RecipeDiv = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   background-color: white;
-  padding-left: 20%;
-  padding-right: 20%;
+  padding: 7% 15% 7% 15%;
+  padding-right: 1%;
 `;
+
+export const RecipeBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+`;
+
 export const RecipeText1 = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
   align-items: flex-start;
   justify-content: flex-start;
-  font-size: 2.5rem;
+  font-size: 5rem;
   font-weight: bolder;
   line-height: 130%;
-  padding-top: 6%;
 `;
 
-export const RecipeBox = styled.div`
+export const RecipeText2 = styled.div`
   display: flex;
-  flex-direction: row;
-  text-align: center;
-  align-items: center;
+  flex-direction: column;
+  text-align: left;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 1.5rem;
+  margin-top: 3%;
+  margin-bottom: 7%;
+`;
+
+export const RecipeButton = styled(Link)`
+  display: flex;
   justify-content: center;
-  margin-top: 5%;
-`;
-
-export const RecipeImg = styled.img`
-  display: flex;
-  width: 50%;
-  height: 100%;
-  margin: 4%;
-  border: 1px solid black;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  background-color: #b8c27a;
+  border: none;
+  text-align: center;
+  border-radius: 20px 20px 20px 20px;
+  width: 200px;
+  height: 50px;
+  box-shadow: 3px 3px 5px gray;
 `;
 
 export const RecipeBox2 = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-end;
   margin-left: 10%;
 `;
 
-export const RecipeText2 = styled.div`
+export const RecipeImg = styled.img`
   display: flex;
-  font-size: 1rem;
-  line-height: 240%;
-  text-align: left;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const RecipeButton2 = styled(Link)`
-  width: 60%;
-  font-size: 1rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
-  background-color: #cde990;
-  border: none;
-  text-align: center;
-  border-radius: 20px 20px 20px 20px;
-  margin: 3%;
-  padding: 4%;
-  box-shadow: 3px 3px 5px gray;
+  width: 500px;
+  height: 300px;
+  margin: auto 0 0 auto;
 `;
 
 export const SharingDiv = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   background-color: #cde990;
-  padding-left: 20%;
-  padding-right: 20%;
+  padding: 7% 10% 7% 10%;
+  padding-right: 3%;
 `;
+
+export const SharingBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+`;
+
 export const SharingText1 = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
   align-items: flex-start;
   justify-content: flex-start;
-  font-size: 2.5rem;
+  font-size: 5rem;
   font-weight: bolder;
   line-height: 130%;
-  padding-top: 6%;
-`;
-
-export const SharingBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  margin-top: 5%;
-`;
-
-export const SharingImg = styled.img`
-  display: flex;
-  width: 50%;
-  height: 100%;
-  margin: 4%;
-  border: 1px solid black;
-`;
-
-export const SharingBox2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-left: 10%;
 `;
 
 export const SharingText2 = styled.div`
   display: flex;
-  font-size: 1rem;
-  line-height: 240%;
+  flex-direction: column;
   text-align: left;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 1.5rem;
+  margin-top: 3%;
+  margin-bottom: 7%;
 `;
 
 export const SharingButton = styled(Link)`
-  width: 70%;
-  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
   color: black;
@@ -329,9 +279,24 @@ export const SharingButton = styled(Link)`
   border: none;
   text-align: center;
   border-radius: 20px 20px 20px 20px;
-  margin: 3%;
-  padding: 4%;
+  width: 200px;
+  height: 50px;
   box-shadow: 3px 3px 5px gray;
+`;
+
+export const SharingBox2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-left: 10%;
+`;
+
+export const SharingImg = styled.img`
+  display: flex;
+  width: 500px;
+  height: 300px;
+  margin-right: 2%;
 `;
 
 export const SaleDiv = styled.div`
@@ -340,67 +305,75 @@ export const SaleDiv = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
-  padding-left: 20%;
-  padding-right: 20%;
+  padding: 7% 15% 7% 15%;
+  padding-right: 1%;
 `;
+
+export const SaleBox1 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+`;
+
 export const SaleText1 = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
   align-items: flex-start;
   justify-content: flex-start;
-  font-size: 2.5rem;
+  font-size: 4rem;
   font-weight: bolder;
   line-height: 130%;
-  padding-top: 6%;
-`;
-
-export const SaleBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  margin-top: 5%;
-`;
-
-export const SaleImg = styled.img`
-  display: flex;
-  width: 50%;
-  height: 100%;
-  margin: 4%;
-  border: 1px solid black;
 `;
 
 export const SaleBox2 = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  margin-left: 10%;
+  justify-content: flex-start;
+  /* margin-left: 10%; */
+`;
+
+export const SaleTextBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 `;
 
 export const SaleText2 = styled.div`
   display: flex;
-  font-size: 1rem;
-  line-height: 240%;
+  flex-direction: column;
   text-align: left;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 1.5rem;
+  margin-top: 3%;
+  margin-bottom: 7%;
 `;
 
 export const SaleButton = styled(Link)`
-  width: 60%;
-  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
   color: black;
   cursor: pointer;
-  background-color: #cde990;
+  background-color: #b8c27a;
   border: none;
   text-align: center;
   border-radius: 20px 20px 20px 20px;
-  margin: 3%;
-  padding: 4%;
+  width: 200px;
+  height: 50px;
   box-shadow: 3px 3px 5px gray;
+`;
+
+export const SaleImg = styled.img`
+  display: flex;
+  margin-left: 25%;
+  width: 500px;
+  height: 300px;
 `;
