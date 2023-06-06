@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 
 
 const RecipePosts = ({ posts, loading }: any) => {
-    return (
-      <>
-        {loading && <div> loading... </div>}
-        <div>
+  return (
+    <>
+      {loading && <div> loading... </div>}
+      <div>
+        <Link to="/community/recipe/">
           {posts.map((post: any) => (
             <Link to="/community/recipe/1" key={post.id}>
             <M.PostSpan>
@@ -17,9 +18,10 @@ const RecipePosts = ({ posts, loading }: any) => {
             </M.PostSpan>
             </Link>
           ))}
-        </div>
-      </>
-    );
-  };
+        </Link>
+      </div>
+    </>
+  );
+};
 
-  export default RecipePosts;
+export default RecipePosts;

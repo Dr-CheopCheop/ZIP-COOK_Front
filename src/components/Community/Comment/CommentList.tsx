@@ -29,7 +29,6 @@ const CommentList = (props: any) => {
             content: responseData[key].content,
           });
         }
-
         setDatas(loadedDatas);
       } catch (error) {
         console.error(error);
@@ -42,17 +41,31 @@ const CommentList = (props: any) => {
     setDatas([...datas, content]);
   };
 
-  const onDeleteCommentHandler = (id: any) => {
+  const onDeleteCommentHandler = async (id: any) => {
     const filteredDatas = datas.filter((data) => data.id !== id);
     setDatas(filteredDatas);
+    const response = await axios({
+      method: "DELETE",
+      url: `/${category}-comment/delete/${id}`,
+    });
+    const responseData = response.data();
+    console.log(responseData);
   };
 
-  const onEditCommentHandler = (id: any, editComment: string) => {
+  const onEditCommentHandler = async (id: any, editComment: string) => {
     setDatas(
       datas.map((data) =>
         data.id === id ? { ...data, content: editComment } : data
       )
     );
+
+    const response = await axios({
+      method: "POST",
+      url: `/${category}-comment/update/${id}`,
+      data: { content: editComment },
+    });
+    const responseData = response.data();
+    console.log(responseData);
   };
 
   return (

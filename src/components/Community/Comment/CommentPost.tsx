@@ -22,6 +22,7 @@ const CommentPost = (props:any) => {
       nickname: "Lee Ga yeong",
       content: data.content,
     };
+
     try {
       const response = await axios({
         url: `/${category}-comment`,
