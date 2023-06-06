@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as C from './ChatbotStyle';
 import axios from 'axios';
 import Clock from 'react-live-clock';
 
-const ChatbotPage = () => {
+const ChatbotPage = React.memo(() => {
     const [loading, setLoading] = useState(false);
     const [weatherData, setWeatherData] = useState({
       icon: '',
@@ -115,5 +115,6 @@ const ChatbotPage = () => {
             </C.ChatbotDiv>
         </C.Container>
     )
-}
+})
+
 export default ChatbotPage;
