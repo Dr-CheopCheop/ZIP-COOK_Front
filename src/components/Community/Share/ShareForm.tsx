@@ -9,8 +9,10 @@ import ErrorMessage from "../../Error/ErrorMessage";
 import FormRequirements from "../../../constants/FormRequriements";
 import type { ShareProps } from "../../../constants/interfaces";
 import { defaultShareValue } from "../../../constants/defaultFormOption";
-import Loading from "../../Loading/PageLoading";
 import axios from "axios";
+
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/rootReducer";
 
 const { titleRequirements, imageRequirements, shareContentRequirements } =
   FormRequirements;
@@ -21,7 +23,8 @@ const ShareForm = () => {
   const location = useLocation();
   const [imagePreview, setImagePreview] = useState<string>("");
   //유저정보에서 위치정보 가져올예정
-  const sido = "seoul";
+  // const sido = "seoul";
+  const { sido } = useSelector((state: RootState) => state.address);
 
   if (location.state) {
     defaultValue = location.state.datas;

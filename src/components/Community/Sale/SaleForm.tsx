@@ -9,7 +9,11 @@ import ErrorMessage from "../../Error/ErrorMessage";
 import FormRequirements from "../../../constants/FormRequriements";
 import type { SaleProps } from "../../../constants/interfaces";
 import { defaultDiscountValue } from "../../../constants/defaultFormOption";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/rootReducer";
+
 // import Loading from "../../Loading/PageLoading";
+
 import axios from "axios";
 
 const SaleForm = () => {
@@ -17,7 +21,12 @@ const SaleForm = () => {
   const location = useLocation();
   const [imagePreview, setImagePreview] = useState<string>("");
   //유저정보에서 위치정보 가져올예정
-  const sido = "seoul";
+  // const sido = "seoul";
+
+  //추후수정 닉네임추가
+  const { sido } = useSelector((state: RootState) => state.address);
+
+  console.log(sido);
 
   const {
     titleRequirements,
@@ -50,7 +59,7 @@ const SaleForm = () => {
 
   const onSubmitHandler: SubmitHandler<SaleProps> = async (data) => {
     const salepost = {
-      nickname: "로그인전 닉네임",
+      nickname: "닉네임생기면나중에바꾸자",
       price: data.price,
       place: data.place,
       discountPrice: data.discountPrice,

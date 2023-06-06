@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Colors from "../../../Styles/Colors";
+import { Link } from "react-router-dom";
 
 export const ReadContainer = styled.section`
   width: 1080px;
@@ -128,7 +129,7 @@ export const MealKitContainer = styled.div`
   height: 700px;
   margin: 20px auto 0;
   display: flex;
-  border: 2px solid black;
+  border: 2px solid ${Colors.postBackgroundBorder};
 `;
 
 export const MainImg = styled.div`
@@ -166,7 +167,7 @@ export const Option = styled.div`
     position: relative;
     border: 1px solid white;
     border-radius: 50%;
-    background-color: black;
+    background-color: ${Colors.postBackground};
     margin: 0 2px;
     svg {
       display: block;
@@ -193,6 +194,8 @@ export const Option = styled.div`
 export const explainBox = styled.div`
   width: 50%;
   height: 100%;
+  background-color: ${Colors.postBackground};
+  color: white;
   img {
     width: 100%;
     height: 100%;
@@ -200,8 +203,60 @@ export const explainBox = styled.div`
 `;
 
 export const editButtonBox = styled.div`
+  text-align: right;
+  margin: 5px 10px 5px 5px;
   button {
     all: unset;
     cursor: pointer;
+    margin: 0 2px;
+    font-size: 13px;
+    width: 50px;
+    height: 30px;
+    border: 2px solid ${Colors.loginButton};
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+
+    color: ${Colors.loginButton};
   }
+  button:hover {
+    font-size: 15px;
+  }
+`;
+
+export const IngredientBox = styled.div`
+  p {
+    font-size: 28px;
+    text-align: center;
+    font-weight: 700;
+  }
+  div {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    align-items: center; /* Add this line to center align the items vertically */
+    justify-content: center; /* Add this line to center align the items horizontally */
+
+    span {
+      flex-basis: 33.33%;
+      font-size: 13px;
+    }
+  }
+`;
+
+export const contentBox = styled.div`
+  text-align: left;
+
+  width: 80%;
+  margin: 20px auto 0;
+  div {
+    width: 100%;
+    height: 65px;
+    p {
+    }
+  }
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
 `;

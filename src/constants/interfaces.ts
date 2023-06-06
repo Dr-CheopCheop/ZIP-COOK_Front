@@ -80,3 +80,7 @@ export interface CommentEditProps {
 export interface buttonProps {
   active: boolean;
 }
+
+export interface RecipeCommentListWrapperProps {
+  isMoved: boolean;
+}
