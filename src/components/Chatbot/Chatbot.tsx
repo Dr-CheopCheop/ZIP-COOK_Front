@@ -74,7 +74,7 @@ const ChatbotPage = () => {
         });
     };
     getChatBotResponse();
-  });
+  }, [setLoading]);
 
     return (
         <C.Container>
