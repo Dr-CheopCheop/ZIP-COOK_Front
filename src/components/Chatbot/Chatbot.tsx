@@ -25,7 +25,6 @@ const ChatbotPage = () => {
       const fetchWeatherData = async () => {
         setLoading(true);
         const response = await axios.get(url);
-        const data = response.data;
         setWeatherData({
           icon: response.data.weather[0].icon
         });
@@ -57,24 +56,41 @@ const ChatbotPage = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+      const getChatBotResponse = async () => {
+        setLoading(true);
+        try {
+          const response = await axios.post(`/chatbot/message`, {
+            question: userRequest,
+          });
+          console.log(response.data);
+          setChatbotResponse(response.data.choices.text);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      getChatBotResponse();
     console.log(userRequest);
   };
 
-  useEffect(() => {
-    const getChatBotResponse = async () => {
-      setLoading(true);
-      await axios
-        .post(`/chatbot/message`, {
-          question: userRequest,
-        })
-        .then((response) => {
-          console.log(response.data);
-          setChatbotResponse(response.data.choices.text);
-          setLoading(false);
-        });
-    };
-    getChatBotResponse();
-  }, []);
+  // useEffect(() => {
+  //   const getChatBotResponse = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const response = await axios.post(`/chatbot/message`, {
+  //         question: userRequest,
+  //       });
+  //       console.log(response.data);
+  //       setChatbotResponse(response.data.choices.text);
+  //     } catch (error) {
+  //       console.error(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   getChatBotResponse();
+  // }, [onSubmit]);
 
     return (
         <C.Container>
@@ -99,7 +115,7 @@ const ChatbotPage = () => {
             </C.FirstDiv>
             <C.ChatbotDiv>
                 <C.UserRequestText>
-                    {userRequest}
+                  {userRequest}
                 </C.UserRequestText>
                 <C.ChatbotResponseText>
                 {chatbotResponse}
