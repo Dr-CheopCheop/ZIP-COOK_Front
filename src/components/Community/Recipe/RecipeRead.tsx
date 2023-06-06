@@ -2,7 +2,7 @@ import Navbar from "../../Navbar/Navbar";
 import React, { useState } from "react";
 import * as S from "./RecipeReadStyle";
 // import CommentList from "../Comment/CommentList";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import tbk from "../../../img/tteokbbokki.jpg";
 import CommentList from "../Comment/RecipeCommentList";
 
@@ -40,10 +40,11 @@ const readData = {
 };
 
 const RecipeRead = () => {
-  const { id } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
+  const id = location.pathname.split("/")[3];
   const [commentViewToggle, setCommentViewToggle] = useState<boolean>(false);
-
+  console.log("recipe read id :", id);
   // const selectData = DummyData.find((data) => data.id === Number(id));
   // const { title, level, cookTime } = selectData ?? {
   //   title: "존재하지 않는 게시물 입니다.",
