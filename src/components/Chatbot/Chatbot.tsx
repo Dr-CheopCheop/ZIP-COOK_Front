@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as C from './ChatbotStyle';
 import axios from 'axios';
 import Clock from 'react-live-clock';
@@ -9,7 +9,7 @@ const ChatbotPage = () => {
       icon: '',
     });
     const [monthFoods, setMonthFoods] = useState([]);
-    const [chatbotResponse, setChatbotResponse] = useState([]);
+    const [chatbotResponse, setChatbotResponse] = useState("");
     const [userRequest, setUserRequest] = useState("");
     let monthArray: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let now = new Date();
@@ -18,21 +18,20 @@ const ChatbotPage = () => {
     let month = monthArray[tempMonth];
     // const examples = ['오렌지', '사과', '딸기', '포도', '수박'];
 
-  useEffect(() => {
     const cityName = 'Seoul';
     const apiKey = `3cd159f4738663f7bef01ba94f76bc30`;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
-    axios
-    .get(url)
-    .then((responseData) => {
-      console.log(responseData);
-      const data = responseData.data;
-      setWeatherData({
-        icon: data.weather[0].icon
-      });
-    })
-    .catch((error) => console.log(error));
-  })
+    useEffect(() => {
+      const fetchWeatherData = async () => {
+        setLoading(true);
+        const response = await axios.get(url);
+        setWeatherData({
+          icon: response.data.weather[0].icon
+        });
+        setLoading(false);
+      };
+      fetchWeatherData();
+    }, []);
 
   const weatherImgSrc = `https://openweathermap.org/img/w/${weatherData.icon}.png`;
 
@@ -64,7 +63,7 @@ const ChatbotPage = () => {
     const getChatBotResponse = async () => {
       setLoading(true);
       await axios
-        .post(`/chatbot`, {
+        .post(`/chatbot/message`, {
           question: userRequest,
         })
         .then((response) => {
@@ -74,7 +73,7 @@ const ChatbotPage = () => {
         });
     };
     getChatBotResponse();
-  });
+  }, []);
 
     return (
         <C.Container>
@@ -99,7 +98,7 @@ const ChatbotPage = () => {
             </C.FirstDiv>
             <C.ChatbotDiv>
                 <C.UserRequestText>
-                    {userRequest}
+                  {userRequest}
                 </C.UserRequestText>
                 <C.ChatbotResponseText>
                 {chatbotResponse}
@@ -116,4 +115,5 @@ const ChatbotPage = () => {
         </C.Container>
     )
 }
+
 export default ChatbotPage;
