@@ -113,12 +113,6 @@ const Loginpage = () => {
           <L.P></L.P>
           <L.button onClick={JoinPage}>Sign UP</L.button>
         </div>
-        <L.Line></L.Line>
-        <L.Div>
-          <L.Googleb type="button" onClick={Googlepage}>
-            <L.img src={icon} />
-          </L.Googleb>
-        </L.Div>
       </div>
     </L.Container>
   );
