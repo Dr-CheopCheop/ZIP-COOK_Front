@@ -3,7 +3,7 @@ import * as C from './ChatbotStyle';
 import axios from 'axios';
 import Clock from 'react-live-clock';
 
-const ChatbotPage = React.memo(() => {
+const ChatbotPage = () => {
     const [loading, setLoading] = useState(false);
     const [weatherData, setWeatherData] = useState({
       icon: '',
@@ -18,21 +18,21 @@ const ChatbotPage = React.memo(() => {
     let month = monthArray[tempMonth];
     // const examples = ['오렌지', '사과', '딸기', '포도', '수박'];
 
-  useEffect(() => {
     const cityName = 'Seoul';
     const apiKey = `3cd159f4738663f7bef01ba94f76bc30`;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
-    axios
-    .get(url)
-    .then((responseData) => {
-      console.log(responseData);
-      const data = responseData.data;
-      setWeatherData({
-        icon: data.weather[0].icon
-      });
-    })
-    .catch((error) => console.log(error));
-  })
+    useEffect(() => {
+      const fetchWeatherData = async () => {
+        setLoading(true);
+        const response = await axios.get(url);
+        const data = response.data;
+        setWeatherData({
+          icon: response.data.weather[0].icon
+        });
+        setLoading(false);
+      };
+      fetchWeatherData();
+    }, []);
 
   const weatherImgSrc = `https://openweathermap.org/img/w/${weatherData.icon}.png`;
 
@@ -64,7 +64,7 @@ const ChatbotPage = React.memo(() => {
     const getChatBotResponse = async () => {
       setLoading(true);
       await axios
-        .post(`/chatbot`, {
+        .post(`/chatbot/message`, {
           question: userRequest,
         })
         .then((response) => {
@@ -74,7 +74,7 @@ const ChatbotPage = React.memo(() => {
         });
     };
     getChatBotResponse();
-  }, [setLoading]);
+  }, []);
 
     return (
         <C.Container>
@@ -115,6 +115,6 @@ const ChatbotPage = React.memo(() => {
             </C.ChatbotDiv>
         </C.Container>
     )
-})
+}
 
 export default ChatbotPage;
