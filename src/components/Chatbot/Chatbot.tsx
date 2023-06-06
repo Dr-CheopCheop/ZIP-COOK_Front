@@ -9,7 +9,7 @@ const ChatbotPage = () => {
       icon: '',
     });
     const [monthFoods, setMonthFoods] = useState([]);
-    const [chatbotResponse, setChatbotResponse] = useState([]);
+    const [chatbotResponse, setChatbotResponse] = useState("");
     const [userRequest, setUserRequest] = useState("");
     let monthArray: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let now = new Date();
