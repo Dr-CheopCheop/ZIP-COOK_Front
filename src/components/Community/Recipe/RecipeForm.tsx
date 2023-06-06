@@ -51,8 +51,8 @@ const RecipeForm = () => {
       title: data.title,
       serving: data.serving,
       level: data.level,
-      // ingredients: data.ingredients,
-      // summary: data.summary,
+      ingredients: data.ingredients,
+      summary: data.summary,
       content: data.content,
       time: data.time,
     };
