@@ -10,8 +10,9 @@ const CommentList = (props: any) => {
   const [datas, setDatas] = useState<commentDataProps[]>([]);
 
   const location = useLocation();
-  const { id } = props;
+
   const category = location.pathname.split("/")[2];
+  const id = location.pathname.split("/")[3];
 
   useEffect(() => {
     const fetchData = async () => {
