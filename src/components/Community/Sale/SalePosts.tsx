@@ -10,7 +10,7 @@ const SalePosts = ({ posts, loading }: any) => {
           {posts.map((post: any) => (
             <Link to="/community/recipe/1" key={post.id}>
             <S.PostSpan>
-              {post.filepath}{<br />}
+              <img src={`/images/${post.filepath}`} />{<br />}
               {post.title}{<br />}
               PRICE: {post.discountPrice}{<br />}
               LOCATION: {post.location}

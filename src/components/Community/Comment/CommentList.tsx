@@ -23,7 +23,7 @@ const CommentList = (props: any) => {
           url: `/${category}-comment/${id}`,
         });
         const responseData = await response.data;
-        console.log(responseData);
+        console.log(responseData,'ㅇ');
         const loadedDatas: commentDataProps[] = [];
         for (const key in responseData) {
           loadedDatas.push({

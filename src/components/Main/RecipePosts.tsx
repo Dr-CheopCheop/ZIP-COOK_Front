@@ -12,7 +12,7 @@ const RecipePosts = ({ posts, loading }: any) => {
           {posts.map((post: any) => (
             <Link to="/community/recipe/1" key={post.id}>
             <M.PostSpan>
-              {post.image}{<br />}
+              <img src={`/images/${post.filepath}`} />{<br />}
               {post.title}{<br />}
               {post.level}
             </M.PostSpan>

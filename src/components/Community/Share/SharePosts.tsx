@@ -11,7 +11,7 @@ const SharePosts = ({ posts, loading }: any) => {
           {posts.map((post: any) => (
             <Link to="/community/share/1" key={post.id}>
             <S.PostSpan>
-              {post.filepath}{<br />}
+              <img src={`/images/${post.filepath}`} />{<br />}
               {post.title}{<br />}
               DATE: {post.date}
             </S.PostSpan>

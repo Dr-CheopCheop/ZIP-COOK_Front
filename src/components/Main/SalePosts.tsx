@@ -10,7 +10,7 @@ const SalePosts = ({ posts, loading }: any) => {
           {posts.map((post: any) => (
             <Link to="/community/sale/1" key={post.id}>
             <M.PostSpan>
-              {post.image}{<br />}
+              <img src={`/images/${post.filepath}`} />{<br />}
               {post.title}{<br />}
               {post.location}{<br />}
               {post.date}
