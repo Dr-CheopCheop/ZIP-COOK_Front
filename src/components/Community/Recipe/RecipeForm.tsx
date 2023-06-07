@@ -32,6 +32,7 @@ const RecipeForm = () => {
 
   console.log("location: ", location.state);
   const a = location.state.filepath;
+  console.log("이미지경로", a);
 
   //수정 여부
   if (location.state) defaultValues = location.state.datas;
