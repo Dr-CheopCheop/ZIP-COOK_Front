@@ -25,8 +25,6 @@ const CommentPost = (props: any) => {
   useEffect(() => {
     fetchNickname();
   }, []);
-
-  console.log(user);
   const onSubmitHandler: SubmitHandler<CommentProps> = async (data) => {
     console.log(data);
     const postData = {

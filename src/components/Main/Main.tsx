@@ -20,10 +20,22 @@ const MainPage = () => {
     const [recipecurrentPage, setRecipeCurrentPage] = useState(1);
     const[salecurrentPage, setSaleCurrentPage] = useState(1);
     const[sharecurrentPage, setShareCurrentPage] = useState(1);
+
+    // const [communityNum,setCommunityNum]=useState({
+    //     recipeNum:1,
+    //     shareeNum:1,
+    //     saleNum:1,
+    // })
+
     const [postsPerPage, setPostsPerPage] = useState(5);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [msg, setMsg] = useState("");
+
+    console.log('recipe:',recipecurrentPage)
+
+    console.log('sale:',salecurrentPage)
+    console.log('share:',sharecurrentPage)
 
     useEffect(() => {
         const fetchRecipeData = async () => {
