@@ -1,10 +1,9 @@
 import Navbar from "../../Navbar/Navbar";
 import React, { useState, useEffect } from "react";
 import * as S from "./RecipeReadStyle";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import CommentList from "../Comment/RecipeCommentList";
 
-import Icons from "../../../Styles/Icons";
 import axios from "axios";
 import type { RecipeReadProps } from "../../../constants/interfaces";
 
@@ -13,7 +12,6 @@ const RecipeRead = () => {
   const navigate = useNavigate();
   const [data, setData] = useState<RecipeReadProps>();
   const id = location.pathname.split("/")[3];
-  const [commentViewToggle, setCommentViewToggle] = useState<boolean>(false);
 
   console.log("요청 url 주소", `/board-recipe/${id}`);
   console.log("recipe READ 요청 DATA:", data);
@@ -51,64 +49,63 @@ const RecipeRead = () => {
   return (
     <>
       <Navbar />
-      <S.MealKitContainer>
-        <S.MainImg>
-          <img src={`/images/${data?.filepath}`} alt="main_img" />
-          <S.MainTitle>
-            <h1>{data?.title}</h1>
-            <p>{data?.summary}</p>
-          </S.MainTitle>
-          <S.Option>
+
+      <S.ReadContainer>
+        <S.TitleContainer>
+          <S.TitleBox>
+            <S.UpperTitle>
+              <Link
+                to="/community/recipe/write"
+                state={{ update: true, datas: data, num: id }}
+              >
+                <S.TitleButton>수정</S.TitleButton>
+              </Link>
+              <S.TitleButton onClick={onDeleteHandler}>삭제</S.TitleButton>
+            </S.UpperTitle>
+            <S.LowTitle>
+              <p>작성자: cooker</p>
+              <p>2023.03.26 16:53</p>
+            </S.LowTitle>
+          </S.TitleBox>
+          <S.TitleImage src="http://placehold.it/250x250" alt="" />
+        </S.TitleContainer>
+        <S.RecipeContentsContainer>
+          <h1>{data?.title}</h1>
+          <S.RecipeContentsSummaryBox>
             <div>
-              {Icons.level}
-              <span>{data?.level}</span>
-            </div>
-            <div>
-              {Icons.spoon}
+              <h4>분량</h4>
               <span>{data?.serving}</span>
             </div>
             <div>
-              {Icons.clock}
+              <h4>조리시간</h4>
               <span>{data?.time}</span>
             </div>
-          </S.Option>
-        </S.MainImg>
-        <S.explainBox>
-          <S.editButtonBox>
-            <S.StyledLink
-              to="/community/recipe/write"
-              state={{ update: true, datas: data, num: id }}
-            >
-              <button>수정</button>
-            </S.StyledLink>
-            <button onClick={onDeleteHandler}>삭제</button>
-            <button onClick={() => setCommentViewToggle(!commentViewToggle)}>
-              {Icons.comment}
-              댓글
-            </button>
-          </S.editButtonBox>
-          <S.IngredientBox>
+            <div>
+              <h4>조리난이도</h4>
+              <span>{data?.level}</span>
+            </div>
+          </S.RecipeContentsSummaryBox>
+          <S.foodsListContainer>
             <p>재료</p>
             <div>
-              {data?.ingredients.map((food: string, idx: number) => (
-                <span key={food}>
-                  {food}
-                  {/* {idx !== data.ingredients.length - 1 && <span>,</span>} */}
-                </span>
+              {data?.ingredients.map((food, idx) => (
+                <React.Fragment key={food}>
+                  <span> {food}</span>
+                  {idx !== data?.ingredients.length - 1 && <span>,</span>}
+                </React.Fragment>
               ))}
             </div>
-          </S.IngredientBox>
-          <S.contentBox>
-            {data?.content.map((manual: string, idx: number) => (
-              <div key={manual}>
-                <p>{idx + 1}</p>
-                <span>{manual}</span>
-              </div>
+          </S.foodsListContainer>
+          <S.manualsListBox>
+            {data?.content.map((manual) => (
+              <React.Fragment key={manual}>
+                <h3> {manual}</h3>
+              </React.Fragment>
             ))}
-          </S.contentBox>
-        </S.explainBox>
-      </S.MealKitContainer>
-      {commentViewToggle && <CommentList id={id} />}
+          </S.manualsListBox>
+        </S.RecipeContentsContainer>
+        <CommentList id={id} />
+      </S.ReadContainer>
     </>
   );
 };
