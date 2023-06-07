@@ -47,10 +47,6 @@ const RecipeMain = () => {
   };
 
   return (
-    // <>
-    //   <GetPostList category="recipe" />
-    //   <Link to="/community/recipe/write">작성</Link>
-    // </>
     <R.Container>
       <R.CommunityListHeader>
         <span>RECIPE</span>
@@ -63,12 +59,14 @@ const RecipeMain = () => {
         </div>
       </R.CommunityListHeader>
       <R.SecondDiv>
-        <RecipePosts posts={currentPosts(recipePosts)} loading={loading} />
+        <R.PostList>
+          <RecipePosts posts={currentPosts(recipePosts)} loading={loading} />
+        </R.PostList>
         <RecipePagination
-          postsPerPage={postsPerPage}
-          totalPosts={recipePosts.length}
-          paginate={setCurrentPage}
-        />
+            postsPerPage={postsPerPage}
+            totalPosts={recipePosts.length}
+            paginate={setCurrentPage}
+          />
       </R.SecondDiv>
     </R.Container>
   );
