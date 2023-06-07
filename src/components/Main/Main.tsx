@@ -7,7 +7,9 @@ import SharingPosts from './SharingPosts';
 import SalePosts from './SalePosts';
 import Pagination from './Pagination';
 import icon from '../../img/MainPhoto.jpeg'
-import MapSelectorSido from '../../utils/MapSelectorSido'
+import { useNavigate } from 'react-router-dom'; 
+import { useDispatch } from 'react-redux';
+import { SET_TOKEN } from '../../reducer/userSlice';
 
 
 const MainPage = () => {
@@ -19,6 +21,9 @@ const MainPage = () => {
     const[salecurrentPage, setSaleCurrentPage] = useState(1);
     const[sharecurrentPage, setShareCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(5);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [msg, setMsg] = useState("");
 
     useEffect(() => {
         const fetchRecipeData = async () => {
@@ -78,6 +83,16 @@ const MainPage = () => {
     const currentPosts3 = (posts: any) => {
         return posts.slice(indexOfFirst3, indexOfLast3);
     }
+
+    useEffect(() => {
+       const accessToken = localStorage.getItem("accessToken");
+       if(accessToken){
+        setMsg("그대로 유지");
+        dispatch(SET_TOKEN(accessToken));
+       }else {
+        navigate('/login');
+       }
+      },[]);
 
     return (
         <M.Container>
