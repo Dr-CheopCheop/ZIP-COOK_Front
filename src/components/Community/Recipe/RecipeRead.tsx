@@ -1,7 +1,6 @@
 import Navbar from "../../Navbar/Navbar";
 import React, { useState, useEffect } from "react";
 import * as S from "./RecipeReadStyle";
-// import CommentList from "../Comment/CommentList";
 import { useNavigate, useLocation } from "react-router-dom";
 import CommentList from "../Comment/RecipeCommentList";
 

@@ -47,7 +47,7 @@ const DiscountRead = () => {
 
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   return (
     <>
