@@ -74,8 +74,8 @@ export const PostSpan = styled.span`
 `;
 
 export const PostWrap = styled.div`
-  width: 33%;
-  height: 100%;
+  width: 100%;
+  height: 20%;
   margin-bottom: 4%;
   border: 1px solid black;
   border-radius: 15px;
@@ -94,9 +94,9 @@ export const PostImg = styled.img`
 `;
 
 export const PostList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, auto));
-  grid-template-rows: repeat(auto-fill, minmax(30%, auto));
+  display: inline-grid;
+  grid-template-columns: repeat(3, minmax(10rem, auto));
+  grid-template-rows: repeat(5, minmax(30%, auto));
   padding-top: 2rem;
   padding-bottom: 2rem;
   gap: 2rem 2rem;
