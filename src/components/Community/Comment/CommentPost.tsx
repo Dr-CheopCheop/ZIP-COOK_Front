@@ -26,6 +26,7 @@ const CommentPost = (props: any) => {
     fetchNickname();
   }, []);
 
+  console.log(user);
   const onSubmitHandler: SubmitHandler<CommentProps> = async (data) => {
     console.log(data);
     const postData = {
@@ -34,6 +35,7 @@ const CommentPost = (props: any) => {
       content: data.content,
     };
 
+    console.log(postData);
     try {
       const response = await axios({
         url: `/${category}-comment`,
