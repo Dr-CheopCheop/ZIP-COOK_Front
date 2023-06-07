@@ -9,6 +9,16 @@ export interface RecipeProps {
   time: string;
 }
 
+export interface RecipeReadProps {
+  title: string;
+  serving: string;
+  level: string;
+  ingredients: string[];
+  summary: string;
+  content: string[];
+  time: string;
+}
+
 export interface SaleProps {
   img: FileList;
   price: string;

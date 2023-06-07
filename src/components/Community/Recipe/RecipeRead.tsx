@@ -8,42 +8,43 @@ import CommentList from "../Comment/RecipeCommentList";
 
 import Icons from "../../../Styles/Icons";
 import axios from "axios";
+import type { RecipeReadProps } from "../../../constants/interfaces";
 
-const readData = {
-  title: "치즈 해물 떡볶이",
-  level: "상",
-  time: "1시간 30분",
-  serving: "2인분",
-  summary: "#불맛이 가득한",
-  ingredients: [
-    "고추장 3큰술",
-    "떡 300g",
-    "어묵 2장",
-    "설탕 1큰술",
-    "모짜렐라 치즈",
-    "다진마늘 2큰술",
-    "진간장 3큰술",
-    "파 80g",
-    "고춧가루",
-    "홍합 100g",
-    "새우 150g",
-    "",
-  ],
-  content: [
-    "떡을 물에 담가서 불립니다.",
-    "냄비에 고추장 3큰술을 넣고 중불로 끓여줍니다",
-    "다진마늘을 넣고 진간장3스푼,설탕 1큰술을 넣어줍니다.",
-    "잘씻은 홍합과 새우를 넣고 4분간 끓입니다",
-    "어묵과 떡을 넣고 3분간 끓입니다. ",
-    "파와 고춧가루를 넣어줍니다.",
-    "모짜렐라 치즈를 기호에 맞게 넣어줍니다.",
-  ],
-};
+// const readData = {
+//   title: "치즈 해물 떡볶이",
+//   level: "상",
+//   time: "1시간 30분",
+//   serving: "2인분",
+//   summary: "#불맛이 가득한",
+//   ingredients: [
+//     "고추장 3큰술",
+//     "떡 300g",
+//     "어묵 2장",
+//     "설탕 1큰술",
+//     "모짜렐라 치즈",
+//     "다진마늘 2큰술",
+//     "진간장 3큰술",
+//     "파 80g",
+//     "고춧가루",
+//     "홍합 100g",
+//     "새우 150g",
+//     "",
+//   ],
+//   content: [
+//     "떡을 물에 담가서 불립니다.",
+//     "냄비에 고추장 3큰술을 넣고 중불로 끓여줍니다",
+//     "다진마늘을 넣고 진간장3스푼,설탕 1큰술을 넣어줍니다.",
+//     "잘씻은 홍합과 새우를 넣고 4분간 끓입니다",
+//     "어묵과 떡을 넣고 3분간 끓입니다. ",
+//     "파와 고춧가루를 넣어줍니다.",
+//     "모짜렐라 치즈를 기호에 맞게 넣어줍니다.",
+//   ],
+// };
 
 const RecipeRead = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [data, setData] = useState();
+  const [data, setData] = useState<RecipeReadProps>();
   const id = location.pathname.split("/")[3];
   const [commentViewToggle, setCommentViewToggle] = useState<boolean>(false);
 
@@ -67,16 +68,17 @@ const RecipeRead = () => {
     }
   };
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`/board-recipe/${id}`);
+      const responseData = await response.data;
+      setData(responseData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/board-recipe/${id}`);
-        const responseData = await response.data;
-        setData(responseData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     fetchData();
   });
 
@@ -87,21 +89,21 @@ const RecipeRead = () => {
         <S.MainImg>
           <img src={tbk} alt="main_img" />
           <S.MainTitle>
-            <h1>{readData.title}</h1>
-            <p>{readData.summary}</p>
+            <h1>{data?.title}</h1>
+            <p>{data?.summary}</p>
           </S.MainTitle>
           <S.Option>
             <div>
               {Icons.level}
-              <span>{readData.level}</span>
+              <span>{data?.level}</span>
             </div>
             <div>
               {Icons.spoon}
-              <span>{readData.serving}</span>
+              <span>{data?.serving}</span>
             </div>
             <div>
               {Icons.clock}
-              <span>{readData.time}</span>
+              <span>{data?.time}</span>
             </div>
           </S.Option>
         </S.MainImg>
@@ -109,7 +111,7 @@ const RecipeRead = () => {
           <S.editButtonBox>
             <S.StyledLink
               to="/community/recipe/write"
-              state={{ update: true, datas: readData, num: id }}
+              state={{ update: true, datas: data, num: id }}
             >
               <button>수정</button>
             </S.StyledLink>
@@ -122,16 +124,16 @@ const RecipeRead = () => {
           <S.IngredientBox>
             <p>재료</p>
             <div>
-              {readData.ingredients.map((food, idx) => (
+              {data?.ingredients.map((food, idx) => (
                 <span key={food}>
                   {food}
-                  {/* {idx !== readData.ingredients.length - 1 && <span>,</span>} */}
+                  {/* {idx !== data.ingredients.length - 1 && <span>,</span>} */}
                 </span>
               ))}
             </div>
           </S.IngredientBox>
           <S.contentBox>
-            {readData.content.map((manual, idx) => (
+            {data?.content.map((manual, idx) => (
               <div key={manual}>
                 <p>{idx + 1}</p>
                 <span>{manual}</span>
