@@ -10,6 +10,7 @@ export interface RecipeProps {
 }
 
 export interface RecipeReadProps {
+  nickname: string;
   filepath: FileList;
   title: string;
   serving: string;
@@ -28,6 +29,7 @@ export interface SaleProps {
   title: string;
 }
 export interface SaleReadProps {
+  nickname: string;
   filepath: FileList;
   price: string;
   place: string;
@@ -41,6 +43,7 @@ export interface ShareProps {
   content: string;
 }
 export interface ShareReadProps {
+  nickname: string;
   filepath: FileList;
   title: string;
   content: string;

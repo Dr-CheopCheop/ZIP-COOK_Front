@@ -16,7 +16,20 @@ const SaleForm = () => {
   const location = useLocation();
   const [imagePreview, setImagePreview] = useState<string>("");
   //유저정보에서 위치정보 가져올예정
+  const [nicks, setNicks] = useState();
+
   // const sido = "seoul";
+
+  const fetchNickname = async () => {
+    const userInfoRes = await axios.get("/auth/user");
+    const userInfo = await userInfoRes.data;
+    console.log(userInfo);
+    setNicks(userInfo.nickname);
+  };
+
+  useEffect(() => {
+    fetchNickname();
+  }, []);
 
   //추후수정 닉네임추가
   const sido = "서울특별시";
@@ -57,7 +70,7 @@ const SaleForm = () => {
 
   const onSubmitHandler: SubmitHandler<SaleProps> = async (data) => {
     const salepost = {
-      nickname: "닉네임생기면나중에바꾸자",
+      nickname: nicks,
       price: data.price,
       place: data.place,
       discountPrice: data.discountPrice,

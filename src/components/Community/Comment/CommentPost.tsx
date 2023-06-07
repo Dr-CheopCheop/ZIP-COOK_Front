@@ -2,8 +2,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import * as S from "./CommentPostStyle";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../reducer/rootReducer";
 import { useEffect, useState } from "react";
 
 interface CommentProps {
@@ -12,7 +10,6 @@ interface CommentProps {
 
 const CommentPost = (props: any) => {
   const { register, handleSubmit, reset } = useForm<CommentProps>({});
-  const user = useSelector((state: RootState) => state.user);
   const location = useLocation();
   const id = location.pathname.split("/")[3];
   const category = location.pathname.split("/")[2];

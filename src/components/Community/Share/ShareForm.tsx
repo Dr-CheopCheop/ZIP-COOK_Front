@@ -21,6 +21,20 @@ const ShareForm = () => {
   const [imagePreview, setImagePreview] = useState<string>("");
   //유저정보에서 위치정보 가져올예정
   // const sido = "seoul";
+
+  const [nicks, setNicks] = useState();
+
+  const fetchNickname = async () => {
+    const userInfoRes = await axios.get("/auth/user");
+    const userInfo = await userInfoRes.data;
+    console.log(userInfo);
+    setNicks(userInfo.nickname);
+  };
+
+  useEffect(() => {
+    fetchNickname();
+  }, []);
+
   const sido = "서울특별시";
   console.log("location: ", location.state);
   if (location.state) {
@@ -51,7 +65,7 @@ const ShareForm = () => {
   const onSubmitHandler: SubmitHandler<ShareProps> = async (data) => {
     const sharepost = {
       uid: 1,
-      nickname: "김모씨",
+      nickname: nicks,
       title: data.title,
       content: data.content,
       location: sido,

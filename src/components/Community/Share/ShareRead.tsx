@@ -7,8 +7,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import type { ShareReadProps } from "../../../constants/interfaces";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../reducer/rootReducer";
 
 const ShareRead = () => {
   const location = useLocation();
@@ -70,8 +68,7 @@ const ShareRead = () => {
               <S.TitleButton onClick={onDeleteHandler}>삭제</S.TitleButton>
             </S.UpperTitle>
             <S.LowTitle>
-              <p>작성자: cooker</p>
-              <p>2023.03.26 16:53</p>
+              <p>작성자: {data?.nickname}</p>
             </S.LowTitle>
           </S.TitleBox>
           <S.TitleImage src={`/images/${data?.filepath}`} alt="" />

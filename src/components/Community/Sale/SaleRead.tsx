@@ -64,8 +64,7 @@ const DiscountRead = () => {
               <S.TitleButton onClick={onDeleteHandler}>삭제</S.TitleButton>
             </S.UpperTitle>
             <S.LowTitle>
-              <p>작성자:임시데이터 </p>
-              <p>2023.03.26 16:53</p>
+              <p>작성자:{data?.nickname} </p>
             </S.LowTitle>
           </S.TitleBox>
           <S.TitleImage src={`/images/${data?.filepath}`} alt="" />
