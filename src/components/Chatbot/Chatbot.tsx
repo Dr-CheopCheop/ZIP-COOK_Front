@@ -11,7 +11,7 @@ const ChatbotPage = () => {
     const [monthFoods, setMonthFoods] = useState([]);
     const [chatbotResponse, setChatbotResponse] = useState("");
     const [userRequest, setUserRequest] = useState("");
-    let monthArray: string[] = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    let monthArray: string[] = ['january', 'feburary', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
     let now = new Date();
     let tempMonth = now.getMonth();
     // setMonth(monthArray[tempMonth]);
@@ -39,7 +39,7 @@ const ChatbotPage = () => {
   useEffect(() => {
     const fetchFoodData = async () => {
       setLoading(true);
-      const response = await axios.get(`/monthFood/${month}`);
+      const response = await axios.get(`/chatbot/${month}`);
       setMonthFoods(response.data);
       setLoading(false);
     };
@@ -56,24 +56,41 @@ const ChatbotPage = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+      const getChatBotResponse = async () => {
+        setLoading(true);
+        try {
+          const response = await axios.post(`/chatbot/message`, {
+            question: userRequest,
+          });
+          console.log(response.data);
+          setChatbotResponse(response.data.choices[0].text);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      getChatBotResponse();
     console.log(userRequest);
   };
 
-  useEffect(() => {
-    const getChatBotResponse = async () => {
-      setLoading(true);
-      await axios
-        .post(`/chatbot/message`, {
-          question: userRequest,
-        })
-        .then((response) => {
-          console.log(response.data);
-          setChatbotResponse(response.data.choices.text);
-          setLoading(false);
-        });
-    };
-    getChatBotResponse();
-  }, []);
+  // useEffect(() => {
+  //   const getChatBotResponse = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const response = await axios.post(`/chatbot/message`, {
+  //         question: userRequest,
+  //       });
+  //       console.log(response.data);
+  //       setChatbotResponse(response.data.choices.text);
+  //     } catch (error) {
+  //       console.error(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   getChatBotResponse();
+  // }, [onSubmit]);
 
     return (
         <C.Container>
@@ -115,5 +132,6 @@ const ChatbotPage = () => {
         </C.Container>
     )
 }
+
 
 export default ChatbotPage;

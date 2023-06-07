@@ -3,29 +3,27 @@ import { useSelector, useDispatch } from "react-redux";
 import { clearUser, loginUser } from "../../reducer/userSlice";
 import { RootState } from "../../reducer/rootReducer";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import { DELETE_TOKEN } from "../../reducer/tokenSlice";
-import { access } from "fs";
 
 const Navbar = () => {
   const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-    const handleLogout = () => {
-      console.log(localStorage.removeItem("accessToken"));
-      localStorage.removeItem("accessToken")
-      axios.get("/auth/logout")
-      .then(res => {
-        if(res.status === 200){
-          navigate('/main');
-          dispatch(clearUser());
-          dispatch(DELETE_TOKEN());
-        }else {
-          console.log("logout failed", res.data);
-        }
-      })
-    }
+  const handleLogout = () => {
+    console.log(localStorage.removeItem("accessToken"));
+    localStorage.removeItem("accessToken");
+    axios.get("/auth/logout").then((res) => {
+      if (res.status === 200) {
+        navigate("/main");
+        dispatch(clearUser());
+        dispatch(DELETE_TOKEN());
+      } else {
+        console.log("logout failed", res.data);
+      }
+    });
+  };
   return (
     <>
       <S.Header>
