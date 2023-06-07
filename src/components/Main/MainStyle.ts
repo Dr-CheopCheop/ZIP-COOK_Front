@@ -209,3 +209,35 @@ export const DiscountPostWrap = styled.div`
 export const Div = styled.div`
   width: 300px;
 `
+
+export const PostImg = styled.img`
+  width: 150px;
+  height: 150px;
+`
+
+export const PostList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+export const PostLink = styled(Link)`
+  font-size: 1rem;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  border: none;
+`
+
+export const PostWrap = styled.div`
+  width: 300px;
+  height: 300px;
+  margin-bottom: 4%;
+  padding: 2%;
+  border: 1px solid black;
+  border-radius: 15px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;
