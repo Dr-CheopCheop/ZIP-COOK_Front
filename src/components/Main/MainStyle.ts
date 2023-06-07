@@ -205,3 +205,7 @@ export const DiscountPostWrap = styled.div`
   flex-direction: row;
   justify-content: space-around;
 `;
+
+export const Div = styled.div`
+  width: 300px;
+`

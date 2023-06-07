@@ -8,7 +8,6 @@ const SharePosts = ({ posts, loading }: any) => {
       <>
         {loading && <div> loading... </div>}
         <S.PostList>
-          <Link to="/community/share">
           {posts.map((post: any) => (
             <Link to={`/community/share/${post.id}`} key={post.id}>
             <S.PostWrap>
@@ -18,7 +17,6 @@ const SharePosts = ({ posts, loading }: any) => {
             </S.PostWrap>
             </Link>
           ))}
-          </Link>
         </S.PostList>
       </>
     );

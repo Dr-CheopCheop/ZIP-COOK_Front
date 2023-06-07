@@ -62,9 +62,10 @@ export const SecondDiv = styled.div`
 `;
 
 export const PostWrap = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 300px;
+  height: 300px;
   margin-bottom: 4%;
+  padding: 2%;
   border: 1px solid black;
   border-radius: 15px;
   justify-content: center;
@@ -77,20 +78,24 @@ export const PostImgDiv = styled.div`
 `;
 
 export const PostImg = styled.img`
-  max-width: 95%;
-  max-height: 100%;
+  width: 150px;
+  height: 150px;
 `;
 
 export const PostList = styled.div`
-  display: inline-grid;
-  grid-template-columns: repeat(3, 1fr);
-  // grid-template-rows: repeat(5, minmax(auto, auto));
-  padding-top: 2%;
-  padding-bottom: 2%;
-  gap: 2% 2%;
-  // place-items: stretch stretch;
-  justify-content: space-around;
-  align-items: center;
+  // display: inline-grid;
+  // grid-template-columns: repeat(3, 1fr);
+  // // grid-template-rows: repeat(5, minmax(auto, auto));
+  // padding-top: 2%;
+  // padding-bottom: 2%;
+  // gap: 2% 2%;
+  // // place-items: stretch stretch;
+  // justify-content: space-around;
+  // align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const PageButtonWrap = styled.div`
