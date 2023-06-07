@@ -8,7 +8,7 @@ const SalePosts = ({ posts, loading }: any) => {
         {loading && <div> loading... </div>}
         <div>
           {posts.map((post: any) => (
-            <Link to="/community/sale/1" key={post.id}>
+            <Link to={`/community/sale/${post.id}`} key={post.id}>
             <M.PostSpan>
               <img src={`/images/${post.filepath}`} />{<br />}
               {post.title}{<br />}
