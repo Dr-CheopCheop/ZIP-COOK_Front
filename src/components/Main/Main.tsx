@@ -128,14 +128,12 @@ const MainPage = () => {
             </M.SecondDiv>
             <M.ThirdDiv>
                 <M.RecipeText>RECIPE</M.RecipeText>
-                <M.Div>
                 <RecipePosts posts={currentPosts1(recipePosts)} loading={loading} />
                 <Pagination
                   postsPerPage={postsPerPage}
                   totalPosts={recipePosts.length}
                   paginate={setRecipeCurrentPage}
                 />
-                </M.Div>
             </M.ThirdDiv>
             <M.FourthDiv>
                 <M.SharingText>SHARING INGREDIENTS</M.SharingText>
