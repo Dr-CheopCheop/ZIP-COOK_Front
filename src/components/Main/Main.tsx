@@ -11,18 +11,20 @@ import MapSelectorSido from '../../utils/MapSelectorSido'
 
 
 const MainPage = () => {
-    const [recipePosts, setRecipePosts] = useState([]);
+    const [recipePosts, setRecipePosts] = useState<any[]>([]);
     const [sharingPosts, setSharingPosts] = useState([]);
     const [salePosts, setSalePosts] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [recipecurrentPage, setRecipeCurrentPage] = useState(1);
+    const[salecurrentPage, setSaleCurrentPage] = useState(1);
+    const[sharecurrentPage, setShareCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(5);
 
     useEffect(() => {
         const fetchRecipeData = async () => {
             setLoading(true);
             const response = await axios.get(
-                `/board-recipe/main?page=${currentPage}`
+                `/board-recipe/main?page=${recipecurrentPage}`
             );
             setRecipePosts(response.data);
             setLoading(false);
@@ -35,7 +37,7 @@ const MainPage = () => {
         const fetchSharingData = async () => {
             setLoading(true);
             const response = await axios.get(
-                `/board-share/main?page=${currentPage}`
+                `/board-share/main?page=${sharecurrentPage}`
             );
             setSharingPosts(response.data);
             console.log(response);
@@ -49,7 +51,7 @@ const MainPage = () => {
         const fetchSaleData = async () => {
             setLoading(true);
             const response = await axios.get(
-                `/board-sale/main?page=${currentPage}`
+                `/board-sale/main?page=${salecurrentPage}`
             );
             setSalePosts(response.data);
             console.log(response);
@@ -59,13 +61,23 @@ const MainPage = () => {
     }, []);
     console.log(salePosts);
 
-    const indexOfLast = currentPage * postsPerPage;
-    const indexOfFirst = indexOfLast - postsPerPage;
-    const currentPosts = (posts: any) => {
-        let currentPosts = 0;
-        currentPosts = posts.slice(indexOfFirst, indexOfLast);
-        return currentPosts;
+    const indexOfLast1 = recipecurrentPage * postsPerPage;
+    const indexOfLast2 = salecurrentPage * postsPerPage;
+    const indexOfLast3 = sharecurrentPage * postsPerPage;
+    const indexOfFirst1 = indexOfLast1 - postsPerPage;
+    const indexOfFirst2 = indexOfLast2 - postsPerPage;
+    const indexOfFirst3 = indexOfLast3 - postsPerPage;
+    const currentPosts1 = (posts: any) => {
+        return posts.slice(indexOfFirst1, indexOfLast1);
     };
+
+    const currentPosts2 = (posts : any) => {
+        return posts.slice(indexOfFirst2, indexOfLast2);
+    }
+
+    const currentPosts3 = (posts: any) => {
+        return posts.slice(indexOfFirst3, indexOfLast3);
+    }
 
     return (
         <M.Container>
@@ -85,33 +97,33 @@ const MainPage = () => {
                 <M.AllButton to="/main">All</M.AllButton>
                 <M.RecipeButton to="/community/recipe">RECIPE</M.RecipeButton>
                 <M.SharingButton to="/community/share">SHARING INREDIENTS</M.SharingButton>
-                <M.DiscountButton to="/community/sale">SALE INREDIENTS</M.DiscountButton>
+                <M.DiscountButton to="/community/sale">DISCOUNT</M.DiscountButton>
             </M.SecondDiv>
             <M.ThirdDiv>
                 <M.RecipeText>RECIPE</M.RecipeText>
-                <RecipePosts posts={currentPosts(recipePosts)} loading={loading} />
+                <RecipePosts posts={currentPosts1(recipePosts)} loading={loading} />
                 <Pagination
                   postsPerPage={postsPerPage}
                   totalPosts={recipePosts.length}
-                  paginate={setCurrentPage}
+                  paginate={setRecipeCurrentPage}
                 />
             </M.ThirdDiv>
             <M.FourthDiv>
                 <M.SharingText>SHARING INGREDIENTS</M.SharingText>
-                <SharingPosts posts={currentPosts(sharingPosts)} loading={loading} />
+                <SharingPosts posts={currentPosts2(sharingPosts)} loading={loading} />
                 <Pagination
                   postsPerPage={postsPerPage}
                   totalPosts={sharingPosts.length}
-                  paginate={setCurrentPage}
+                  paginate={setShareCurrentPage}
                 />
             </M.FourthDiv>
             <M.FifthDiv>
-                <M.DiscountText>RECIPE</M.DiscountText>
-                <SalePosts posts={currentPosts(salePosts)} loading={loading} />
+                <M.DiscountText>SALE INCREDINENTS</M.DiscountText>
+                <SalePosts posts={currentPosts3(salePosts)} loading={loading} />
                 <Pagination
                   postsPerPage={postsPerPage}
                   totalPosts={salePosts.length}
-                  paginate={setCurrentPage}
+                  paginate={setSaleCurrentPage}
                 />
             </M.FifthDiv>
         </M.Container>
