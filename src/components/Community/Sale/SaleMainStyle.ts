@@ -61,16 +61,14 @@ export const WriteButton = styled(Link)`
 `;
 
 export const SecondDiv = styled.div`
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    width: 100%;
 `;
 
 export const PostWrap = styled.div`
-  width: 33%;
-  height: 100%;
+  width: 300px;
+  height: 300px;
   margin-bottom: 4%;
+  padding: 2%;
   border: 1px solid black;
   border-radius: 15px;
   justify-content: center;
@@ -78,23 +76,30 @@ export const PostWrap = styled.div`
   text-align: center;
 `;
 
+export const PostLink = styled(Link)`
+    font-size: 1rem;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+`;
+
+
 export const PostImgDiv = styled.div`
   text-align: center;
 `;
 
 export const PostImg = styled.img`
-  max-width: 95%;
-  max-height: 100%;
+  width: 150px;
+  height: 150px;
 `;
 
 export const PostList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, auto));
-  grid-template-rows: repeat(auto-fill, minmax(30%, auto));
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  gap: 2rem 2rem;
-  place-items: stretch stretch;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const PostSpan = styled.span`

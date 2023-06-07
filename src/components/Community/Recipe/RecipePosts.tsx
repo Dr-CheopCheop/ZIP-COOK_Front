@@ -6,8 +6,7 @@ const RecipePosts = ({ posts, loading }: any) => {
     return (
       <>
         {loading && <div> loading... </div>}
-        <div>
-          <Link to="/community/recipe">
+        <R.PostList>
           {posts.map((post: any) => (
             <Link to={`/community/recipe/${post.id}`} key={post.id}>
               <R.PostWrap>
@@ -18,8 +17,7 @@ const RecipePosts = ({ posts, loading }: any) => {
               </R.PostWrap>
             </Link>
           ))}
-          </Link>
-        </div>
+          </R.PostList>
       </>
     );
   };

@@ -83,19 +83,19 @@ export const PostImg = styled.img`
 `;
 
 export const PostList = styled.div`
-  // display: inline-grid;
-  // grid-template-columns: repeat(3, 1fr);
-  // // grid-template-rows: repeat(5, minmax(auto, auto));
-  // padding-top: 2%;
-  // padding-bottom: 2%;
-  // gap: 2% 2%;
-  // // place-items: stretch stretch;
-  // justify-content: space-around;
-  // align-items: center;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+export const PostLink = styled(Link)`
+    font-size: 1rem;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    border: none;
+    text-align: center;
 `;
 
 export const PageButtonWrap = styled.div`
