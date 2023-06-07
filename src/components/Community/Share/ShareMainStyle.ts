@@ -36,20 +36,23 @@ export const SearchButton = styled.button`
     appearance: none;
     border: none;
     background-color: rgba(255, 255, 255, 0);
-    width: 10px;
-    height: 20px;
-    margin-left: 2%;
 `;
 
 export const WriteButton = styled(Link)`
+  display: flex;
+  flex-direction: row;
   font-size: 1rem;
   text-decoration: none;
   color: black;
   cursor: pointer;
   border: none;
   text-align: center;
-  width: 60px;
-  height: 30px;
+  width: 100px;
+  height: 50%;
+  margin-top: 5%;
+  margin-left: 5%;
+  justify-content: center;
+  align-items: center;
   background-color: #f7c04a;
   border-radius: 10px;
 `;
@@ -92,7 +95,7 @@ export const PageButton = styled.button`
   margin: 0.5%;
 `;
 
-export const InputBox = styled.div`
+export const InputBox = styled.form`
   position: relative;
   width: 300px;
   height: 30px;

@@ -7,6 +7,7 @@ import SalePagination from "./SalePagination";
 import * as S from "./SaleMainStyle";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducer/rootReducer";
+import Icons from '../../../Styles/Icons';
 
 const SaleMain = () => {
   const [salePosts, setSalePosts] = useState([]);
@@ -54,14 +55,16 @@ const SaleMain = () => {
     //   <Link to="/community/discount/write">작성</Link>
     // </div>
     <S.Container>
-      <S.FirstDiv>
-        <S.FirstDivText>BARGAIN SALE</S.FirstDivText>
-        <S.SearchForm>
-          <S.SearchInput onChange={getValue} />
-          <S.SearchButton type="submit" onClick={searchPosts}>검색</S.SearchButton>
-        </S.SearchForm>
-        <S.WriteButton to="/community/sale/write">글쓰기</S.WriteButton>
-      </S.FirstDiv>
+      <S.CommunityListHeader>
+        <span>SALE</span>
+        <div>
+          <S.InputBox>
+            <input type="text" onChange={getValue} />
+            <S.SearchButton type="submit" onClick={searchPosts}>{Icons.search}</S.SearchButton>
+          </S.InputBox>
+          <S.WriteButton to="/community/sale/write">글쓰기</S.WriteButton>
+        </div>
+      </S.CommunityListHeader>
       <S.SecondDiv>
         <SalePosts posts={currentPosts(salePosts)} loading={loading} />
         <SalePagination

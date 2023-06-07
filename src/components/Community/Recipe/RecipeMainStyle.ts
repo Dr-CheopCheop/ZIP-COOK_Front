@@ -3,10 +3,12 @@ import styled from  'styled-components';
 import Colors from '../../../Styles/Colors';
 
 export const Container = styled.div`
-    width: 100%;
+    /* width: 100%;
     display: flex;
     flex-direction: column;
-    text-align: center;
+    text-align: center; */
+    width: 1080px;
+    margin: 0 auto;
 `;
 
 export const FirstDiv = styled.div`
@@ -25,13 +27,11 @@ export const FirstDivText = styled.div`
 
 export const SearchForm = styled.form`
     display: flex;
-    width: 70%;
-    margin-left: 40%;
 `;
 
 export const SearchInput = styled.input`
     width: 50%;
-    /* margin-left: 60%; */
+    margin-left: 60%;
 `;
 
 export const SearchButton = styled.button`
@@ -40,22 +40,25 @@ export const SearchButton = styled.button`
     appearance: none;
     border: none;
     background-color: rgba(255, 255, 255, 0);
-    width: 10px;
-    height: 20px;
-    margin-left: 2%;
 `;
 
 export const WriteButton = styled(Link)`
+    display: flex;
+    flex-direction: row;
     font-size: 1rem;
     text-decoration: none;
     color: black;
     cursor: pointer;
     border: none;
     text-align: center;
-    margin-left: 1%;
-    padding: .5%;
-    background-color: #F7C04A;
-    border-radius: 15px 15px 15px 15px;
+    width: 100px;
+    height: 50%;
+    margin-top: 5%;
+    margin-left: 5%;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7c04a;
+    border-radius: 10px;
 `;
 
 export const SecondDiv = styled.div`
@@ -94,5 +97,49 @@ export const PageButton = styled.button`
     border: none;
     padding: 1%;
     margin: 0.5%;
+`;
+
+export const InputBox = styled.form`
+  position: relative;
+  width: 300px;
+  height: 30px;
+  margin: 30px auto 0;
+  color: ${Colors.zipCookYellow};
+  input {
+    display: block;
+    width: 300px;
+    height: 100%;
+    background-color: transparent;
+    border: 1px solid white;
+    padding-right: 50px;
+    color: ${Colors.zipCookYellow};
+    font-size: 12px;
+    border-bottom: 1px solid ${Colors.zipCookYellow};
+  }
+  input::placeholder {
+    color: #d9d9d9;
+  }
+  input:focus {
+    outline: none;
+  }
+  svg {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0%, -50%);
+    font-size: 20px;
+  }
+`;
+
+export const CommunityListHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  span {
+    font-size: 40px;
+    line-height: 80px;
+  }
+  div {
+    display: flex;
+  }
 `;
 

@@ -54,8 +54,8 @@ const ShareMain = () => {
         <span>SHARING</span>
         <div>
           <S.InputBox>
-            <input type="text" value="zz" />
-            {Icons.search}
+            <input type="text" onChange={getValue} />
+            <S.SearchButton type="submit" onClick={searchPosts}>{Icons.search}</S.SearchButton>
           </S.InputBox>
           <S.WriteButton to="/community/share/write">글쓰기</S.WriteButton>
         </div>

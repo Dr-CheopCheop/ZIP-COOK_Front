@@ -5,6 +5,7 @@ import axios from "axios";
 import RecipePosts from "./RecipePosts";
 import RecipePagination from "./RecipePagination";
 import * as R from "./RecipeMainStyle";
+import Icons from "../../../Styles/Icons";
 
 const RecipeMain = () => {
   const [recipePosts, setRecipePosts] = useState([]);
@@ -23,7 +24,7 @@ const RecipeMain = () => {
   useEffect(() => {
     const fetchRecipeData = async () => {
       setLoading(true);
-      const response = await axios.get(`/board-recipe?page=1`);
+      const response = await axios.get(`/board-recipe?page=${currentPage}`);
       setRecipePosts(response.data);
       setLoading(false);
     };
@@ -33,11 +34,6 @@ const RecipeMain = () => {
 
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
-  // const currentPosts = (posts: any) => {
-  //   let currentPosts = 0;
-  //   currentPosts = posts.slice(indexOfFirst, indexOfLast);
-  //   return currentPosts;
-  // };
   const currentPosts = (posts: any) => {
     let filteredPosts = posts.filter((post: any) =>
       post.title.toLowerCase().includes(searchQuery)
@@ -56,14 +52,16 @@ const RecipeMain = () => {
     //   <Link to="/community/recipe/write">작성</Link>
     // </>
     <R.Container>
-      <R.FirstDiv>
-        <R.FirstDivText>RECIPE</R.FirstDivText>
-        <R.SearchForm>
-          <R.SearchInput onChange={getValue} />
-          <R.SearchButton type="submit" onClick={searchPosts}>검색</R.SearchButton>
-        </R.SearchForm>
-        <R.WriteButton to="/community/recipe/write">글쓰기</R.WriteButton>
-      </R.FirstDiv>
+      <R.CommunityListHeader>
+        <span>RECIPE</span>
+        <div>
+          <R.InputBox>
+            <input type="text" onChange={getValue} />
+            <R.SearchButton type="submit" onClick={searchPosts}>{Icons.search}</R.SearchButton>
+          </R.InputBox>
+          <R.WriteButton to="/community/recipe/write">글쓰기</R.WriteButton>
+        </div>
+      </R.CommunityListHeader>
       <R.SecondDiv>
         <RecipePosts posts={currentPosts(recipePosts)} loading={loading} />
         <RecipePagination
