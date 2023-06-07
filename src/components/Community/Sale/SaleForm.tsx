@@ -11,9 +11,6 @@ import type { SaleProps } from "../../../constants/interfaces";
 import { defaultDiscountValue } from "../../../constants/defaultFormOption";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducer/rootReducer";
-
-// import Loading from "../../Loading/PageLoading";
-
 import axios from "axios";
 
 const SaleForm = () => {

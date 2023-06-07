@@ -67,7 +67,7 @@ const ShareForm = () => {
     try {
       const response = await axios({
         url: location.state
-          ? `/board-share/update/${location.state.num}`
+          ? `/board-share/${sido}/update/${location.state.num}`
           : `/board-share`,
         method: "POST",
         headers: { "Content-Type": "multipart/form-data" },

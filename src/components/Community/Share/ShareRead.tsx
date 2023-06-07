@@ -7,13 +7,16 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import type { ShareReadProps } from "../../../constants/interfaces";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/rootReducer";
 
 const ShareRead = () => {
   const location = useLocation();
   const [data, setData] = useState<ShareReadProps>();
   const id = location.pathname.split("/")[3];
-
   const navigate = useNavigate();
+
+  const { sido } = useSelector((state: RootState) => state.address);
 
   console.log("요청 url 주소", `/board-share/${id}`);
   console.log("share READ 요청 DATA:", data);
@@ -23,7 +26,7 @@ const ShareRead = () => {
     try {
       const response = await axios({
         method: "DELETE",
-        url: `/board-share/${id}`,
+        url: `/board-share/${sido}/${id}`,
       });
       const responseData = await response.data;
       console.log(responseData);
@@ -36,7 +39,7 @@ const ShareRead = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`/board-share/${id}`);
+      const response = await axios.get(`/board-share/${sido}/${id}`);
       const responseData = await response.data;
       setData(responseData);
     } catch (error) {

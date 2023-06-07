@@ -6,14 +6,17 @@ import Icons from "../../../Styles/Icons";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import type { SaleReadProps } from "../../../constants/interfaces";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/rootReducer";
 
 const DiscountRead = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [data, setData] = useState<SaleReadProps>();
   const id = location.pathname.split("/")[3];
+  const { sido } = useSelector((state: RootState) => state.address);
 
-  console.log("요청 url 주소", `/board-sale/${id}`);
+  console.log("요청 url 주소", `/board-sale/${sido}/${id}`);
   console.log("sale READ 요청 DATA:", data);
 
   const onDeleteHandler = async () => {
@@ -21,7 +24,7 @@ const DiscountRead = () => {
     try {
       const response = await axios({
         method: "DELETE",
-        url: `/board-sale/${id}`,
+        url: `/board-sale/${sido}/${id}`,
       });
       const responseData = await response.data;
       console.log(responseData);
@@ -34,7 +37,7 @@ const DiscountRead = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`/board-sale/${id}`);
+      const response = await axios.get(`/board-sale/${sido}/${id}`);
       const responseData = await response.data;
       setData(responseData);
     } catch (error) {
