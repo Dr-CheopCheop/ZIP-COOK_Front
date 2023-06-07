@@ -10,6 +10,7 @@ export interface RecipeProps {
 }
 
 export interface RecipeReadProps {
+  filepath: FileList;
   title: string;
   serving: string;
   level: string;

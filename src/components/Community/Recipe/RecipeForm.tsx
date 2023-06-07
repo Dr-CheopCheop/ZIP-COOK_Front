@@ -73,7 +73,7 @@ const RecipeForm = () => {
     try {
       const response = await axios({
         url: location.state
-          ? `/board-recipe/${location.state.num}`
+          ? `/board-recipe/update/${location.state.num}`
           : `/board-recipe`,
         method: "POST",
         headers: { "Content-Type": "multipart/form-data" },

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import * as S from "./RecipeReadStyle";
 // import CommentList from "../Comment/CommentList";
 import { useNavigate, useLocation } from "react-router-dom";
-import tbk from "../../../img/tteokbbokki.jpg";
 import CommentList from "../Comment/RecipeCommentList";
 
 import Icons from "../../../Styles/Icons";
@@ -87,7 +86,7 @@ const RecipeRead = () => {
       <Navbar />
       <S.MealKitContainer>
         <S.MainImg>
-          <img src={tbk} alt="main_img" />
+          <img src={`/images/${data?.filepath}`} alt="main_img" />
           <S.MainTitle>
             <h1>{data?.title}</h1>
             <p>{data?.summary}</p>
@@ -124,7 +123,7 @@ const RecipeRead = () => {
           <S.IngredientBox>
             <p>재료</p>
             <div>
-              {data?.ingredients.map((food, idx) => (
+              {data?.ingredients.map((food: string, idx: number) => (
                 <span key={food}>
                   {food}
                   {/* {idx !== data.ingredients.length - 1 && <span>,</span>} */}
@@ -133,7 +132,7 @@ const RecipeRead = () => {
             </div>
           </S.IngredientBox>
           <S.contentBox>
-            {data?.content.map((manual, idx) => (
+            {data?.content.map((manual: string, idx: number) => (
               <div key={manual}>
                 <p>{idx + 1}</p>
                 <span>{manual}</span>
