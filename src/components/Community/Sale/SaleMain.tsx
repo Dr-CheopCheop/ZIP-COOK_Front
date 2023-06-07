@@ -68,12 +68,12 @@ const SaleMain = () => {
       <S.SecondDiv>
         <S.PostList>
         <SalePosts posts={currentPosts(salePosts)} loading={loading} />
+        </S.PostList>
         <SalePagination
           postsPerPage={postsPerPage}
           totalPosts={salePosts.length}
           paginate={setCurrentPage}
         />
-        </S.PostList>
       </S.SecondDiv>
     </S.Container>
   );
