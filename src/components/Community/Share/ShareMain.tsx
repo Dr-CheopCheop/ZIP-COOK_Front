@@ -25,7 +25,7 @@ const ShareMain = () => {
     const fetchShareData = async () => {
       setLoading(true);
       const response = await axios.get(
-        `/board-share?location=${sido}&page=${currentPage}`
+        `/board-share?location=${sido}`
       );
       setSharePosts(response.data);
       setLoading(false);
@@ -62,7 +62,9 @@ const ShareMain = () => {
       </S.CommunityListHeader>
 
       <S.SecondDiv>
+        <S.PostList>
         <SharePosts posts={currentPosts(sharePosts)} loading={loading} />
+        </S.PostList>
         <SharePagination
           postsPerPage={postsPerPage}
           totalPosts={sharePosts.length}

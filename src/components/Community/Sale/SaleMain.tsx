@@ -27,7 +27,7 @@ const SaleMain = () => {
   useEffect(() => {
     const fetchSaleData = async () => {
       setLoading(true);
-      const response = await axios.get(`/board-sale?location=${sido}&page=${currentPage}`);
+      const response = await axios.get(`/board-sale?location=${sido}`);
       setSalePosts(response.data);
       setLoading(false);
     };
@@ -66,12 +66,14 @@ const SaleMain = () => {
         </div>
       </S.CommunityListHeader>
       <S.SecondDiv>
+        <S.PostList>
         <SalePosts posts={currentPosts(salePosts)} loading={loading} />
         <SalePagination
           postsPerPage={postsPerPage}
           totalPosts={salePosts.length}
           paginate={setCurrentPage}
         />
+        </S.PostList>
       </S.SecondDiv>
     </S.Container>
   );

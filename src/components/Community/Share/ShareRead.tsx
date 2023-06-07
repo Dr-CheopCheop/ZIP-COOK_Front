@@ -18,7 +18,7 @@ const ShareRead = () => {
 
   const { sido } = useSelector((state: RootState) => state.address);
 
-  console.log("요청 url 주소", `/board-share/${id}`);
+  console.log("요청 url 주소", `/board-share/${sido}/${id}`);
   console.log("share READ 요청 DATA:", data);
 
   const onDeleteHandler = async () => {
@@ -49,7 +49,7 @@ const ShareRead = () => {
 
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   return (
     <>

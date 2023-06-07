@@ -62,7 +62,7 @@ export const WriteButton = styled(Link)`
 `;
 
 export const SecondDiv = styled.div`
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -75,6 +75,43 @@ export const PostSpan = styled.span`
     align-items: center;
     border: 1px solid black;
     border-radius: 15px;
+`;
+
+export const PostContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+`;
+
+export const PostWrap = styled.div`
+  width: 33%;
+  height: 100%;
+  margin-bottom: 4%;
+  border: 1px solid black;
+  border-radius: 15px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;
+
+export const PostImgDiv = styled.div`
+  text-align: center;
+`;
+
+export const PostImg = styled.img`
+  max-width: 95%;
+  max-height: 100%;
+`;
+
+export const PostList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, auto));
+  grid-template-rows: repeat(auto-fill, minmax(30%, auto));
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  gap: 2rem 2rem;
+  place-items: stretch stretch;
 `;
 
 export const PageButtonWrap = styled.div`
