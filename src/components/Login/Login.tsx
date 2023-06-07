@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../reducer/userSlice";
 import axios from "axios";
 import { SET_TOKEN } from "../../reducer/tokenSlice";
+import ZipCook_logo from '../../img/ZipCook_logo.png'
 
 interface FormValue {
   username: string;
@@ -108,7 +109,7 @@ const Loginpage = () => {
   return (
     <L.Container>
       <L.Test to={"/main"}>
-        <h1>LOGO 넣기</h1>
+        <L.img src={ZipCook_logo}/>
       </L.Test>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>

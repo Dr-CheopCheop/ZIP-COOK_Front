@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import HomeImg1 from '../../img/HomeImg1.jpeg';
+import HomeImg1 from "../../img/HomeImg1.jpeg";
 
 export const Container = styled.div`
   width: 100%;
   text-align: center;
+  margin-top: 1.5rem;
 `;
 
 export const FirstDiv = styled.div`

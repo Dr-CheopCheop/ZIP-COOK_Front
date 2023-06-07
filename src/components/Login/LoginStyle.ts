@@ -93,7 +93,5 @@ export const Googleb = styled.button`
 `;
 
 export const img = styled.img`
-  width: 250px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
+  width: 300px;
 `;
