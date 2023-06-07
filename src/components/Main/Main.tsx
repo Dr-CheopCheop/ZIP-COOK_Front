@@ -85,7 +85,7 @@ const MainPage = () => {
                 <M.AllButton to="/main">All</M.AllButton>
                 <M.RecipeButton to="/community/recipe">RECIPE</M.RecipeButton>
                 <M.SharingButton to="/community/share">SHARING INREDIENTS</M.SharingButton>
-                <M.DiscountButton to="/community/sale">DISCOUNT</M.DiscountButton>
+                <M.DiscountButton to="/community/sale">SALE INREDIENTS</M.DiscountButton>
             </M.SecondDiv>
             <M.ThirdDiv>
                 <M.RecipeText>RECIPE</M.RecipeText>
