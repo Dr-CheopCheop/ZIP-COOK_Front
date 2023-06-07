@@ -7,16 +7,18 @@ const RecipePosts = ({ posts, loading }: any) => {
       <>
         {loading && <div> loading... </div>}
         <div>
+          <Link to="/community/recipe">
           {posts.map((post: any) => (
-            <Link to="/community/recipe/1" key={post.id}>
-            <R.PostSpan >
-              <img src={`/images/${post.filepath}`} />{<br />}
-              {post.title}{<br />}
-              TIME: {post.time}{<br />}
-              LEVEL: {post.level}
-            </R.PostSpan>
+            <Link to={`/community/recipe/${post.id}`} key={post.id}>
+              <R.PostWrap>
+                <R.PostImg src={`/images/${post.filepath}`} />{<br />}
+                {post.title}{<br />}
+                TIME: {post.time}{<br />}
+                LEVEL: {post.level}
+              </R.PostWrap>
             </Link>
           ))}
+          </Link>
         </div>
       </>
     );
