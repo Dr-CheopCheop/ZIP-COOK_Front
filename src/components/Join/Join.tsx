@@ -38,23 +38,6 @@ const SignupForm = () => {
     console.log(sido, sigugun, dong);
   };
 
-  // const idCheckRes = async (data: SignupProps) => {
-  //   try {
-  //     const { username } = data;
-  //     const CheckRes = await axios.get(
-  //       `http://localhost/auth/exist/username/${username}`
-  //     );
-  //     if (CheckRes.data.exist === true) {
-  //       throw new Error("이미 사용중인 username입니다.");
-  //       console.log("사용가능한 아이디");
-  //       alert("사용가능한 아이디입니다.");
-  //       setIdCheckResult("사용가능한 username입니다");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const idCheckRes = async (username : string) => {
     console.log(username);
     try {
@@ -65,11 +48,16 @@ const SignupForm = () => {
         throw new Error("이미 사용중인 아이디입니다.");
       }
       console.log("사용가능한 아이디");
-      alert("사용가능한 아이디입니다.");
       setIdCheckResult("사용가능한 아이디입니다");
     } catch (error) {
       console.log(error);
+      setIdCheckResult("중복된 아이디입니다.");
     }
+  };
+
+  const handleIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIdCheckResult(e.target.value);
+    setIdCheckResult(""); // 인풋 값이 변경될 때마다 nicknameResult 상태 초기화
   };
 
   
@@ -83,11 +71,16 @@ const SignupForm = () => {
         throw new Error("이미 사용중인 닉네임입니다.");
       }
       console.log("사용가능한 아이디");
-      alert("사용가능한 닉네임입니다.");
       setNicknameResult("사용가능한 닉네임입니다");
     } catch (error) {
       console.log(error);
+      setNicknameResult("중복된 닉네임입니다.");
     }
+  };
+
+  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNicknameResult(e.target.value);
+    setNicknameResult(""); // 인풋 값이 변경될 때마다 nicknameResult 상태 초기화
   };
 
   const EmailCheckRes = async (email : string) => {
@@ -102,7 +95,13 @@ const SignupForm = () => {
       setEmailCheckResult("사용가능한 이메일입니다");
     } catch (error) {
       console.log(error);
+      setEmailCheckResult("이미 사용중인 이메일입니다.");
     }
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmailCheckResult(e.target.value);
+    setEmailCheckResult(""); // 인풋 값이 변경될 때마다 nicknameResult 상태 초기화
   };
   
   const onSubmitHandler: SubmitHandler<SignupProps> = (data) => {
@@ -114,6 +113,12 @@ const SignupForm = () => {
       password: data.password,
       location: selectedLocation,
     };
+
+    if (!data.username || !data.nickname || !data.email || !data.password || !data.passwordConfirm || !selectedLocation) {
+      console.log("모든 필수 입력 항목을 채워주세요!");
+      alert("모든 항목을 채워주세요!");
+      return;
+    }
 
     axios
       .post(`/auth/signup`, formData, {
@@ -146,12 +151,14 @@ const SignupForm = () => {
           <S.Input
             placeholder="ID을 입력해주세요."
             {...register("username", { required: true })}
+            onChange={handleIdChange}
           />
           <span>
             <S.E_button type="button" onClick={() => idCheckRes(watch("username"))}>
               중복체크
             </S.E_button>
           </span>
+          <div>{idCheckResult}</div>
         </div>
         {errors.username && <div>ID를 작성해주세요!</div>}
         <S.Div>
@@ -161,12 +168,14 @@ const SignupForm = () => {
           <S.Input
             placeholder="6글자 이내로 입력해주세요"
             {...register("nickname", { required: true, maxLength: 4 })}
+            onChange={handleNicknameChange}
           />
           <span>
             <S.E_button type="button" onClick={() => NicknameCheckRes(watch("nickname"))}>
               중복체크
             </S.E_button>
           </span>
+          <div>{nicknameResult}</div>
         </div>
         {errors.nickname && errors.nickname.type === "maxLength" && (
           <div>닉네임는 4글자 이내로 작성해주세요!</div>
@@ -188,12 +197,14 @@ const SignupForm = () => {
                 message: "이메일 형식에 맞지 않습니다.",
               },
             })}
+            onChange={handleEmailChange}
           />
           <span>
             <S.E_button type="button" onClick={() => EmailCheckRes(watch("email"))}>
               중복체크
             </S.E_button>
           </span>
+          <div>{emailCheckResult}</div>
         </div>
         {errors.email && <small role="alert">{errors.email.message}</small>}
         <S.Div>
