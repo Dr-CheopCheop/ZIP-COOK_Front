@@ -10,51 +10,65 @@ const RecipeCommentList = (props: any) => {
   const [datas, setDatas] = useState<commentDataProps[]>([]);
 
   const location = useLocation();
-  const { id } = props;
+  const id = location.pathname.split("/")[3];
   const category = location.pathname.split("/")[2];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios({
-          method: "GET",
-          url: `/${category}-comment/${id}`,
+  const fetchData = async () => {
+    try {
+      const response = await axios({
+        method: "GET",
+        url: `/${category}-comment/${id}`,
+      });
+      const responseData = await response.data;
+      const loadedDatas: commentDataProps[] = [];
+      for (const key in responseData) {
+        loadedDatas.push({
+          id: responseData[key].id,
+          nickname: responseData[key].nickname,
+          content: responseData[key].content,
         });
-        const responseData = await response.data;
-        const loadedDatas: commentDataProps[] = [];
-        for (const key in responseData) {
-          loadedDatas.push({
-            id: responseData[key].id,
-            nickname: responseData[key].nickname,
-            content: responseData[key].content,
-          });
-        }
-
-        setDatas(loadedDatas);
-      } catch (error) {
-        console.error(error);
       }
-    };
+
+      setDatas(loadedDatas);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   const onAddCommentHanlder = (content: any) => {
     setDatas([...datas, content]);
   };
 
-  const onDeleteCommentHandler = (id: any) => {
+  const onDeleteCommentHandler = async (id: any) => {
     const filteredDatas = datas.filter((data) => data.id !== id);
     setDatas(filteredDatas);
+    const response = await axios({
+      method: "DELETE",
+      url: `/${category}-comment/delete/${id}`,
+    });
+    const responseData = response.data();
+    console.log(responseData);
   };
 
-  const onEditCommentHandler = (id: any, editComment: string) => {
+  const onEditCommentHandler = async (id: any, editComment: string) => {
     setDatas(
       datas.map((data) =>
         data.id === id ? { ...data, content: editComment } : data
       )
     );
-  };
 
+    const response = await axios({
+      method: "POST",
+      url: `/${category}-comment/update/${id}`,
+      data: { content: editComment },
+    });
+    const responseData = response.data();
+    console.log(responseData);
+  };
   return (
     <S.CommentListWrapper>
       <S.CountComments>

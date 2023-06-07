@@ -3,27 +3,53 @@ import Navbar from "../../Navbar/Navbar";
 // import DummyData from "../Dummydata";
 import * as S from "./ShareReadStyle";
 import CommentList from "../Comment/CommentList";
-import { Link, useParams, useNavigate } from "react-router-dom";
-
-const readData = {
-  title: "파프리카 가져가실분~",
-  contents:
-    "요리하고 남은거 가져가실분 계실까요 채소라 빠르게 가져가셨으면 좋겠습니다! 유통기한 (~3/31)",
-};
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import type { ShareReadProps } from "../../../constants/interfaces";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/rootReducer";
 
 const ShareRead = () => {
-  const { id } = useParams();
-
-  // const selectData = DummyData.find((data) => data.id === Number(id));
-  // const { title, difficulty, cookTime } = selectData ?? {
-  //   title: "존재하지 않는 게시물 입니다.",
-  // };
+  const location = useLocation();
+  const [data, setData] = useState<ShareReadProps>();
+  const id = location.pathname.split("/")[3];
   const navigate = useNavigate();
 
-  const onDeleteHandler = () => {
+  const { sido } = useSelector((state: RootState) => state.address);
+
+  console.log("요청 url 주소", `/board-share/${id}`);
+  console.log("share READ 요청 DATA:", data);
+
+  const onDeleteHandler = async () => {
     //삭제 로직 작성
-    navigate("/community/share");
+    try {
+      const response = await axios({
+        method: "DELETE",
+        url: `/board-share/${sido}/${id}`,
+      });
+      const responseData = await response.data;
+      console.log(responseData);
+
+      navigate("/community/share");
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`/board-share/${sido}/${id}`);
+      const responseData = await response.data;
+      setData(responseData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  });
 
   return (
     <>
@@ -36,7 +62,7 @@ const ShareRead = () => {
                 to="/community/share/write"
                 state={{
                   update: true,
-                  datas: readData,
+                  datas: data,
                   num: id,
                 }}
               >
@@ -52,13 +78,10 @@ const ShareRead = () => {
           <S.TitleImage src="http://placehold.it/250x250" alt="" />
         </S.TitleContainer>
         <S.ContentsContainer>
-          <h1>파프리카 가져가실분~</h1>
+          <h1>{data?.title}</h1>
           <div>경기도 부천시 역곡동 12-1</div>
 
-          <div>
-            요리하고 남은거 가져가실분 계실까요 채소라 빠르게 가져가셨으면
-            좋겠습니다! 유통기한 (~3/31)
-          </div>
+          <div>{data?.content}</div>
         </S.ContentsContainer>
         <CommentList id={id} />
       </S.ReadContainer>

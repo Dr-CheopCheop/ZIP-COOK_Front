@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import HomeImg1 from '../../img/HomeImg1.jpeg';
+import HomeImg1 from "../../img/HomeImg1.jpeg";
 
 export const Container = styled.div`
   width: 100%;
   text-align: center;
+  margin-top: 1.5rem;
 `;
 
 export const FirstDiv = styled.div`
@@ -14,6 +15,7 @@ export const FirstDiv = styled.div`
   flex-direction: column;
   position: relative;
   padding: 7% 15% 7% 15%;
+  overflow: auto;
   ::after {
     width: 100%;
     height: 100%;
@@ -107,6 +109,7 @@ export const SecondDiv = styled.div`
   width: 100%;
   height: 100vh;
   padding: 7% 15% 7% 15%;
+  overflow: auto;
 `;
 
 export const SecondBox1 = styled.div`
@@ -150,8 +153,10 @@ export const SecondBox2 = styled.div`
 
 export const ChatbotImg = styled.img`
   display: flex;
-  width: 500px;
-  height: 450px;
+  /* width: 500px;
+  height: 450px; */
+  width: 120%;
+  height: 60%;
   margin: auto 0 0 auto;
 `;
 
@@ -163,6 +168,7 @@ export const RecipeDiv = styled.div`
   background-color: white;
   padding: 7% 15% 7% 15%;
   padding-right: 1%;
+  overflow: auto;
 `;
 
 export const RecipeBox = styled.div`
@@ -222,8 +228,8 @@ export const RecipeBox2 = styled.div`
 
 export const RecipeImg = styled.img`
   display: flex;
-  width: 500px;
-  height: 300px;
+  width: 100%;
+  height: 60%;
   margin: auto 0 0 auto;
 `;
 
@@ -235,6 +241,7 @@ export const SharingDiv = styled.div`
   background-color: #cde990;
   padding: 7% 10% 7% 10%;
   padding-right: 3%;
+  overflow: auto;
 `;
 
 export const SharingBox = styled.div`
@@ -242,6 +249,7 @@ export const SharingBox = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  width: 60%;
 `;
 
 export const SharingText1 = styled.div`
@@ -290,12 +298,13 @@ export const SharingBox2 = styled.div`
   align-items: flex-end;
   justify-content: flex-end;
   margin-left: 10%;
+  width: 40%;
 `;
 
 export const SharingImg = styled.img`
   display: flex;
-  width: 500px;
-  height: 300px;
+  width: 100%;
+  height: 60%;
   margin-right: 2%;
 `;
 
@@ -307,6 +316,7 @@ export const SaleDiv = styled.div`
   background-color: white;
   padding: 7% 15% 7% 15%;
   padding-right: 1%;
+  overflow: auto;
 `;
 
 export const SaleBox1 = styled.div`
@@ -374,6 +384,8 @@ export const SaleButton = styled(Link)`
 export const SaleImg = styled.img`
   display: flex;
   margin-left: 25%;
-  width: 500px;
-  height: 300px;
+  /* width: 500px;
+  height: 300px; */
+  width: 30%;
+  
 `;

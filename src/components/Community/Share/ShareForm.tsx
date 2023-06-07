@@ -26,6 +26,7 @@ const ShareForm = () => {
   // const sido = "seoul";
   const { sido } = useSelector((state: RootState) => state.address);
 
+  console.log("location: ", location.state);
   if (location.state) {
     defaultValue = location.state.datas;
   }
@@ -66,9 +67,9 @@ const ShareForm = () => {
     try {
       const response = await axios({
         url: location.state
-          ? `/board-share/${location.state.num}`
+          ? `/board-share/${sido}/update/${location.state.num}`
           : `/board-share`,
-        method: location.state ? "PUT" : "POST",
+        method: "POST",
         headers: { "Content-Type": "multipart/form-data" },
         data: formData,
       });

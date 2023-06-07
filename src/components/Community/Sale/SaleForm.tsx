@@ -11,9 +11,6 @@ import type { SaleProps } from "../../../constants/interfaces";
 import { defaultDiscountValue } from "../../../constants/defaultFormOption";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducer/rootReducer";
-
-// import Loading from "../../Loading/PageLoading";
-
 import axios from "axios";
 
 const SaleForm = () => {
@@ -27,7 +24,7 @@ const SaleForm = () => {
   const { sido } = useSelector((state: RootState) => state.address);
 
   console.log(sido);
-
+  console.log("location: ", location.state);
   const {
     titleRequirements,
     imageRequirements,
@@ -81,9 +78,9 @@ const SaleForm = () => {
     try {
       const response = await axios({
         url: location.state
-          ? `/board-sale/${location.state.num}`
+          ? `/board-sale/update/${location.state.num}`
           : `/board-sale`,
-        method: location.state ? "PUT" : "POST",
+        method: "POST",
         headers: { "Content-Type": "multipart/form-data" },
         data: formData,
       });

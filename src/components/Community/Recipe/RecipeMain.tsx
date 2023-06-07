@@ -5,17 +5,26 @@ import axios from "axios";
 import RecipePosts from "./RecipePosts";
 import RecipePagination from "./RecipePagination";
 import * as R from "./RecipeMainStyle";
+import Icons from "../../../Styles/Icons";
 
 const RecipeMain = () => {
   const [recipePosts, setRecipePosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(15);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const getValue = (e: React.FormEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = e;
+    setSearchQuery(value.toLowerCase());
+  }
 
   useEffect(() => {
     const fetchRecipeData = async () => {
       setLoading(true);
-      const response = await axios.get(`/board-recipe?page=1`);
+      const response = await axios.get(`/board-recipe?page=${currentPage}`);
       setRecipePosts(response.data);
       setLoading(false);
     };
@@ -26,21 +35,33 @@ const RecipeMain = () => {
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
   const currentPosts = (posts: any) => {
-    let currentPosts = 0;
-    currentPosts = posts.slice(indexOfFirst, indexOfLast);
-    return currentPosts;
+    let filteredPosts = posts.filter((post: any) =>
+      post.title.toLowerCase().includes(searchQuery)
+    );
+    filteredPosts = filteredPosts.slice(indexOfFirst, indexOfLast);
+    return filteredPosts;
+  }
+
+  const searchPosts = () => {
+    setCurrentPage(1);
   };
+
   return (
     // <>
     //   <GetPostList category="recipe" />
     //   <Link to="/community/recipe/write">작성</Link>
     // </>
     <R.Container>
-      <R.FirstDiv>
-        <R.FirstDivText>RECIPE</R.FirstDivText>
-        <R.SearchInput></R.SearchInput>
-        <R.WriteButton to="/community/recipe/write">글쓰기</R.WriteButton>
-      </R.FirstDiv>
+      <R.CommunityListHeader>
+        <span>RECIPE</span>
+        <div>
+          <R.InputBox>
+            <input type="text" onChange={getValue} />
+            <R.SearchButton type="submit" onClick={searchPosts}>{Icons.search}</R.SearchButton>
+          </R.InputBox>
+          <R.WriteButton to="/community/recipe/write">글쓰기</R.WriteButton>
+        </div>
+      </R.CommunityListHeader>
       <R.SecondDiv>
         <RecipePosts posts={currentPosts(recipePosts)} loading={loading} />
         <RecipePagination

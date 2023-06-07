@@ -1,23 +1,53 @@
 import Navbar from "../../Navbar/Navbar";
 import * as S from "./SaleReadStyle";
 import CommentList from "../Comment/CommentList";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Icons from "../../../Styles/Icons";
-const readData = {
-  title: "딸기 한박스",
-  place: "역곡 홈플러스",
-  price: "12000원",
-  discountPrice: "9000원",
-};
+import { useEffect, useState } from "react";
+import axios from "axios";
+import type { SaleReadProps } from "../../../constants/interfaces";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/rootReducer";
 
 const DiscountRead = () => {
-  const { id } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
+  const [data, setData] = useState<SaleReadProps>();
+  const id = location.pathname.split("/")[3];
+  const { sido } = useSelector((state: RootState) => state.address);
 
-  const onDeleteHandler = () => {
+  console.log("요청 url 주소", `/board-sale/${sido}/${id}`);
+  console.log("sale READ 요청 DATA:", data);
+
+  const onDeleteHandler = async () => {
     //삭제 로직 작성
-    navigate("/community/sale");
+    try {
+      const response = await axios({
+        method: "DELETE",
+        url: `/board-sale/${sido}/${id}`,
+      });
+      const responseData = await response.data;
+      console.log(responseData);
+
+      navigate("/community/sale");
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`/board-sale/${sido}/${id}`);
+      const responseData = await response.data;
+      setData(responseData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  });
 
   return (
     <>
@@ -28,14 +58,14 @@ const DiscountRead = () => {
             <S.UpperTitle>
               <Link
                 to="/community/sale/write"
-                state={{ update: true, datas: readData, num: id }}
+                state={{ update: true, datas: data, num: id }}
               >
                 <S.TitleButton>수정</S.TitleButton>
               </Link>
               <S.TitleButton onClick={onDeleteHandler}>삭제</S.TitleButton>
             </S.UpperTitle>
             <S.LowTitle>
-              <p>작성자: cooker</p>
+              <p>작성자:임시데이터 </p>
               <p>2023.03.26 16:53</p>
             </S.LowTitle>
           </S.TitleBox>
@@ -43,13 +73,13 @@ const DiscountRead = () => {
         </S.TitleContainer>
         <S.ContentsContainer>
           <div>
-            <h1>{readData.title}</h1>
-            <span>매장 : {readData.place}</span>
+            <h1>{data?.title}</h1>
+            <span>매장 : {data?.place}</span>
           </div>
           <div>
-            <p>원가 : {readData.price}</p>
+            <p>원가 : {data?.price}</p>
             <p>{Icons.downDirection}</p>
-            <p>할인가 : {readData.discountPrice}</p>
+            <p>할인가 : {data?.discountPrice}</p>
           </div>
         </S.ContentsContainer>
         <CommentList id={id} />

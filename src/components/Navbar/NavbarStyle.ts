@@ -48,6 +48,9 @@ export const Logo = styled.div`
   line-height: ${Frames.navbar_height};
   white-space: nowrap;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Li = styled.li`
@@ -55,4 +58,15 @@ export const Li = styled.li`
   padding: 0 15px;
   align-items: center;
   white-space: nowrap;
+`;
+
+export const LogoImg = styled.img`
+  width: 300px;
+  margin-top: 3rem;
+`;
+
+export const Button = styled.button`
+  border: none;
+  background: none;
+  cursor: pointer;
 `;

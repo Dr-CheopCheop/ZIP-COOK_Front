@@ -5,6 +5,7 @@ import { RootState } from "../../reducer/rootReducer";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { DELETE_TOKEN } from "../../reducer/tokenSlice";
+import zipCook_logo from '../../img/ZipCook_logo.png';
 
 const Navbar = () => {
   const user = useSelector((state: RootState) => state.user);
@@ -39,14 +40,14 @@ const Navbar = () => {
             </S.Div>
             <S.Div>
               <S.Logo>
-                <S.StyledLink to="/main">ZIP COOK</S.StyledLink>
+                <S.StyledLink to="/main"><S.LogoImg src={zipCook_logo}/></S.StyledLink>
               </S.Logo>
             </S.Div>
             <S.Div>
               {user.isLogin ? (
                 <>
                   <S.Li>
-                    <button onClick={handleLogout}>LOGOUT</button>
+                    <S.Button onClick={handleLogout}>LOGOUT</S.Button>
                   </S.Li>
                   <S.Li>
                     <S.StyledLink to="/mypage">MY PAGE</S.StyledLink>

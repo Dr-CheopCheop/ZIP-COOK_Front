@@ -30,6 +30,8 @@ const RecipeForm = () => {
   let defaultValues = defaultRecipeValue;
   const navigate = useNavigate();
 
+  console.log("location: ", location.state);
+
   //수정 여부
   if (location.state) defaultValues = location.state.datas;
   else defaultValues = defaultRecipeValue;
@@ -47,12 +49,12 @@ const RecipeForm = () => {
 
   const onSubmitHandler: SubmitHandler<RecipeProps> = async (data) => {
     const recipepost = {
-      nickname: "김모씨",
+      nickname: "닉네임생기면바꾸자",
       title: data.title,
       serving: data.serving,
       level: data.level,
-      // ingredients: data.ingredients,
-      // summary: data.summary,
+      ingredients: data.ingredients,
+      summary: data.summary,
       content: data.content,
       time: data.time,
     };
@@ -71,9 +73,9 @@ const RecipeForm = () => {
     try {
       const response = await axios({
         url: location.state
-          ? `/board-recipe/${location.state.num}`
+          ? `/board-recipe/update/${location.state.num}`
           : `/board-recipe`,
-        method: location.state ? "PUT" : "POST",
+        method: "POST",
         headers: { "Content-Type": "multipart/form-data" },
         data: formData,
       });

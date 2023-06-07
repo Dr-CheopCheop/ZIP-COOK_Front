@@ -9,8 +9,26 @@ export interface RecipeProps {
   time: string;
 }
 
+export interface RecipeReadProps {
+  filepath: FileList;
+  title: string;
+  serving: string;
+  level: string;
+  ingredients: string[];
+  summary: string;
+  content: string[];
+  time: string;
+}
+
 export interface SaleProps {
   img: FileList;
+  price: string;
+  place: string;
+  discountPrice: string;
+  title: string;
+}
+export interface SaleReadProps {
+  filepath: FileList;
   price: string;
   place: string;
   discountPrice: string;
@@ -19,6 +37,11 @@ export interface SaleProps {
 
 export interface ShareProps {
   img: FileList;
+  title: string;
+  content: string;
+}
+export interface ShareReadProps {
+  filepath: FileList;
   title: string;
   content: string;
 }

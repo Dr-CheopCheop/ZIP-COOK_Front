@@ -1,22 +1,32 @@
-import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SharePosts from "./SharePosts";
 import SharePagination from "./SharePagination";
 import * as S from "./ShareMainStyle";
-import GetPostList from "../Post/GetPostList";
-import { url } from "../../../constants/serverURL";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/rootReducer";
+import Icons from "../../../Styles/Icons";
 const ShareMain = () => {
   const [sharePosts, setSharePosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(15);
+  const [searchQuery, setSearchQuery] = useState("");
+  const { sido } = useSelector((state: RootState) => state.address);
+
+  const getValue = (e: React.FormEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = e;
+    setSearchQuery(value.toLowerCase());
+  };
 
   useEffect(() => {
     const fetchShareData = async () => {
       setLoading(true);
-      const response = await axios.get(`/board-share?page=1`);
+      const response = await axios.get(
+        `/board-share?location=${sido}&page=${currentPage}`
+      );
       setSharePosts(response.data);
       setLoading(false);
     };
@@ -27,22 +37,30 @@ const ShareMain = () => {
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
   const currentPosts = (posts: any) => {
-    let currentPosts = 0;
-    currentPosts = posts.slice(indexOfFirst, indexOfLast);
-    return currentPosts;
+    let filteredPosts = posts.filter((post: any) =>
+      post.title.toLowerCase().includes(searchQuery)
+    );
+    filteredPosts = filteredPosts.slice(indexOfFirst, indexOfLast);
+    return filteredPosts;
+  };
+
+  const searchPosts = () => {
+    setCurrentPage(1);
   };
 
   return (
-    // <div>
-    //   <GetPostList category="share" />
-    //   <Link to="/community/share/write">작성</Link>
-    // </div>
     <S.Container>
-      <S.FirstDiv>
-        <S.FirstDivText>SHARING</S.FirstDivText>
-        <S.SearchInput></S.SearchInput>
-        <S.WriteButton to="/community/share/write">글쓰기</S.WriteButton>
-      </S.FirstDiv>
+      <S.CommunityListHeader>
+        <span>SHARING</span>
+        <div>
+          <S.InputBox>
+            <input type="text" onChange={getValue} />
+            <S.SearchButton type="submit" onClick={searchPosts}>{Icons.search}</S.SearchButton>
+          </S.InputBox>
+          <S.WriteButton to="/community/share/write">글쓰기</S.WriteButton>
+        </div>
+      </S.CommunityListHeader>
+
       <S.SecondDiv>
         <SharePosts posts={currentPosts(sharePosts)} loading={loading} />
         <SharePagination

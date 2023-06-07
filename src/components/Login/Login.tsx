@@ -1,12 +1,13 @@
 import * as L from "./LoginStyle";
-import icon from "../../img/Gb.jpeg";
+import React, {useEffect} from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginUser, SET_TOKEN } from "../../reducer/userSlice";
+import { loginUser } from "../../reducer/userSlice";
 import axios from "axios";
-import setAuthorizationToken from '../../utils/setAuthorizationToken'
+import { SET_TOKEN } from "../../reducer/tokenSlice";
+import ZipCook_logo from '../../img/ZipCook_logo.png'
 
 interface FormValue {
   username: string;
@@ -17,7 +18,7 @@ const Loginpage = () => {
   const dispatch = useDispatch();
   const movepage = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [msg, setMsg] = useState("");
+  const [meg, setMsg] = useState("");
 
   function JoinPage() {
     movepage("/join");
@@ -25,10 +26,6 @@ const Loginpage = () => {
 
   function ForgotPage() {
     movepage("/forgot");
-  }
-
-  function Googlepage() {
-    movepage("/googleLogin");
   }
 
   const {
@@ -53,10 +50,11 @@ const Loginpage = () => {
           },
         }
       );
-      const jwtToken = response.data.token;
+      const user = response.data;
+      const jwtToken = user.token;
       //token 저장
       localStorage.setItem("accessToken", jwtToken);
-      //setAuthorizationToken(jwtToken);
+      axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
       const userInfoRes = await axios.get("/auth/user");
       const userInfo = userInfoRes.data;
 
@@ -65,13 +63,53 @@ const Loginpage = () => {
       movepage("/main");
     } catch (error) {
       console.log("login fail", error);
+      alert("로그인에 실패하셨습니다. 다시 로그인해주세요");
+      setIsLoading(false);
+      setMsg("LOGIN");
     }
   };
+
+  useEffect(() => {
+    const validateToken = async () => {
+      const jwtToken = localStorage.getItem("accessToken");
+      if(jwtToken) {
+        try{
+          const response = await axios.post("/auth/user",
+          {Authorization : jwtToken},
+          {
+            headers : {
+              "Content-Type": "application/json",
+            }
+          }
+          );
+          if(response.data.valid){
+            axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
+
+            const userInfoRes = await axios.get("/auth/user");
+            const userInfo = userInfoRes.data;
+
+            dispatch(SET_TOKEN(jwtToken));
+            dispatch(loginUser(userInfo));
+            movepage("/main");
+          }else {
+            movepage('/login');
+          }
+        } catch(error){
+          console.log("토큰 요청 실패", error);
+          movepage('/login');
+        }
+      }
+    };
+
+    validateToken();
+  },[dispatch, movepage]);
+
+
 
   return (
     <L.Container>
       <L.Test to={"/main"}>
-        <h1>LOGO 넣기</h1>
+        <L.img src={ZipCook_logo}/>
       </L.Test>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -113,12 +151,6 @@ const Loginpage = () => {
           <L.P></L.P>
           <L.button onClick={JoinPage}>Sign UP</L.button>
         </div>
-        <L.Line></L.Line>
-        <L.Div>
-          <L.Googleb type="button" onClick={Googlepage}>
-            <L.img src={icon} />
-          </L.Googleb>
-        </L.Div>
       </div>
     </L.Container>
   );

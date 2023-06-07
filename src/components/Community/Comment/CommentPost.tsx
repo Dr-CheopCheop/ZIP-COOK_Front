@@ -8,19 +8,21 @@ interface CommentProps {
   content: string;
 }
 
-const CommentPost = (props: any) => {
+const CommentPost = (props:any) => {
   const { register, handleSubmit, reset } = useForm<CommentProps>({});
 
   const location = useLocation();
-  const { id } = props;
+  const  id  = location.pathname.split("/")[3];
   const category = location.pathname.split("/")[2];
 
   const onSubmitHandler: SubmitHandler<CommentProps> = async (data) => {
+    console.log(data);
     const postData = {
       board_id: id,
       nickname: "Lee Ga yeong",
       content: data.content,
     };
+
     try {
       const response = await axios({
         url: `/${category}-comment`,
