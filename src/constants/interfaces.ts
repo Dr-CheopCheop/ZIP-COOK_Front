@@ -27,9 +27,21 @@ export interface SaleProps {
   discountPrice: string;
   title: string;
 }
+export interface SaleReadProps {
+  filepath: FileList;
+  price: string;
+  place: string;
+  discountPrice: string;
+  title: string;
+}
 
 export interface ShareProps {
   img: FileList;
+  title: string;
+  content: string;
+}
+export interface ShareReadProps {
+  filepath: FileList;
   title: string;
   content: string;
 }

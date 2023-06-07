@@ -21,7 +21,6 @@ const RecipeRead = () => {
 
   const onDeleteHandler = async () => {
     //삭제 로직 작성
-    navigate(`/community/recipe`);
     try {
       const response = await axios({
         method: "DELETE",

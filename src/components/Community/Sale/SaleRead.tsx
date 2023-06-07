@@ -1,25 +1,21 @@
 import Navbar from "../../Navbar/Navbar";
 import * as S from "./SaleReadStyle";
 import CommentList from "../Comment/CommentList";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Icons from "../../../Styles/Icons";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-const readData = {
-  title: "딸기 한박스",
-  place: "역곡 홈플러스",
-  price: "12000원",
-  discountPrice: "9000원",
-};
+import type { SaleReadProps } from "../../../constants/interfaces";
 
 const DiscountRead = () => {
-  const { id } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
-  const [data, setData] = useState();
+  const [data, setData] = useState<SaleReadProps>();
+  const id = location.pathname.split("/")[3];
 
   console.log("요청 url 주소", `/board-sale/${id}`);
   console.log("sale READ 요청 DATA:", data);
+
   const onDeleteHandler = async () => {
     //삭제 로직 작성
     try {
@@ -36,16 +32,17 @@ const DiscountRead = () => {
     }
   };
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`/board-sale/${id}`);
+      const responseData = await response.data;
+      setData(responseData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/board-sale/${id}`);
-        const responseData = await response.data;
-        setData(responseData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     fetchData();
   });
 
@@ -58,7 +55,7 @@ const DiscountRead = () => {
             <S.UpperTitle>
               <Link
                 to="/community/sale/write"
-                state={{ update: true, datas: readData, num: id }}
+                state={{ update: true, datas: data, num: id }}
               >
                 <S.TitleButton>수정</S.TitleButton>
               </Link>
@@ -73,13 +70,13 @@ const DiscountRead = () => {
         </S.TitleContainer>
         <S.ContentsContainer>
           <div>
-            <h1>{readData.title}</h1>
-            <span>매장 : {readData.place}</span>
+            <h1>{data?.title}</h1>
+            <span>매장 : {data?.place}</span>
           </div>
           <div>
-            <p>원가 : {readData.price}</p>
+            <p>원가 : {data?.price}</p>
             <p>{Icons.downDirection}</p>
-            <p>할인가 : {readData.discountPrice}</p>
+            <p>할인가 : {data?.discountPrice}</p>
           </div>
         </S.ContentsContainer>
         <CommentList id={id} />
