@@ -7,6 +7,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../reducer/rootReducer";
 import Icons from "../../../Styles/Icons";
 import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { SET_TOKEN } from '../../../reducer/userSlice';
+import { useNavigate } from 'react-router-dom'; 
 
 const ShareMain = () => {
   const [sharePosts, setSharePosts] = useState([]);
@@ -15,6 +18,19 @@ const ShareMain = () => {
   const [postsPerPage, setPostsPerPage] = useState(15);
   const [searchQuery, setSearchQuery] = useState("");
   const { sido } = useSelector((state: RootState) => state.address);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+      const accessToken = localStorage.getItem("accessToken");
+      if(accessToken){
+      dispatch(SET_TOKEN(accessToken));
+      }else {
+      navigate('/login');
+      }
+    },[]);
+
 
   const getValue = (e: React.FormEvent<HTMLInputElement>) => {
     const {
