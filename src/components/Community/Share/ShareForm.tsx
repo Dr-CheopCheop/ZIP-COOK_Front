@@ -11,9 +11,6 @@ import type { ShareProps } from "../../../constants/interfaces";
 import { defaultShareValue } from "../../../constants/defaultFormOption";
 import axios from "axios";
 
-import { useSelector } from "react-redux";
-import { RootState } from "../../../reducer/rootReducer";
-
 const { titleRequirements, imageRequirements, shareContentRequirements } =
   FormRequirements;
 let defaultValue = defaultShareValue;
@@ -41,9 +38,13 @@ const ShareForm = () => {
   const { img } = watch();
 
   useEffect(() => {
-    if (img && img.length > 0) {
-      const file = img[0];
-      setImagePreview(URL.createObjectURL(file));
+    if (location.state) {
+      setImagePreview(`/images/${location.state.datas.filepath}`);
+    } else {
+      if (img && img.length > 0) {
+        const file = img[0];
+        setImagePreview(URL.createObjectURL(file));
+      }
     }
   }, [img]);
 

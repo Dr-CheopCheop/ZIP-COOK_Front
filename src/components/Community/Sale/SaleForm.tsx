@@ -9,8 +9,6 @@ import ErrorMessage from "../../Error/ErrorMessage";
 import FormRequirements from "../../../constants/FormRequriements";
 import type { SaleProps } from "../../../constants/interfaces";
 import { defaultDiscountValue } from "../../../constants/defaultFormOption";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../reducer/rootReducer";
 import axios from "axios";
 
 const SaleForm = () => {
@@ -47,9 +45,13 @@ const SaleForm = () => {
   const { img } = watch();
 
   useEffect(() => {
-    if (img && img.length > 0) {
-      const file = img[0];
-      setImagePreview(URL.createObjectURL(file));
+    if (location.state) {
+      setImagePreview(`/images/${location.state.datas.filepath}`);
+    } else {
+      if (img && img.length > 0) {
+        const file = img[0];
+        setImagePreview(URL.createObjectURL(file));
+      }
     }
   }, [img]);
 
