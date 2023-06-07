@@ -74,24 +74,6 @@ const ChatbotPage = () => {
     console.log(userRequest);
   };
 
-  // useEffect(() => {
-  //   const getChatBotResponse = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const response = await axios.post(`/chatbot/message`, {
-  //         question: userRequest,
-  //       });
-  //       console.log(response.data);
-  //       setChatbotResponse(response.data.choices.text);
-  //     } catch (error) {
-  //       console.error(error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   getChatBotResponse();
-  // }, [onSubmit]);
-
     return (
         <C.Container>
             <C.FirstDiv>
