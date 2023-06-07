@@ -4,6 +4,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducer/rootReducer";
+import { useEffect, useState } from "react";
 
 interface CommentProps {
   content: string;
@@ -15,13 +16,25 @@ const CommentPost = (props: any) => {
   const location = useLocation();
   const id = location.pathname.split("/")[3];
   const category = location.pathname.split("/")[2];
+  const [nicks, setNicks] = useState();
+
+  const fetchNickname = async () => {
+    const userInfoRes = await axios.get("/auth/user");
+    const userInfo = await userInfoRes.data;
+    console.log(userInfo);
+    setNicks(userInfo.nickname);
+  };
+
+  useEffect(() => {
+    fetchNickname();
+  }, []);
 
   console.log(user);
   const onSubmitHandler: SubmitHandler<CommentProps> = async (data) => {
     console.log(data);
     const postData = {
       board_id: id,
-      nickname: user.username,
+      nickname: nicks,
       content: data.content,
     };
 
