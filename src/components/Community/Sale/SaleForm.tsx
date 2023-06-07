@@ -77,7 +77,7 @@ const SaleForm = () => {
     try {
       const response = await axios({
         url: location.state
-          ? `/board-sale/update/${location.state.num}`
+          ? `/board-sale/${sido}/update/${location.state.num}`
           : `/board-sale`,
         method: "POST",
         headers: { "Content-Type": "multipart/form-data" },
