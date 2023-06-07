@@ -31,6 +31,7 @@ const CommentList = (props: any) => {
             content: responseData[key].content,
           });
         }
+        console.log("loadedDatas:", loadedDatas);
         setDatas(loadedDatas);
       } catch (error) {
         console.error(error);
