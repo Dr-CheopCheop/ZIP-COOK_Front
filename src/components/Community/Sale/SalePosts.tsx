@@ -8,14 +8,14 @@ const SalePosts = ({ posts, loading }: any) => {
         {loading && <div> loading... </div>}
         <S.PostList>
           {posts.map((post: any) => (
-            <Link to={`/community/sale/${post.id}`} key={post.id}>
+            <S.PostLink to={`/community/sale/${post.id}`} key={post.id}>
             <S.PostWrap>
               <S.PostImg src={`/images/${post.filepath}`} />{<br />}
               {post.title}{<br />}
               PRICE: {post.discountPrice}{<br />}
               LOCATION: {post.location}
             </S.PostWrap>
-            </Link>
+            </S.PostLink>
           ))}
         </S.PostList>
       </>

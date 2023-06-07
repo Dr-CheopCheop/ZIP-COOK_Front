@@ -8,14 +8,14 @@ const RecipePosts = ({ posts, loading }: any) => {
         {loading && <div> loading... </div>}
         <R.PostList>
           {posts.map((post: any) => (
-            <Link to={`/community/recipe/${post.id}`} key={post.id}>
+            <R.PostLink to={`/community/recipe/${post.id}`} key={post.id}>
               <R.PostWrap>
                 <R.PostImg src={`/images/${post.filepath}`} />{<br />}
                 {post.title}{<br />}
                 TIME: {post.time}{<br />}
                 LEVEL: {post.level}
               </R.PostWrap>
-            </Link>
+            </R.PostLink>
           ))}
           </R.PostList>
       </>
