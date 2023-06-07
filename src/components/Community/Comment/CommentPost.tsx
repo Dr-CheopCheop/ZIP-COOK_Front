@@ -1,25 +1,26 @@
-import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as S from "./CommentPostStyle";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/rootReducer";
 
 interface CommentProps {
   content: string;
 }
 
-const CommentPost = (props:any) => {
+const CommentPost = (props: any) => {
   const { register, handleSubmit, reset } = useForm<CommentProps>({});
-
+  const user = useSelector((state: RootState) => state.user);
   const location = useLocation();
-  const  id  = location.pathname.split("/")[3];
+  const id = location.pathname.split("/")[3];
   const category = location.pathname.split("/")[2];
 
   const onSubmitHandler: SubmitHandler<CommentProps> = async (data) => {
     console.log(data);
     const postData = {
       board_id: id,
-      nickname: "Lee Ga yeong",
+      nickname: user.username,
       content: data.content,
     };
 
