@@ -24,8 +24,7 @@ const ShareForm = () => {
   const [imagePreview, setImagePreview] = useState<string>("");
   //유저정보에서 위치정보 가져올예정
   // const sido = "seoul";
-  const { sido } = useSelector((state: RootState) => state.address);
-
+  const sido = "서울특별시";
   console.log("location: ", location.state);
   if (location.state) {
     defaultValue = location.state.datas;

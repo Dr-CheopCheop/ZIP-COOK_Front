@@ -14,8 +14,7 @@ const DiscountRead = () => {
   const navigate = useNavigate();
   const [data, setData] = useState<SaleReadProps>();
   const id = location.pathname.split("/")[3];
-  const { sido } = useSelector((state: RootState) => state.address);
-
+  const sido = "서울특별시";
   console.log("요청 url 주소", `/board-sale/${sido}/${id}`);
   console.log("sale READ 요청 DATA:", data);
 
