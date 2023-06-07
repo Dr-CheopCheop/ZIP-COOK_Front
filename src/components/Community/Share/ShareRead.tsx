@@ -16,8 +16,7 @@ const ShareRead = () => {
   const id = location.pathname.split("/")[3];
   const navigate = useNavigate();
 
-  const { sido } = useSelector((state: RootState) => state.address);
-
+  const sido = "서울특별시";
   console.log("요청 url 주소", `/board-share/${sido}/${id}`);
   console.log("share READ 요청 DATA:", data);
 
@@ -79,8 +78,6 @@ const ShareRead = () => {
         </S.TitleContainer>
         <S.ContentsContainer>
           <h1>{data?.title}</h1>
-          <div>경기도 부천시 역곡동 12-1</div>
-
           <div>{data?.content}</div>
         </S.ContentsContainer>
         <CommentList id={id} />

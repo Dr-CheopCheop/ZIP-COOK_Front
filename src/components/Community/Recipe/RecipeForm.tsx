@@ -30,7 +30,9 @@ const RecipeForm = () => {
   let defaultValues = defaultRecipeValue;
   const navigate = useNavigate();
 
-  console.log("location: ", location.state);
+  console.log("location: ", location.state.datas);
+  const a = location.state.datas.filepath;
+  console.log("이미지경로", a);
 
   //수정 여부
   if (location.state) defaultValues = location.state.datas;
@@ -186,7 +188,10 @@ const RecipeForm = () => {
             <label>
               <S.ImgView>
                 {imagePreview ? (
-                  <img src={imagePreview} alt="사진 첨부" />
+                  <img
+                    src={a ? `/images/${a}` : imagePreview}
+                    alt="사진 첨부"
+                  />
                 ) : (
                   <>{Icons.camera}</>
                 )}

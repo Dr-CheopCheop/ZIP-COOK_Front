@@ -21,8 +21,7 @@ const SaleForm = () => {
   // const sido = "seoul";
 
   //추후수정 닉네임추가
-  const { sido } = useSelector((state: RootState) => state.address);
-
+  const sido = "서울특별시";
   console.log(sido);
   console.log("location: ", location.state);
   const {
@@ -78,7 +77,7 @@ const SaleForm = () => {
     try {
       const response = await axios({
         url: location.state
-          ? `/board-sale/update/${location.state.num}`
+          ? `/board-sale/${sido}/update/${location.state.num}`
           : `/board-sale`,
         method: "POST",
         headers: { "Content-Type": "multipart/form-data" },
