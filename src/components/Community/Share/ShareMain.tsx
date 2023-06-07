@@ -50,27 +50,6 @@ const ShareMain = () => {
     setCurrentPage(1);
   };
 
-  // const SharePosts = ({ posts, loading }: any) => {
-  //   return (
-  //     <>
-  //       {loading && <div> loading... </div>}
-  //       <div>
-  //         <Link to="/community/share">
-  //         {posts.map((post: any) => (
-  //           <Link to={`/community/share/${post.id}`} key={post.id}>
-  //           <S.PostWrap>
-  //             <S.PostImg src={`/images/${post.filepath}`} />{<br />}
-  //             {post.title}{<br />}
-  //             DATE: {post.date}
-  //           </S.PostWrap>
-  //           </Link>
-  //         ))}
-  //         </Link>
-  //       </div>
-  //     </>
-  //   );
-  // };
-
   return (
     <S.Container>
       <S.CommunityListHeader>
@@ -85,9 +64,9 @@ const ShareMain = () => {
       </S.CommunityListHeader>
 
       <S.SecondDiv>
-        <S.PostList>
+        {/* <S.PostList> */}
         <SharePosts posts={currentPosts(sharePosts)} loading={loading} />
-        </S.PostList>
+        {/* </S.PostList> */}
         <SharePagination
           postsPerPage={postsPerPage}
           totalPosts={sharePosts.length}

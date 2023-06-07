@@ -32,7 +32,6 @@ const RecipeForm = () => {
 
   if (location.state) {
     defaultValues = location.state.datas;
-    setImagePreview(`/images/${location.state.datas.filepath}`);
   } else defaultValues = defaultRecipeValue;
 
   const {
@@ -89,10 +88,14 @@ const RecipeForm = () => {
   const { img, serving, title, time, level, ingredients } = watch();
 
   useEffect(() => {
-    if (img && img.length > 0) {
+    if(location.state){
+      setImagePreview(`/images/${location.state.datas.filepath}`)
+    }
+    else{if (img && img.length > 0) {
       const file = img[0];
       setImagePreview(URL.createObjectURL(file));
-    }
+    }}
+    
   }, [img]);
   const servingHandler = (operation: string) => {
     let num = parseInt(serving);

@@ -8,7 +8,6 @@ const RecipePosts = ({ posts, loading }: any) => {
     <>
       {loading && <div> loading... </div>}
       <div>
-        <Link to="/community/recipe/">
           {posts.map((post: any) => (
             <Link to={`community/recipe/${post.id}`} key={post.id}>
             <M.PostSpan>
@@ -18,7 +17,6 @@ const RecipePosts = ({ posts, loading }: any) => {
             </M.PostSpan>
             </Link>
           ))}
-        </Link>
       </div>
     </>
   );
