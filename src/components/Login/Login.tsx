@@ -69,42 +69,6 @@ const Loginpage = () => {
     }
   };
 
-  useEffect(() => {
-    const validateToken = async () => {
-      const jwtToken = localStorage.getItem("accessToken");
-      if(jwtToken) {
-        try{
-          const response = await axios.post("/auth/user",
-          {Authorization : jwtToken},
-          {
-            headers : {
-              "Content-Type": "application/json",
-            }
-          }
-          );
-          if(response.data.valid){
-            axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
-
-            const userInfoRes = await axios.get("/auth/user");
-            const userInfo = userInfoRes.data;
-
-            dispatch(SET_TOKEN(jwtToken));
-            dispatch(loginUser(userInfo));
-            movepage("/main");
-          }else {
-            movepage('/login');
-          }
-        } catch(error){
-          console.log("토큰 요청 실패", error);
-          movepage('/login');
-        }
-      }
-    };
-
-    validateToken();
-  },[dispatch, movepage]);
-
-
 
   return (
     <L.Container>

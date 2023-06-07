@@ -6,6 +6,8 @@ import * as S from "./ShareMainStyle";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducer/rootReducer";
 import Icons from "../../../Styles/Icons";
+import { Link } from "react-router-dom";
+
 const ShareMain = () => {
   const [sharePosts, setSharePosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -47,6 +49,27 @@ const ShareMain = () => {
   const searchPosts = () => {
     setCurrentPage(1);
   };
+
+  // const SharePosts = ({ posts, loading }: any) => {
+  //   return (
+  //     <>
+  //       {loading && <div> loading... </div>}
+  //       <div>
+  //         <Link to="/community/share">
+  //         {posts.map((post: any) => (
+  //           <Link to={`/community/share/${post.id}`} key={post.id}>
+  //           <S.PostWrap>
+  //             <S.PostImg src={`/images/${post.filepath}`} />{<br />}
+  //             {post.title}{<br />}
+  //             DATE: {post.date}
+  //           </S.PostWrap>
+  //           </Link>
+  //         ))}
+  //         </Link>
+  //       </div>
+  //     </>
+  //   );
+  // };
 
   return (
     <S.Container>
