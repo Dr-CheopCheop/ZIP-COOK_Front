@@ -20,7 +20,7 @@ const SharePosts = ({ posts, loading }: any) => {
             </Link>
           ))}
           </Link>
-          </S.PostList>
+        </S.PostList>
         </div>
       </>
     );
