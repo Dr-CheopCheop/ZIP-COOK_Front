@@ -78,8 +78,6 @@ const ShareRead = () => {
         </S.TitleContainer>
         <S.ContentsContainer>
           <h1>{data?.title}</h1>
-          <div>경기도 부천시 역곡동 12-1</div>
-
           <div>{data?.content}</div>
         </S.ContentsContainer>
         <CommentList id={id} />

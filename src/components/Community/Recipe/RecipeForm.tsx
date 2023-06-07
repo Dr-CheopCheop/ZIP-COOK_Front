@@ -30,8 +30,9 @@ const RecipeForm = () => {
   let defaultValues = defaultRecipeValue;
   const navigate = useNavigate();
 
-  console.log("location: ", location.state);
-  const a = location.state.filepath;
+  console.log("location: ", location.state.datas);
+  const a = location.state.datas.filepath;
+  console.log("이미지경로", a);
 
   //수정 여부
   if (location.state) defaultValues = location.state.datas;
