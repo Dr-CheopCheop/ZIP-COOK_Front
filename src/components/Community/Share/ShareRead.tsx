@@ -4,6 +4,8 @@ import Navbar from "../../Navbar/Navbar";
 import * as S from "./ShareReadStyle";
 import CommentList from "../Comment/CommentList";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const readData = {
   title: "파프리카 가져가실분~",
@@ -13,17 +15,40 @@ const readData = {
 
 const ShareRead = () => {
   const { id } = useParams();
-
-  // const selectData = DummyData.find((data) => data.id === Number(id));
-  // const { title, difficulty, cookTime } = selectData ?? {
-  //   title: "존재하지 않는 게시물 입니다.",
-  // };
+  const [data, setData] = useState();
   const navigate = useNavigate();
 
-  const onDeleteHandler = () => {
+  console.log("요청 url 주소", `/board-share/${id}`);
+  console.log("share READ 요청 DATA:", data);
+
+  const onDeleteHandler = async () => {
     //삭제 로직 작성
-    navigate("/community/share");
+    try {
+      const response = await axios({
+        method: "DELETE",
+        url: `/board-share/${id}`,
+      });
+      const responseData = await response.data;
+      console.log(responseData);
+
+      navigate("/community/share");
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/board-share/${id}`);
+        const responseData = await response.data;
+        setData(responseData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  });
 
   return (
     <>

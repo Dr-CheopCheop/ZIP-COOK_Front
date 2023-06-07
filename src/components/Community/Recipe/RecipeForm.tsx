@@ -30,6 +30,8 @@ const RecipeForm = () => {
   let defaultValues = defaultRecipeValue;
   const navigate = useNavigate();
 
+  console.log("location: ", location.state);
+
   //수정 여부
   if (location.state) defaultValues = location.state.datas;
   else defaultValues = defaultRecipeValue;
@@ -73,7 +75,7 @@ const RecipeForm = () => {
         url: location.state
           ? `/board-recipe/${location.state.num}`
           : `/board-recipe`,
-        method: location.state ? "PUT" : "POST",
+        method: "POST",
         headers: { "Content-Type": "multipart/form-data" },
         data: formData,
       });

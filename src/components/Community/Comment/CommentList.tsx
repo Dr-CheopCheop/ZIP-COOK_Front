@@ -13,8 +13,8 @@ const CommentList = (props: any) => {
 
   const category = location.pathname.split("/")[2];
   const id = location.pathname.split("/")[3];
-  console.log(`api주소 테스트: ${category},${id}`);
-
+  console.log(`댓글 api주소 테스트: /${category}-comment/${id}`);
+  console.log("댓글datas:", datas);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,7 +23,6 @@ const CommentList = (props: any) => {
           url: `/${category}-comment/${id}`,
         });
         const responseData = await response.data;
-        console.log(responseData,'ㅇ');
         const loadedDatas: commentDataProps[] = [];
         for (const key in responseData) {
           loadedDatas.push({

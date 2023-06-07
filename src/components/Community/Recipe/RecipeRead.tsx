@@ -1,5 +1,5 @@
 import Navbar from "../../Navbar/Navbar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./RecipeReadStyle";
 // import CommentList from "../Comment/CommentList";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -7,6 +7,7 @@ import tbk from "../../../img/tteokbbokki.jpg";
 import CommentList from "../Comment/RecipeCommentList";
 
 import Icons from "../../../Styles/Icons";
+import axios from "axios";
 
 const readData = {
   title: "치즈 해물 떡볶이",
@@ -42,77 +43,45 @@ const readData = {
 const RecipeRead = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [data, setData] = useState();
   const id = location.pathname.split("/")[3];
   const [commentViewToggle, setCommentViewToggle] = useState<boolean>(false);
-  console.log("recipe read id :", id);
-  // const selectData = DummyData.find((data) => data.id === Number(id));
-  // const { title, level, cookTime } = selectData ?? {
-  //   title: "존재하지 않는 게시물 입니다.",
-  // };
-  const onDeleteHandler = () => {
+
+  console.log("요청 url 주소", `/board-recipe/${id}`);
+  console.log("recipe READ 요청 DATA:", data);
+
+  const onDeleteHandler = async () => {
     //삭제 로직 작성
     navigate(`/community/recipe`);
+    try {
+      const response = await axios({
+        method: "DELETE",
+        url: `/board-recipe/${id}`,
+      });
+      const responseData = await response.data;
+      console.log(responseData);
+
+      navigate("/community/recipe");
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/board-recipe/${id}`);
+        const responseData = await response.data;
+        setData(responseData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  });
 
   return (
     <>
-      {/* <Navbar />
-      <S.ReadContainer>
-        <S.TitleContainer>
-          <S.TitleBox>
-            <S.UpperTitle>
-              <Link
-                to="/community/recipe/write"
-                state={{ update: true, datas: readData, num: id }}
-              >
-                <S.TitleButton>수정</S.TitleButton>
-              </Link>
-              <S.TitleButton onClick={onDeleteHandler}>삭제</S.TitleButton>
-            </S.UpperTitle>
-            <S.LowTitle>
-              <p>작성자: cooker</p>
-              <p>2023.03.26 16:53</p>
-            </S.LowTitle>
-          </S.TitleBox>
-          <S.TitleImage src="http://placehold.it/250x250" alt="" />
-        </S.TitleContainer>
-        <S.RecipeContentsContainer>
-          <h1>{readData.title}</h1>
-          <S.RecipeContentsSummaryBox>
-            <div>
-              <h4>분량</h4>
-              <span>{readData.serving}</span>
-            </div>
-            <div>
-              <h4>조리시간</h4>
-              <span>{readData.time}</span>
-            </div>
-            <div>
-              <h4>조리난이도</h4>
-              <span>{readData.level}</span>
-            </div>
-          </S.RecipeContentsSummaryBox>
-          <S.foodsListContainer>
-            <p>재료</p>
-            <div>
-              {readData.ingredients.map((food, idx) => (
-                <React.Fragment key={food}>
-                  <span> {food}</span>
-                  {idx !== readData.ingredients.length - 1 && <span>,</span>}
-                </React.Fragment>
-              ))}
-            </div>
-          </S.foodsListContainer>
-          <S.manualsListBox>
-            {readData.content.map((manual) => (
-              <React.Fragment key={manual}>
-                <h3> {manual}</h3>
-              </React.Fragment>
-            ))}
-          </S.manualsListBox>
-        </S.RecipeContentsContainer>
-        <CommentList id={id} />
-      </S.ReadContainer> */}
       <Navbar />
       <S.MealKitContainer>
         <S.MainImg>
