@@ -74,7 +74,7 @@ const ShareRead = () => {
               <p>2023.03.26 16:53</p>
             </S.LowTitle>
           </S.TitleBox>
-          <S.TitleImage src="http://placehold.it/250x250" alt="" />
+          <S.TitleImage src={`/images/${data?.filepath}`} alt="" />
         </S.TitleContainer>
         <S.ContentsContainer>
           <h1>{data?.title}</h1>
