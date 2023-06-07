@@ -51,6 +51,8 @@ export const TitleImage = styled.img`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  height: 300px;
+  width: 300px;
 `;
 
 //내용부분 --제목,주소,내용

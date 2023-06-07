@@ -49,6 +49,8 @@ export const TitleImage = styled.img`
   position: absolute;
   top: 50%;
   left: 50%;
+  height: 300px;
+  width: 300px;
   transform: translate(-50%, -50%);
 `;
 
