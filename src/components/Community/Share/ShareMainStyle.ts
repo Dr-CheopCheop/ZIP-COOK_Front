@@ -59,19 +59,7 @@ export const WriteButton = styled(Link)`
 
 export const SecondDiv = styled.div`
   width: 100%;
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: space-around;
 `;
-
-// export const PostSpan = styled.span`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   border: 1px solid black;
-//   border-radius: 15px;
-// `;  안씀
 
 export const PostWrap = styled.div`
   width: 100%;

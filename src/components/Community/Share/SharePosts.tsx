@@ -7,7 +7,6 @@ const SharePosts = ({ posts, loading }: any) => {
     return (
       <>
         {loading && <div> loading... </div>}
-        <div>
         <S.PostList>
           <Link to="/community/share">
           {posts.map((post: any) => (
@@ -21,7 +20,6 @@ const SharePosts = ({ posts, loading }: any) => {
           ))}
           </Link>
         </S.PostList>
-        </div>
       </>
     );
   };
