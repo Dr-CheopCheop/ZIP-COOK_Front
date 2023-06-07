@@ -48,7 +48,7 @@ const RecipeRead = () => {
 
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   return (
     <>
