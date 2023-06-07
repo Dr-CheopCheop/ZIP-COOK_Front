@@ -49,7 +49,7 @@ const RecipeForm = () => {
 
   const onSubmitHandler: SubmitHandler<RecipeProps> = async (data) => {
     const recipepost = {
-      nickname: "김모씨",
+      nickname: "닉네임생기면바꾸자",
       title: data.title,
       serving: data.serving,
       level: data.level,

@@ -9,37 +9,6 @@ import Icons from "../../../Styles/Icons";
 import axios from "axios";
 import type { RecipeReadProps } from "../../../constants/interfaces";
 
-// const readData = {
-//   title: "치즈 해물 떡볶이",
-//   level: "상",
-//   time: "1시간 30분",
-//   serving: "2인분",
-//   summary: "#불맛이 가득한",
-//   ingredients: [
-//     "고추장 3큰술",
-//     "떡 300g",
-//     "어묵 2장",
-//     "설탕 1큰술",
-//     "모짜렐라 치즈",
-//     "다진마늘 2큰술",
-//     "진간장 3큰술",
-//     "파 80g",
-//     "고춧가루",
-//     "홍합 100g",
-//     "새우 150g",
-//     "",
-//   ],
-//   content: [
-//     "떡을 물에 담가서 불립니다.",
-//     "냄비에 고추장 3큰술을 넣고 중불로 끓여줍니다",
-//     "다진마늘을 넣고 진간장3스푼,설탕 1큰술을 넣어줍니다.",
-//     "잘씻은 홍합과 새우를 넣고 4분간 끓입니다",
-//     "어묵과 떡을 넣고 3분간 끓입니다. ",
-//     "파와 고춧가루를 넣어줍니다.",
-//     "모짜렐라 치즈를 기호에 맞게 넣어줍니다.",
-//   ],
-// };
-
 const RecipeRead = () => {
   const location = useLocation();
   const navigate = useNavigate();
