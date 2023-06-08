@@ -208,12 +208,12 @@ export const DiscountPostWrap = styled.div`
 
 export const Div = styled.div`
   width: 300px;
-`
+`;
 
 export const PostImg = styled.img`
   width: 150px;
   height: 150px;
-`
+`;
 
 export const PostList = styled.div`
   display: flex;
@@ -222,7 +222,7 @@ export const PostList = styled.div`
   width: 1000px;
   height: auto;
   overflow-x: scroll;
-`
+`;
 
 export const PostLink = styled(Link)`
   font-size: 1rem;
@@ -230,10 +230,10 @@ export const PostLink = styled(Link)`
   color: black;
   cursor: pointer;
   border: none;
-`
+`;
 
 export const PostWrap = styled.div`
-  width: 300px;
+  width: 1080px;
   height: 200px;
   margin-bottom: 4%;
   padding: 2%;
@@ -245,4 +245,4 @@ export const PostWrap = styled.div`
 
 export const Br = styled.br`
   margin-top: 1rem;
-`
+`;
