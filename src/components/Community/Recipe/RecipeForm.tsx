@@ -26,9 +26,21 @@ const RecipeForm = () => {
   const location = useLocation();
   const [imagePreview, setImagePreview] = useState<string>("");
   const [levels, setLevels] = useState<number>(1);
+  const [nicks, setNicks] = useState();
+  const navigate = useNavigate();
 
   let defaultValues = defaultRecipeValue;
-  const navigate = useNavigate();
+
+  const fetchNickname = async () => {
+    const userInfoRes = await axios.get("/auth/user");
+    const userInfo = await userInfoRes.data;
+    console.log(userInfo);
+    setNicks(userInfo.nickname);
+  };
+
+  useEffect(() => {
+    fetchNickname();
+  }, []);
 
   if (location.state) {
     defaultValues = location.state.datas;
@@ -47,7 +59,7 @@ const RecipeForm = () => {
 
   const onSubmitHandler: SubmitHandler<RecipeProps> = async (data) => {
     const recipepost = {
-      nickname: "닉네임생기면바꾸자",
+      nickname: nicks,
       title: data.title,
       serving: data.serving,
       level: data.level,
@@ -88,14 +100,10 @@ const RecipeForm = () => {
   const { img, serving, title, time, level, ingredients } = watch();
 
   useEffect(() => {
-    if(location.state){
-      setImagePreview(`/images/${location.state.datas.filepath}`)
-    }
-    else{if (img && img.length > 0) {
+    if (img && img.length > 0) {
       const file = img[0];
       setImagePreview(URL.createObjectURL(file));
-    }}
-    
+    }
   }, [img]);
   const servingHandler = (operation: string) => {
     let num = parseInt(serving);

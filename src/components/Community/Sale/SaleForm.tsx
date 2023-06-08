@@ -10,37 +10,35 @@ import FormRequirements from "../../../constants/FormRequriements";
 import type { SaleProps } from "../../../constants/interfaces";
 import { defaultDiscountValue } from "../../../constants/defaultFormOption";
 import axios from "axios";
-
+const {
+  titleRequirements,
+  imageRequirements,
+  discountPriceRequirements,
+  priceRequirements,
+} = FormRequirements;
 const SaleForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [imagePreview, setImagePreview] = useState<string>("");
-  //유저정보에서 위치정보 가져올예정
   const [nicks, setNicks] = useState();
-
-  // const sido = "seoul";
+  const [sido, setSido] = useState();
 
   const fetchNickname = async () => {
     const userInfoRes = await axios.get("/auth/user");
     const userInfo = await userInfoRes.data;
     console.log(userInfo);
     setNicks(userInfo.nickname);
+    setSido(userInfo.location.split(" ")[0]);
   };
 
   useEffect(() => {
     fetchNickname();
   }, []);
 
-  //추후수정 닉네임추가
-  const sido = "서울특별시";
   console.log(sido);
   console.log("location: ", location.state);
-  const {
-    titleRequirements,
-    imageRequirements,
-    discountPriceRequirements,
-    priceRequirements,
-  } = FormRequirements;
+  console.log("로그인한사람의 sido: ", sido);
+
   let defaultValue = defaultDiscountValue;
 
   if (location.state) {
@@ -58,13 +56,9 @@ const SaleForm = () => {
   const { img } = watch();
 
   useEffect(() => {
-    if (location.state) {
-      setImagePreview(`/images/${location.state.datas.filepath}`);
-    } else {
-      if (img && img.length > 0) {
-        const file = img[0];
-        setImagePreview(URL.createObjectURL(file));
-      }
+    if (img && img.length > 0) {
+      const file = img[0];
+      setImagePreview(URL.createObjectURL(file));
     }
   }, [img]);
 
