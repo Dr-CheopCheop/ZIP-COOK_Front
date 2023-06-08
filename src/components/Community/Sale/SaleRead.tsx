@@ -6,15 +6,14 @@ import Icons from "../../../Styles/Icons";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import type { SaleReadProps } from "../../../constants/interfaces";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../reducer/rootReducer";
 
 const DiscountRead = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [data, setData] = useState<SaleReadProps>();
   const id = location.pathname.split("/")[3];
-  const sido = "서울특별시";
+  const [sido, setSido] = useState();
+
   console.log("요청 url 주소", `/board-sale/${sido}/${id}`);
   console.log("sale READ 요청 DATA:", data);
 
@@ -34,6 +33,13 @@ const DiscountRead = () => {
     }
   };
 
+  const fetchSido = async () => {
+    const userInfoRes = await axios.get("/auth/user");
+    const userInfo = await userInfoRes.data;
+
+    setSido(userInfo.location.split(" ")[0]);
+  };
+
   const fetchData = async () => {
     try {
       const response = await axios.get(`/board-sale/${sido}/${id}`);
@@ -43,6 +49,10 @@ const DiscountRead = () => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    fetchSido();
+  }, []);
 
   useEffect(() => {
     fetchData();
