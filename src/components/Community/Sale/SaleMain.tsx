@@ -8,9 +8,6 @@ import * as S from "./SaleMainStyle";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducer/rootReducer";
 import Icons from '../../../Styles/Icons';
-import { useDispatch } from 'react-redux';
-import { SET_TOKEN } from '../../../reducer/userSlice';
-import { useNavigate } from 'react-router-dom'; 
 
 
 const SaleMain = () => {
@@ -20,18 +17,6 @@ const SaleMain = () => {
   const [postsPerPage, setPostsPerPage] = useState(9);
   const [searchQuery, setSearchQuery] = useState("");
   const { sido } = useSelector((state: RootState) => state.address);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-
-  useEffect(() => {
-      const accessToken = localStorage.getItem("accessToken");
-      if(accessToken){
-      dispatch(SET_TOKEN(accessToken));
-      }else {
-      navigate('/login');
-      }
-    },[]);
 
 
   const getValue = (e: React.FormEvent<HTMLInputElement>) => {
