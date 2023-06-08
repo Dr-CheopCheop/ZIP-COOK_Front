@@ -3,7 +3,7 @@ import Colors from "../../Styles/Colors";
 import { Link } from "react-router-dom";
 export const CommunityContainer = styled.div`
   width: 1100px;
-  margin: 30px auto 0;
+  margin: 50px auto 0;
 
   @media (max-width: 1500px) {
     width: 1080px;
