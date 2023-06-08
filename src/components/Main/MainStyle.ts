@@ -217,9 +217,11 @@ export const PostImg = styled.img`
 
 export const PostList = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+  margin-top: 1.5rem;
   justify-content: space-between;
+  width: 1000px;
+  height: auto;
+  overflow-x: scroll;
 `
 
 export const PostLink = styled(Link)`
@@ -232,12 +234,15 @@ export const PostLink = styled(Link)`
 
 export const PostWrap = styled.div`
   width: 300px;
-  height: 300px;
+  height: 200px;
   margin-bottom: 4%;
   padding: 2%;
-  border: 1px solid black;
   border-radius: 15px;
   justify-content: center;
   align-items: center;
   text-align: center;
 `;
+
+export const Br = styled.br`
+  margin-top: 1rem;
+`

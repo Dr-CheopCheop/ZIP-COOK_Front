@@ -5,10 +5,13 @@ export const ReadContainer = styled.section`
   width: 1080px;
   margin: 0 auto;
   text-align: center;
+
+  margin-top: 3rem;
 `;
 
 //머리부분 -- 이미지 버튼 작성자 날짜
 export const TitleContainer = styled.div`
+  margin: -100px 0;
   position: relative;
   text-align: right;
   height: 650px;
@@ -38,7 +41,8 @@ export const TitleButton = styled.button`
   }
 `;
 export const LowTitle = styled.div`
-  font-size: 14px;
+  font-size: 16px;
+  margin-top: 0.5rem;
   padding-right: 30px;
   p:nth-child(1) {
     font-weight: 700;

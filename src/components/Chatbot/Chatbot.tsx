@@ -2,8 +2,13 @@ import React, { useState, useEffect } from 'react';
 import * as C from './ChatbotStyle';
 import axios from 'axios';
 import Clock from 'react-live-clock';
+import { useDispatch } from 'react-redux';
+import { SET_TOKEN } from '../../reducer/userSlice';
+import { useNavigate } from 'react-router-dom'; 
 
 const ChatbotPage = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [weatherData, setWeatherData] = useState({
       icon: '',
@@ -73,6 +78,15 @@ const ChatbotPage = () => {
       getChatBotResponse();
     console.log(userRequest);
   };
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if(accessToken){
+     dispatch(SET_TOKEN(accessToken));
+    }else {
+     navigate('/login');
+    }
+   },[]);
 
     return (
         <C.Container>

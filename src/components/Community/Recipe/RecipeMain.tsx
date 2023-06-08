@@ -6,13 +6,30 @@ import RecipePosts from "./RecipePosts";
 import RecipePagination from "./RecipePagination";
 import * as R from "./RecipeMainStyle";
 import Icons from "../../../Styles/Icons";
+import { useDispatch } from 'react-redux';
+import { SET_TOKEN } from '../../../reducer/userSlice';
+import { useNavigate } from 'react-router-dom'; 
+
 
 const RecipeMain = () => {
   const [recipePosts, setRecipePosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(15);
+  const [postsPerPage, setPostsPerPage] = useState(9);
   const [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+      const accessToken = localStorage.getItem("accessToken");
+      if(accessToken){
+      dispatch(SET_TOKEN(accessToken));
+      }else {
+      navigate('/login');
+      }
+    },[]);
+
 
   const getValue = (e: React.FormEvent<HTMLInputElement>) => {
     const {

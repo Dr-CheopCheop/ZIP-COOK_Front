@@ -6,18 +6,18 @@ const SalePosts = ({ posts, loading }: any) => {
     return (
       <>
         {loading && <div> loading... </div>}
-        <div>
+        <M.PostList>
           {posts.map((post: any) => (
-            <Link to={`/community/sale/${post.id}`} key={post.id}>
-            <M.PostSpan>
-              <img src={`/images/${post.filepath}`} />{<br />}
+            <M.PostLink to={`/community/sale/${post.id}`} key={post.id}>
+            <M.PostWrap>
+              <M.PostImg src={`/images/${post.filepath}`} />{<br />}
               {post.title}{<br />}
               {post.location}{<br />}
               {post.date}
-            </M.PostSpan>
-            </Link>
+            </M.PostWrap>
+            </M.PostLink>
           ))}
-        </div>
+        </M.PostList>
       </>
     );
   };
