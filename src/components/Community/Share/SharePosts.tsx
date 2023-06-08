@@ -13,7 +13,7 @@ const SharePosts = ({ posts, loading }: any) => {
             <S.PostWrap>
               <S.PostImg src={`/images/${post.filepath}`} />{<br />}
               {post.title}{<br />}
-              DATE: {post.date}
+              DATE: {post.regDate}
             </S.PostWrap>
             </S.PostLink>
           ))}
