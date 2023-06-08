@@ -17,7 +17,7 @@ const SaleMain = () => {
   const [salePosts, setSalePosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(15);
+  const [postsPerPage, setPostsPerPage] = useState(9);
   const [searchQuery, setSearchQuery] = useState("");
   const { sido } = useSelector((state: RootState) => state.address);
   const dispatch = useDispatch();

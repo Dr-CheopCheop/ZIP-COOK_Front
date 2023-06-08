@@ -15,7 +15,7 @@ const RecipeMain = () => {
   const [recipePosts, setRecipePosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(15);
+  const [postsPerPage, setPostsPerPage] = useState(9);
   const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
