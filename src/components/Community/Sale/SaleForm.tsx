@@ -21,14 +21,13 @@ const SaleForm = () => {
   const location = useLocation();
   const [imagePreview, setImagePreview] = useState<string>("");
   const [nicks, setNicks] = useState();
-  const [sido, setSido] = useState();
+  const sido = "서울특별시";
 
   const fetchNickname = async () => {
     const userInfoRes = await axios.get("/auth/user");
     const userInfo = await userInfoRes.data;
     console.log(userInfo);
     setNicks(userInfo.nickname);
-    setSido(userInfo.location.split(" ")[0]);
   };
 
   useEffect(() => {
