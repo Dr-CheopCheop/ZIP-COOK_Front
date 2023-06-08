@@ -65,7 +65,7 @@ export const SecondDiv = styled.div`
 export const PostWrap = styled.div`
   width: 300px;
   height: 240px;
-  margin-bottom: 4%;
+  margin-bottom: 8%;
   padding: 2%;
   border: none;
   box-shadow: 3px 3px 5px gray;
