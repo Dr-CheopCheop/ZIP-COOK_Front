@@ -219,7 +219,7 @@ export const PostList = styled.div`
   display: flex;
   margin-top: 1.5rem;
   justify-content: space-between;
-  width: 1000px;
+  width: 1080px;
   height: auto;
   overflow-x: scroll;
 `;
@@ -233,7 +233,7 @@ export const PostLink = styled(Link)`
 `;
 
 export const PostWrap = styled.div`
-  width: 1080px;
+  width: 300px;
   height: 200px;
   margin-bottom: 4%;
   padding: 2%;
