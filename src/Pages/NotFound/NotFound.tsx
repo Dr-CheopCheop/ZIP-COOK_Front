@@ -1,10 +1,20 @@
 import React from "react";
+import Navbar from "../../components/Navbar/Navbar";
+import * as S from "./NotFoundStyle";
+import Icons from "../../Styles/Icons";
 
 const NotFound = () => {
   return (
-    <div>
-      <h1>존재 하지 않는 페이지입니다.</h1>
-    </div>
+    <>
+      <Navbar />
+      <S.ErrorContainer>
+        <div>
+          {Icons.robot}
+          <h1>404 Error</h1>
+          <p>Sorry.page not found</p>
+        </div>
+      </S.ErrorContainer>
+    </>
   );
 };
 

@@ -10,7 +10,7 @@ import { RxCross1 } from "react-icons/rx";
 import { TfiAlarmClock } from "react-icons/tfi";
 import { ImSpoonKnife } from "react-icons/im";
 import { MdOutlineMilitaryTech } from "react-icons/md";
-
+import { SiRobotframework } from "react-icons/si";
 const Icons = {
   camera: <BsCamera />,
   search: <BsSearch />,
@@ -26,6 +26,7 @@ const Icons = {
   spoon: <ImSpoonKnife />,
   level: <MdOutlineMilitaryTech />,
   comment: <AiOutlineComment />,
+  robot: <SiRobotframework />,
 };
 
 export default Icons;
