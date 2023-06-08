@@ -13,8 +13,8 @@ const ShareRead = () => {
   const [data, setData] = useState<ShareReadProps>();
   const id = location.pathname.split("/")[3];
   const navigate = useNavigate();
+  const [sido, setSido] = useState();
 
-  const sido = "서울특별시";
   console.log("요청 url 주소", `/board-share/${sido}/${id}`);
   console.log("share READ 요청 DATA:", data);
 
@@ -34,6 +34,13 @@ const ShareRead = () => {
     }
   };
 
+  const fetchSido = async () => {
+    const userInfoRes = await axios.get("/auth/user");
+    const userInfo = await userInfoRes.data;
+
+    setSido(userInfo.location.split(" ")[0]);
+  };
+
   const fetchData = async () => {
     try {
       const response = await axios.get(`/board-share/${sido}/${id}`);
@@ -43,6 +50,10 @@ const ShareRead = () => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    fetchSido();
+  }, []);
 
   useEffect(() => {
     fetchData();

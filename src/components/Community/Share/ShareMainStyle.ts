@@ -59,12 +59,13 @@ export const WriteButton = styled(Link)`
 
 export const SecondDiv = styled.div`
   width: 100%;
+  margin-top: 7%;
 `;
 
 export const PostWrap = styled.div`
   width: 300px;
-  height: 200px;
-  margin-bottom: 4%;
+  height: 210px;
+  margin-bottom: 8%;
   padding: 2%;
   border: none;
   box-shadow: 3px 3px 5px gray;

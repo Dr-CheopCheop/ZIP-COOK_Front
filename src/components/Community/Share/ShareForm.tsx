@@ -19,24 +19,23 @@ const ShareForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [imagePreview, setImagePreview] = useState<string>("");
-  //유저정보에서 위치정보 가져올예정
-  // const sido = "seoul";
-
   const [nicks, setNicks] = useState();
+  const [sido, setSido] = useState();
 
   const fetchNickname = async () => {
     const userInfoRes = await axios.get("/auth/user");
     const userInfo = await userInfoRes.data;
     console.log(userInfo);
     setNicks(userInfo.nickname);
+    setSido(userInfo.location.split(" ")[0]);
   };
 
   useEffect(() => {
     fetchNickname();
   }, []);
 
-  const sido = "서울특별시";
   console.log("location: ", location.state);
+  console.log("로그인한사람의 sido: ", sido);
   if (location.state) {
     defaultValue = location.state.datas;
   }
@@ -52,13 +51,9 @@ const ShareForm = () => {
   const { img } = watch();
 
   useEffect(() => {
-    if (location.state) {
-      setImagePreview(`/images/${location.state.datas.filepath}`);
-    } else {
-      if (img && img.length > 0) {
-        const file = img[0];
-        setImagePreview(URL.createObjectURL(file));
-      }
+    if (img && img.length > 0) {
+      const file = img[0];
+      setImagePreview(URL.createObjectURL(file));
     }
   }, [img]);
 
