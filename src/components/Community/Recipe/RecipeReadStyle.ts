@@ -10,10 +10,9 @@ export const ReadContainer = styled.section`
 
 //머리부분 -- 이미지 버튼 작성자 날짜
 export const TitleContainer = styled.div`
-  margin: 10px 0;
   position: relative;
   text-align: right;
-  height: 300px;
+  height: 650px;
 `;
 export const TitleBox = styled.div`
   margin-bottom: 10px;
