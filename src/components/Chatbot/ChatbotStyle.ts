@@ -123,7 +123,7 @@ export const UserRequestText = styled.div`
     justify-content: center;
     align-items: center;
     text-align: right;
-    width: 90%;
+    width: 70%;
     font-size: 1rem;
     background-color: white;
     border-radius: 15px;
@@ -141,7 +141,7 @@ export const ChatbotResponseText = styled.div`
     border-radius: 15px;
     /* padding: 1.2%; */
     margin: 1%;
-    width: 90%;
+    width: 70%;
 `;
 
 export const UserInput = styled.input`
