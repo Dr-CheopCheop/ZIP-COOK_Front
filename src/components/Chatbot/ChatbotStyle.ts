@@ -148,6 +148,7 @@ export const UserInput = styled.input`
     width: 650px;
     height: 30px;
     border-radius: 15px;
+    border: 1px solid white;
 `;
 
 export const ChatbotForm = styled.form`
