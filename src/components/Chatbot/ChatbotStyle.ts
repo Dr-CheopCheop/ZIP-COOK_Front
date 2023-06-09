@@ -105,6 +105,18 @@ export const ChatbotDiv = styled.div`
     position: relative;
 `;
 
+export const UserRequestWrapper = styled.div`
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+`;
+
+export const ChatbotResponseWrapper = styled.div`
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+`;
+
 export const UserRequestText = styled.div`
     display: flex;
     flex-direction: row-reverse;
@@ -135,6 +147,7 @@ export const ChatbotResponseText = styled.div`
 export const UserInput = styled.input`
     width: 650px;
     height: 30px;
+    border-radius: 15px;
 `;
 
 export const ChatbotForm = styled.form`

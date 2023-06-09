@@ -16,6 +16,7 @@ const ChatbotPage = () => {
     const [monthFoods, setMonthFoods] = useState([]);
     const [chatbotResponse, setChatbotResponse] = useState("");
     const [userRequest, setUserRequest] = useState("");
+    const [tempRequest, setTempRequest] = useState("");
     let monthArray: string[] = ['january', 'feburary', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
     let now = new Date();
     let tempMonth = now.getMonth();
@@ -76,6 +77,7 @@ const ChatbotPage = () => {
         }
       };
       getChatBotResponse();
+      setTempRequest(userRequest);
     console.log(userRequest);
   };
 
@@ -104,25 +106,25 @@ const ChatbotPage = () => {
                     <C.MonthFoodBox>{monthFoods.map(monthFood => (
                       <C.MonthFoodList>{monthFood}</C.MonthFoodList>
                     ))}</C.MonthFoodBox>
-                    {/* <C.MonthFoodBox>{examples.map(example => (
-                      <C.MonthFoodList>{example}</C.MonthFoodList>
-                    ))}</C.MonthFoodBox> */}
                 </C.FoodBox>
             </C.FirstDiv>
             <C.ChatbotDiv>
+              <C.UserRequestWrapper>
                 <C.UserRequestText>
-                  {userRequest}
+                  {tempRequest}
                 </C.UserRequestText>
+              </C.UserRequestWrapper>
+              <C.ChatbotResponseWrapper>
                 <C.ChatbotResponseText>
                 {chatbotResponse.split('<br>').map((line) => {
                   return (
                     <>
                       {line}
-                      <br />
                     </>
                   );
                 })}
                 </C.ChatbotResponseText>
+              </C.ChatbotResponseWrapper>
                 <C.ChatbotForm onSubmit={onSubmit}>
                     <C.UserInput
                       value={userRequest}
